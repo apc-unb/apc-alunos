@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Linguagem C</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Thiago Veras & Giovanni Guidini">    
+    <link rel="shortcut icon" href="/assets/images/UnB-logo.png">  
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="/assets/plugins/elegant_font/css/style.css">
+    
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
+
+    <!-- Syntax Prettyprint -->
+    <link rel="stylesheet"  href="/assets/syntax/tomorrow_night.css">
+    <script src = "/assets/syntax/prettify.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .img-responsive{
+            width: 80%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+        }
+    </style>
+
+</head> 
+
+<body class="body-blue">
+        <div class="page-wrapper">
+            <!-- ******Header****** -->
+            <header id="header" class="header">
+                <div class="container">
+                    <div class="branding">
+                        <h1 class="logo">
+                            <a href="/index.html">
+                                <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                                <span class="text-highlight">Aula </span><span class="text-bold">2</span>
+                            </a>
+                        </h1>
+                    </div><!--//branding-->
+                    <ol class="breadcrumb">
+                        <li><a href="/index.html">Home</a></li>
+                        <li><a href="/aulas">Voltar</a></li>
+                    </ol>
+                </div><!--//container-->
+            </header><!--//header-->
+            <div class="doc-wrapper">
+                <div class="container">
+                    <div id="doc-header" class="doc-header text-center">
+                        <h1 class="doc-title"><span class="icon-holder"><img src="/assets/images/linguagem-C.png" alt="C" style="width: 1em"></span> Linguagem C</h1>
+                        <div class="meta"><i class="fa fa-clock-o"></i> Last updated: August 14th, 2018</div>
+                    </div><!--//doc-header-->
+                    <div class="doc-body">
+                        <div class="doc-content">
+                            <div class="content-inner">
+                                <section id="intro" class="doc-section">
+                                    <h2 class="section-title">Introdução</h2>
+                                    <div class="section-block" id="intro">
+                                        <p>
+                                        A linguagem C foi criada em 1972 por Dennis Ritchie no Bell Laboratories. O foco da linguagem C inicialmente foi o desenvolvimento de sistemas operacionais e compiladores. C foi usada com grande êxito na construção de uma nova versão do sistema operacional Unix, que inicialmente foi escrito em Assembly. O grande sucesso obtido no mundo do Unix fez com que a linguagem ganhasse mais e mais adeptos e atualmente, quase todos os grandes sistemas operacionais são construídos em C/C++.
+                                        </p>
+                                        <p>É uma linguagem de propósito geral, o que quer dizer que se adapta a praticamente qualquer tipo de projeto, altamente portável e extremamente rápida em tempo de execução.</p>
+                                        <p>Em nosso curso estaremos usando o padrão ANSI da linguagem C para fazer nossos programas. Na aula de hoje conheceremos os elementos básicos da linguagem e expandiremos esse conhecimento ao longo do semestre.</p>
+                                    </div>
+                                </section><!--//doc-section-->
+
+                                <section id="program" class="doc-section">
+                                        <h2 class="section-title">Programação em C</h2>
+                                        <div class="section-block" id="estrutura">
+                                            <h3 class="block-title">Estrutura Básica</h3>
+                                            
+                                        <div id = "basic1"><img src="/assets\images\Linguagem_C\Basic_Structure\basic1.png" class = "img-responsive-med"></div>
+                                        <div id = "basic2" style="display: none;"><img src="/assets\images\Linguagem_C\Basic_Structure\basic2.png" class = "img-responsive-med"></div>
+                                        <div id = "basic3" style="display: none;"><img src="/assets\images\Linguagem_C\Basic_Structure\basic3.png" class = "img-responsive-med"></div>
+                                        <div id = "basic4" style="display: none;"><img src="/assets\images\Linguagem_C\Basic_Structure\basic4.png" class = "img-responsive-med"></div>
+                                        <div id = "basic5" style="display: none;"><img src="/assets\images\Linguagem_C\Basic_Structure\basic5.png" class = "img-responsive-med"></div>
+
+
+
+                                        <a  class="btn btn-blue" onclick="animation_prev('basic',5)">Prev</a>
+                                        <a  class="btn btn-blue" style = "float: right;" onclick="animation_next('basic',5)">Next</a>
+                                    
+                                        </div>
+                                        <div class="section-block" id="comentario">
+                                            <h3 class="block-title">Comentários</h3>
+                                                
+                                        <p>Comentários são uma parte importante de qualquer código. Conforme os códigos vão crescendo, é importante comentá-los para explicar o funcionamento dele para alguém que poderá lê-lo depois. Além disso eles são usados como forma simplificada de documentação.</p>
+
+                                        <p>Na linguagem C os comentários são delimitados por <code>/*</code> e <code>*/</code>. Tudo que estiver entre esses delimitadores será ignorado pelo compilador.</p>
+                                        <pre class="prettyprint lang-cpp linenums:1">
+#include &lt;stdio.h&gt;
+/* Isto eh um comentario, ele serah ignorado pelo compilador. Nao use
+acentos ou caracteres especiais, pois nao sao C ANSI! */
+
+/* Programa que calcula a media de dois numeros. */
+int main () {
+    float media; /* declara uma variavel chamada media */
+    media = (4 + 5) / 2.0;
+
+    /* fim do programa normal */
+    return 0
+}
+                                        </pre>
+                                        </div>
+                                        <div class="section-block" id="ops">
+                                            <h3 class="block-title">Operadores</h3>
+                                                
+                                            <p>Abaixo temos uma tabela com os operadores lógicos e aritméticos da linguagem C. Existem outros operadores, os operadores <em>bitwise</em>, mas eles não são menos utilizados então não foram incluídos. Lembre-se que essa tabela pode não ser a mesma para outras linguagens.</p>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped">
+                                                    <thead >
+                                                        <tr>
+                                                            <th>Operador</th>
+                                                            <th>Operação</th>
+                                                            <th>Linguagem C</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody >
+                                                        <tr>
+                                                            <td ><h4>=</h4></td>
+                                                            <td><h4>Igualdade</h4></td>
+                                                            <td><h4>==</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td ><h4>&ne;</h4></td>
+                                                            <td><h4>Desigualdade</h4></td>
+                                                            <td><h4>!=</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td ><h4>&lt;</h4></td>
+                                                            <td><h4>Menor que</h4></td>
+                                                            <td><h4>&lt;</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td ><h4>&le;</h4></td>
+                                                            <td><h4>Menor ou igual</h4></td>
+                                                            <td><h4>&lt;=</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td ><h4>&gt;</h4></td>
+                                                            <td><h4>Maior que</h4></td>
+                                                            <td><h4>&gt;</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td ><h4>&ge;</h4></td>
+                                                            <td><h4>Maior ou igual</h4></td>
+                                                            <td><h4>&gt;=</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td ><h4>OR</h4></td>
+                                                            <td><h4>Disjunção</h4></td>
+                                                            <td><h4>||</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td ><h4>NOT</h4></td>
+                                                            <td><h4>Negação</h4></td>
+                                                            <td><h4>!</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td ><h4>AND</h4></td>
+                                                            <td><h4>Conjunção</h4></td>
+                                                            <td><h4>&&</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td ><h4>&#xd7;</h4></td>
+                                                            <td><h4>Multiplicação</h4></td>
+                                                            <td><h4>*</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h4>&divide;</h4></td>
+                                                            <td ><h4>Divisão</h4></td>
+                                                            <td><h4>/</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h4>&#8330;</h4></td>
+                                                            <td ><h4>Adição</h4></td>
+                                                            <td><h4>&#8330;</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h4>&minus;</h4></td>
+                                                            <td ><h4>Subtração</h4></td>
+                                                            <td><h4>&minus;</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h4>Resto ou Mod</h4></td>
+                                                            <td ><h4>Resto de Divisão Inteira</h4></td>
+                                                            <td><h4>%</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h4>&larr;</h4></td>
+                                                            <td ><h4>Atribuição</h4></td>
+                                                            <td><h4>=</h4></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                </div>
+    
+                                        </div>
+                                        <div class="section-block" id="vars">
+                                            <h3 class="block-title">Tipos de Variáveis</h3>
+                                                
+                                        <p>Toda variável em C precisa de um <b>tipo</b>. Essa informação diz ao compilador quanto espaço alocar para aquela variável e como o conteúdo dela deve ser interpretado no programa.
+                                            
+                                        <p>
+                                        O <em>tamanho</em> da variável também define uma <em>faixa de valores</em> que podem ser armazenados corretamente dentro da variável (sem causar <em>overflow</em>).</p>
+                                        
+                                        <p>
+                                        Abaixo temos os tipos essenciais da linguagem C. Para ver todos os tipos básicos veja a seção <a href="#materiais" class="scrollto">Materiais Extras</a>.</p>
+
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Tipo</th>
+                                                    <th>linguagem C</th>
+                                                    <th>Bytes</th>
+                                                    <th>Faixa de Valores</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Inteiro</td>
+                                                    <td>int</td>
+                                                    <td>4</td>
+                                                    <td>-2.147.483.648 a 2.147.483.647</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Real</td>
+                                                    <td>float</td>
+                                                    <td>4</td>
+                                                    <td>±3.4028234e±38</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Caractere</td>
+                                                    <td>char</td>
+                                                    <td>1</td>
+                                                    <td>-128 a 127</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <p>Os 2 tipos abaixo não são "nativos" da linguagem C, mas são muito utilizados:</p>
+
+                                        <ul>
+                                            <li>Lógico (Booleano): <br> Usar <b>int</b>, será “falso” quando for zero, e “verdadeiro” quando não for zero.</li>
+                                            <li>String (Sequência de caracteres): <br> <b>char nome[tamanho]</b> <br>
+                                                    ex: char endereco[30]</li>
+                                        </ul>
+                                        </div>
+
+                                        <div class="section-block" id="defs">
+                                            <h3 class="block-title">Declaração de Variáveis e Constantes</h3>
+
+                                            <p>Declaramos constantes e variáveis quase da mesma maneira: </p>
+                                            <ul>
+                                                <li>Variáveis: <code> &lt;tipo&gt; &lt;nome 1&gt;, ..., &lt;nome n&gt;;</code></li>
+                                                <li>Constantes: <code>&lt;const&gt; &lt;tipo&gt; &lt;nome 1&gt; = &lt;valor ou expressão&gt;</code></li>
+                                            </ul>
+                                                
+
+                                            <h3>Exemplo:</h3>
+                                            <pre class="prettyprint linenums:1 lang-cpp">
+/* Variaveis */
+int a, b, c;
+float media, p1, p2;
+char sexo, est_civil;
+
+/* Constantes */
+const int VALOR = 10;
+const float PI = 3.1415;
+const char COD = 'x';
+                                            </pre>
+                                                
+                                        </div>
+                                        <div class="section-block" id="macs">
+                                            <h3 class="block-title">Declaração de Macros</h3>
+                                                
+                                        <p>A diretiva <b>#define</b> associa um identificador a um valor. É utilizado para definir constantes, vincular uma determinada informação a um identificador,  ou criar macros.</p>
+
+                                        <p><code>#define &lt;nome da macro&gt; &lt;valor ou expressão&gt;</code></p>
+
+                                        <p>Macros são diferentes de constantes pois nenhum espaço de memória é alocado para elas. Durante a <b>compilação</b> o compilador troca o <em>identificador da macro</em> em todas as ocorrências dele no código pelo <em>valor associado.</em></p>
+
+                                        <p>Além disso, macros podem ser bastante poderosas, se o programador souber usá-las corretamente. É possível, por exemplo, construir funções usando macros.</p>
+
+                                        <h3>Exemplo:</h3>
+                                        <pre class="prettyprint linenums:1 lang-cpp">
+#define FALSE 0
+#define TRUE 1
+#define MSG "Digite S para sair."
+                                        </pre>
+                                        </div>
+                                        
+                                    </section><!--//doc-section-->
+                                    <section id="printf" class="doc-section">
+                                            <h2 class="section-title">O Comando <em>printf</em> </h2>
+
+                                        <p>O comando <em>printf</em> é uma função disponível na biblioteca <em>stdio.h</em> do C. Ele é utilizado para mostrar informação na tela do usuário, ou seja, produzir output.</p>
+
+                                        <p>O <em>printf</em> pode ser usado para mostrar conteúdo de constantes, variáveis do programa ou uma combinação dessas. Para mostrar o conteúdo de variáveis existem <b>modificadores</b> que devem ser utilizados.</p>
+
+                                        <p>Além disso, ele pode ser usado com <em>caracteres especiais</em>, dos quais o mais utilizado é o caractere '\n', que gera uma quebra de linha.</p>
+                                        <h3>Exemplos:</h3>
+                                        <pre class="prettyprint linenums:1 lang-cpp">
+/* mostrar mensagem constante */
+printf("1. Ola mundo!\n");
+
+/* mostrar conteudo de variaveis na mensagem */
+int idade = 37;
+printf("2. Idade do funcionario: %d\n", idade);
+int cod = 2340;
+float prix = 1.59;
+printf("3. Codigo do produto: %d\nValor do Produto: %f\n", cod, prix);
+
+/* Os comandos acima geram os seguintes outputs: */
+/*
+1. Ola mundo!
+2. Idade do funcionario: 37
+3. Codigo do produto: 2340
+Valor do Produto: 1.59
+*/
+</pre>
+
+                                        <ul>
+                                            <li>Note que, após a string de mensagem, há uma lista de variáveis a serem mostradas, na mesma ordem em que seus modificadores foram inseridos, e que o tipo da variável deve ser compatível com o tipo indicado pelo modificador, como veremos a seguir.</li>
+                                        </ul>
+                                            <div class="section-block" id="mods">
+                                                    <h3 class="block-title">Modificadores</h3>
+        
+                                                    Os modificadores para os tipos básicos de C estão listados abaixo. Existem outros modificadores e opções de formatação para <em>printf</em> (e <em>scanf</em> como veremos em seguida) que podem ser vistos <a href="http://homepages.dcc.ufmg.br/~rodolfo/aedsi-2-10/printf_scanf/printfscanf.html" target="blank">aqui. </a>No entanto vale dizer que a lista é longa e esses modificadores serão pouco utilizados.
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Tipo</th>
+                                                                <th>Modificador</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>int</td>
+                                                                <td>%d</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>float</td>
+                                                                <td>%f</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>float</td>
+                                                                <td>%.nf <br>
+                                                                    Onde n é o número de casas decimais
+                                                                    ex: %.2f para duas casas decimais</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>char</td>
+                                                                <td>%c</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>string</td>
+                                                                <td>%s</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                            </div>
+                                    </section><!--//doc-section-->
+                                    <section id="scanf" class="doc-section">
+                                            <h2 class="section-title">O Comando <em>scanf</em> </h2>
+                                        <p>O comando <em>scanf</em> é uma função disponível na biblioteca <em>stdio.h</em> do C. Ele é utilizado para receber input do usuário.</p>
+
+                                        <ul>
+                                            <li>Ele armazena o que o usuário digitou em uma variável no programa.</li>
+                                            <li>Segue a mesma lógica de modificadores que o <em>printf</em> (usando os mesmos modificadores), porém, exige que seja passado o <b>ENDEREÇO</b> da variável, ou seja, colocando um <b>&</b> antes do nome da variável.</li>
+                                        </ul>
+
+                                        <p>Exemplos:</p>
+                                        <p>Algoritmo para ler o nome e idade de uma pessoa (em anos, meses e dias) e mostrar sua idade expressa apenas em dias.
+                                        <p>Versão em C: </p>
+                                        <pre class="prettyprint lang-cpp linenums:1">
+int idade_dias, anos, meses, dias;
+char nome[30];
+
+printf("Digite seu nome: ");
+/* atencao! em caso de strings nao eh necessário o & antes da variavel */
+scanf("%s", nome); /* nao utiliza & */
+
+printf("Digite sua idade em anos, meses e dias: ");
+scanf("%d %d %d", &anos, &meses, &dias); /* le 3 valores inteiros digitados e 
+atribui para as variáveis anos, meses e dias */
+
+idade_dias = ((anos * 365) + (meses * 30) + dias);
+printf("A idade de %s é de %d dias\n", nome, idade_dias);
+
+return 0;
+</pre>
+                                        
+                                        <p>Versão em Pseudocódigo:</p>
+                                        <pre class="prettyprint lang-html linenums:1">
+Variáveis
+
+    idade_dias, anos, meses, dias: inteiro
+
+Início
+    
+    Escreva (“Digite seu nome: ”)
+
+    Leia (nome)
+
+    Escreva (“Digite sua idade em anos, meses e dias: ”)
+
+    Leia (anos, meses, dias)
+
+    idade_dias ← ((anos * 365) + (meses * 30) + dias)
+
+    Escreva (“A sua idade é de ”, idade_dias, “dias.”)
+
+Fim</pre>    
+                                    </section><!--//doc-section-->
+
+                                    <section id="seq" class="doc-section">
+                                        <h2 class="section-title">Estrutura Sequencial</h2>
+                                    </section><!--//doc-section-->
+                                    <p>C é uma linguagem de programação sequencial. Isso significa que os comandos são executados linha por linha, em <em>sequência</em> até o final do programa. A maior parte das linguagens de programação é sequencial.</p>
+
+                                    <p>O <em>ponto de entrada</em> de um programa em C é a função <em>main</em>, que deve existir em todo programa obrigatoriamente. Isso significa que a primeira linha a ser executada em qualquer programa C é a primeira linha da função main, seguida pela linha abaixo dela, e assim por diante.
+                                    </p>
+
+                                    <p> Ao longo do curso, estudaremos estruturas de controle de fluxo do programa, que <em>alteram a ordem de execução do programa</em>, <b>no entanto</b> a execução do programa é sempre sequencial, uma linha por vez.
+                                    </p>
+
+                                    <h3>Exemplo:</h3>
+
+                                    <div id = "seq1"><img src="/assets/images/Linguagem_C/Sequencial/seq1.png" class = "img-responsive"></div>
+                                    <div id = "seq2" style="display: none;"><img src="/assets/images/Linguagem_C/Sequencial/seq2.png" class = "img-responsive"></div>
+                                    <div id = "seq3" style="display: none;"><img src="/assets/images/Linguagem_C/Sequencial/seq3.png" class = "img-responsive"></div>
+                                    <div id = "seq4" style="display: none;"><img src="/assets/images/Linguagem_C/Sequencial/seq4.png" class = "img-responsive"></div>
+                                    <div id = "seq5" style="display: none;"><img src="/assets/images/Linguagem_C/Sequencial/seq5.png" class = "img-responsive"></div>
+                                    <div id = "seq6" style="display: none;"><img src="/assets/images/Linguagem_C/Sequencial/seq6.png" class = "img-responsive"></div>
+                                    <div id = "seq7" style="display: none;"><img src="/assets/images/Linguagem_C/Sequencial/seq7.png" class = "img-responsive"></div>
+                                    <div id = "seq8" style="display: none;"><img src="/assets/images/Linguagem_C/Sequencial/seq8.png" class = "img-responsive"></div>
+                                    <div id = "seq9" style="display: none;"><img src="/assets/images/Linguagem_C/Sequencial/seq9.png" class = "img-responsive"></div>
+                                    <div id = "seq10" style="display: none;"><img src="/assets/images/Linguagem_C/Sequencial/seq10.png" class = "img-responsive"></div>
+                                    <div id = "seq11" style="display: none;"><img src="/assets/images/Linguagem_C/Sequencial/seq11.png" class = "img-responsive"></div>
+                                    <div id = "seq12" style="display: none;"><img src="/assets/images/Linguagem_C/Sequencial/seq12.png" class = "img-responsive"></div>
+                                    <a  class="btn btn-blue" onclick="animation_prev('seq',12)">Prev</a>
+                                    <a  class="btn btn-blue" style = "margin-left: 50%;" onclick="animation_next('seq',12)">Next</a>
+
+                                    <p>A ferramenta acima é o <a href="http://www.pythontutor.com/c.html#mode=edit" target="blank">C Tutor</a>. Uma ferramenta muito útil para visualização de código que estaremos usando ao longo do semestre.</p>
+                                    <section id="materiais" class="doc-section">
+                                        <h2 class="section-title">Materiais Extras</h2>
+
+                                        <div class="section-block">
+                                            <h3 id="types-full" class="block-title">Tipos em C</h3>
+
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                    <th><strong>Tipo</strong></th>
+                                                    <th><strong>Tamanho (bytes)</strong></th>
+                                                    <th><strong>Faixa de Valores</strong></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                    <td>char</td>
+                                                    <td>1 byte</td>
+                                                    <td>-128 to 127 or 0 to 255</td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td>unsigned char</td>
+                                                    <td>1 byte</td>
+                                                    <td>0 to 255</td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td>signed char</td>
+                                                    <td>1 byte</td>
+                                                    <td>-128 to 127</td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td>int</td>
+                                                    <td>4 bytes</td>
+                                                    <td>-2.147.483.648 to 2.147.483.647</td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td>unsigned int</td>
+                                                    <td>4 bytes</td>
+                                                    <td>0 to 4.294.967.295</td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td>short</td>
+                                                    <td>2 bytes</td>
+                                                    <td>-32,768 to 32,767</td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td>long</td>
+                                                    <td>4 bytes</td>
+                                                    <td>-2,147,483,648 to 2,147,483,647</td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td>unsigned long</td>
+                                                    <td>4 bytes</td>
+                                                    <td>0 to 4,294,967,295</td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td>float</td>
+                                                    <td>4 bytes</td>
+                                                    <td>1.2E-38 to 3.4E+38 (6 decimal places)</td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td>double</td>
+                                                    <td>8 bytes</td>
+                                                    <td>2.3E-308 to 1.7E+308 (15 decimal places)</td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td>long double</td>
+                                                    <td>10 bytes</td>
+                                                    <td>3.4E-4932 to 1.1E+4932 (19 decimal places)</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </section><!--//doc-section-->
+
+                                    
+
+
+                                    
+                                
+                            </div><!--//content-inner-->
+                        </div><!--//doc-content-->
+
+                    <div class="doc-sidebar hidden-xs">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                                <li><a class="scrollto" href="#intro">Introdução</a></li>
+                                <li><a class="scrollto" href="#program">Elementos da Gramática</a></li>
+                                <ul class="nav doc-sub-menu">
+                                    <li><a class="scrollto" href="#estrutura">Estrutura</a></li>
+                                    <li><a class="scrollto" href="#comentario">Comentários</a></li>
+                                    <li><a class="scrollto" href="#ops">Operadores</a></li>
+                                    <li><a class="scrollto" href="#vars">Variáveis</a></li>
+                                    <li><a class="scrollto" href="#defs">Declaração de Variáveis <br> e Constantes</a></li>
+                                    <li><a class="scrollto" href="#macs">Declaração de Macros</a></li>
+                                </ul>
+                                <li><a class="scrollto" href="#printf">Comando <em>printf</em></a></li>
+                                <ul class="nav doc-sub-menu">
+                                        <li><a class="scrollto" href="#mods">Modificadores</a></li>
+                                </ul>
+                                <li><a class="scrollto" href="#scanf">Comando <em>scanf</em></a></li>
+                                <li><a class="scrollto" href="#seq">Estrutura Sequencial</a></li>
+                                <li><a class="scrollto" href="#materiais">Materiais Extras</a></li>
+                                <ul class="nav doc-sub-menu">
+                                    <li><a class="scrollto" href="#types-full">Tipos em C</a></li>
+                                </ul>
+
+                            </ul><!--//doc-menu-->
+                        </nav>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->              
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->        
+    </div><!--//page-wrapper-->
+    
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+            <small class="copyright">Created by:<a class="link" href="https://github.com/VerasThiago" target="_blank"><span> Thiago Veras</span></a> &amp; <a class="link" href="https://github.com/Gguidini" target="_blank"><span> Giovanni M Guidini</span></a></small>
+             <br> <!-- break line-->
+             <small class="copyright">Theme PRETTYDOCS by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a></small>
+ 
+        </div><!--//container-->
+    </footer><!--//footer-->
+    
+     
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="/assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>                                                                
+    <script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="/assets/js/animation.js"></script>
+    
+    <script>
+      prettyPrint();
+    </script>
+    
+</body>
+</html> 

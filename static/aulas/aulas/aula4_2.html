@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Estruturas de Repetição</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Thiago Veras & Giovanni Guidini">    
+    <link rel="shortcut icon" href="/assets/images/UnB-logo.png">  
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="/assets/plugins/elegant_font/css/style.css">
+    
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
+
+    <!-- Syntax Prettyprint -->
+    <link rel="stylesheet"  href="/assets/syntax/tomorrow_night.css">
+    <script src = "/assets/syntax/prettify.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .img-responsive{
+            width: 80%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+        }
+    </style>
+
+</head> 
+
+<body class="body-orange">
+        <div class="page-wrapper">
+            <!-- ******Header****** -->
+            <header id="header" class="header">
+                <div class="container">
+                    <div class="branding">
+                        <h1 class="logo">
+                            <a href="/index.html">
+                                <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                                <span class="text-highlight">Aula </span><span class="text-bold">4.2</span>
+                            </a>
+                        </h1>
+                    </div><!--//branding-->
+                    <ol class="breadcrumb">
+                        <li><a href="/index.html">Home</a></li>
+                        <li><a href="/aulas">Voltar</a></li>
+                    </ol>
+                </div><!--//container-->
+            </header><!--//header-->
+            <div class="doc-wrapper">
+                <div class="container">
+                    <div id="doc-header" class="doc-header text-center">
+                        <h1 class="doc-title"><span class="icon-holder glyphicon glyphicon-repeat"></span> Estruturas de Repetição</h1>
+                        <div class="meta"><i class="fa fa-clock-o"></i> Last updated: September 10nd, 2018</div>
+                    </div><!--//doc-header-->
+                    <div class="doc-body">
+                        <div class="doc-content">
+                            <div class="content-inner">
+                               
+                                <section id="while" class="doc-section">
+                                        <h2 class="section-title">Laço <em>while</em> </h2>
+                                        <p>Vimos com o <code> for </code> o que é um laço de repetição contado, agora iremos ver o que é um laço de repetição condicional.</p>
+                                        <p>Laço de repetição condicional é uma estrutura que irá <b>executar uma instrução</b> que está <b>dentro</b> de seu <b>escopo</b> sempre que a <b>condição</b> de teste for <b>verdadeira</b>.</p>
+                                        <div class="callout-block" style="margin-top: 2em; background-color:orange;color: black;">
+                                            <div class="icon-holder">
+                                                <i class="fa fa-info-circle"></i>
+                                            </div><!--//icon-holder-->
+                                            <div class="content">
+                                                <p>Essa condição pode ser feita no <b>começo</b> do laço ou no <b>final</b> do laço.</p>
+                                            </div><!--//content-->
+                                        </div> 
+                                        <p>Se a condição é realizada no <b>começo</b> do laço, então temos um laço <code>while</code></p>
+                                        <p>A repetição com teste no início apenas inicia o conjunto de instruções caso a condição teste seja verdadeira (testado antes de executar as instruções de dentro) e continua o laço enquanto ela for verdadeira.</p>
+                                        <h3 class="block-title">Exemplo 1</h3>
+                                        <p>Faça um algoritmo que leia a variável SEXO.  Enquanto o valor fornecido não for correto (‘M’, ‘m’, ‘F’, ‘f’), exibir mensagem de erro e ler novamente. Quando for fornecido um valor correto, ler a variável ANO. Escrever ANO e SEXO na tela.</p>
+                                        <pre class="prettyprint lang-cpp linenums:1">
+#include < stdio.h >
+
+int main () {
+    int ano;
+    char sexo;
+    printf("Informe o sexo (M/F):\n");
+    scanf(" %c", &sexo);
+    // A variável de controle deve ter um valor conhecido. Neste caso ela foi lida antes do laço.
+    while ((sexo != 'M') && (sexo != 'm') && (sexo != 'F') && (sexo != 'f')) {
+        printf("Erro! Valor invalido!\n");
+        printf("Informe o sexo novamente (M/F):\n");
+        //A variável de controle deve ter seu valor modificado dentro do laço.
+        //Neste caso, ela foi lida novamente.
+        scanf(" %c", &sexo);
+    }
+    printf("Informe o ano:\n");
+    scanf("%d", &ano);
+    printf("%d - %c\n", ano, sexo);
+    return 0;
+}</pre>                               
+                                    <h3 class="block-title">Exemplo 2</h3>
+                                    <p>Dado um valor n, imprima na tela o valor de n! (1 * 2 * ... * (n-1) * n)</p>       
+                                    <pre class = "prettyprint    lang-cpp    linenums:1">
+#include < stdio.h >
+
+int main () {
+    int n, i, fat;
+    printf("Informe um número:\n");
+    scanf("%d", &n);
+    fat = 1;
+    i = 2;
+    while (i <= n) {
+        fat *= i; /* fat = fat * i */
+        i++;
+    }
+    printf("O fatorial de %d eh %d.\n", n, fat);
+    
+    return 0;
+}
+</pre>
+<a href="http://www.pythontutor.com/c.html#code=%23include%3Cstdio.h%3E%0A%20%0Aint%20main%20%28%29%20%7B%0A%20%20%20%20int%20n,%20i,%20fat%3B%0A%20%20%20%20n%20%3D%203%3B%0A%20%20%20%20fat%20%3D%201%3B%0A%20%20%20%20i%20%3D%202%3B%0A%20%20%20%20while%20%28i%20%3C%3D%20n%29%20%7B%0A%20%20%20%20%20%20%20%20fat%20*%3D%20i%3B%20/*%20fat%20%3D%20fat%20*%20i%20*/%0A%20%20%20%20%20%20%20%20i%2B%2B%3B%0A%20%20%20%20%7D%0A%20%20%20%20printf%28%22O%20fatorial%20de%20%25d%20eh%20%25d.%5Cn%22,%20n,%20fat%29%3B%0A%20%20%20%20%0A%20%20%20%20return%200%3B%0A%7D&curInstr=0&mode=display&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D" class = "btn btn-orange" target = "_blank">Execução</a>                                        
+                                </section><!--//doc-section-->
+
+                                <section id="do_while" class="doc-section">
+                                    <h2 class="section-title">Laço <em>do-while</em> </h2>
+                                    <p>Vimos com o <code> for </code> o que é um laço de repetição contado e com o <code>while</code> o que é um laço de repetição condicional com teste no início.</p>
+                                    <p>O próximo laço de repetição a ser estudado é com teste da condição no <b>final</b> do código.</p>
+                                    <div class="callout-block" style="margin-top: 2em; background-color:orange;color: black;">
+                                        <div class="icon-holder">
+                                            <i class="fa fa-info-circle"></i>
+                                        </div><!--//icon-holder-->
+                                        <div class="content">
+                                            <p>Lembre-se: a repetição com teste no início testa a condição <b>antes</b> de executar o laço. A repetição com teste no final, por sua vez, testa a condição apenas <b>depois</b> de executar o laço, ou seja, ele é executado <b>pelo menos uma vez</b>. Em qualquer uma das duas, o laço só continua sendo executado enquanto a condição for <b>verdadeira</b>.</p>
+                                        </div><!--//content-->
+                                    </div> 
+                                    <h3 class="block-title">Exemplo</h3>
+                                    <p>Elabore um algoritmo que solicite números inteiros enquanto os numeros digitados sejam diferentes de 0. O algoritmo deverá informar, ao final, qual a soma dos numeros informados.</p>
+                                    <pre class = "prettyprint    lang-cpp    linenums:1">
+int n, soma = 0;
+
+do{
+    printf("Digite um numero: ");
+    scanf("%d", &n);
+    soma += n;
+}while(n != 0);
+
+printf("Soma total = %d\n",soma);</pre>
+                                    <p> Exemplo 1 no terminal </p>
+                                    <pre class = "prettyprint lang-html">
+Digite um numero: 25
+Digite um numero: 25
+Digite um numero: 50
+Digite um numero: 0
+Soma total = 100</pre>                                   
+                                    <p> Exemplo 2 no terminal </p>
+                                    <pre class = "prettyprint lang-html">
+Digite um numero: 0
+Soma total = 0</pre>                                        
+                                <div class="callout-block" style="margin-top: 2em; background-color:orange;color: black;">
+                                    <div class="icon-holder">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div><!--//icon-holder-->
+                                    <div class="content">
+                                        <p>Note que mesmo digitando 0 como primeiro número (segundo exemplo) as instruções do while ainda são executadas uma vez.</p>
+                                    </div><!--//content-->
+                                </div> 
+                                </section><!--//doc-section-->
+                                <section id="recomendados" class="doc-section">
+                                    <h2 class="section-title">Exercícios Recomendados  (1064 ~ 1165 URI)</h2>
+                                    <div class="section-block">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1064" target="_blank"><center>Positivos e Média</center></a></td>
+                                                        <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1065" target="_blank"><center>Pares entre Cinco Números</center></a></td>
+                                                        <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1066" target="_blank"><center>Pares, Ímpares, Positivos e Negativos</center></a></td>
+                                                                
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1067" target="_blank"><center>Números Ímpares</center></a></td>
+                                                        <td><center>... ATÉ ...</center></td>
+                                                        <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1165" target="_blank"><center>Número Primo</center></a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!--//table-responsive-->
+                                        <h6>Questões desafio (Nivel: Médio / Difícil) (URI ~ Codeforces)</h6>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/2846" target="_blank">Fibonot</a></td>
+                                                        <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/2782" target="_blank">Escadinha</a></td>
+                                                        <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/2721" target="_blank">Indecisão das Renas</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!--//table-responsive-->
+                                    </div>
+                                </section><!--//doc-section-->
+                                
+                            </div><!--//content-inner-->
+                        </div><!--//doc-content-->
+
+                    <div class="doc-sidebar hidden-xs">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                                <li><a class="scrollto" href="#while">Laço <em>while</em></a></li>
+                                <li><a class="scrollto" href="#do_while">Laço <em>do-while</em></a></li>
+                                <li><a class="scrollto" href="#recomendados">Exercícios Recomendados</a></li>
+                                
+
+                            </ul><!--//doc-menu-->
+                        </nav>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->              
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->        
+    </div><!--//page-wrapper-->
+    
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+            <small class="copyright">Created by:<a class="link" href="https://github.com/VerasThiago" target="_blank"><span> Thiago Veras</span></a> &amp; <a class="link" href="https://github.com/Gguidini" target="_blank"><span> Giovanni M Guidini</span></a></small>
+             <br> <!-- break line-->
+             <small class="copyright">Theme PRETTYDOCS by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a></small>
+ 
+        </div><!--//container-->
+    </footer><!--//footer-->
+    
+     
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="/assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>                                                                
+    <script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="/assets/js/animation.js"></script>
+    
+    <script>
+      prettyPrint();
+    </script>
+    
+</body>
+</html> 

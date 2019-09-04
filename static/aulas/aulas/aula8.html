@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Matrizes</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Thiago Veras & Giovanni Guidini">    
+    <link rel="shortcut icon" href="/assets/images/UnB-logo.png">  
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="/assets/plugins/elegant_font/css/style.css">
+    
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
+
+    <!-- Syntax Prettyprint -->
+    <link rel="stylesheet"  href="/assets/syntax/tomorrow_night.css">
+    <script src = "/assets/syntax/prettify.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .img-responsive{
+            width: 70%;
+            margin: 15px;
+        }
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+    </style>
+
+</head> 
+
+<body class="body-blue">
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="/index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">Aula </span><span class="text-bold">8</span>
+                        </a>
+                    </h1>
+                </div><!--//branding-->
+                <ol class="breadcrumb">
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/aulas">Voltar</a></li>
+                </ol>
+            </div><!--//container-->
+        </header><!--//header-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon glyphicon glyphicon-th"></i> Matrizes</h1>
+                    <div class="meta"><i class="fa fa-clock-o"></i> Last updated: May 5th, 2018</div>
+                </div><!--//doc-header-->
+                <div class="doc-body">
+                    <div class="doc-content">
+                        <div class="content-inner">
+                            <section id="intro" class="doc-section">
+                                <h2 class="section-title">Introdu&#xE7;&#xE3;o</h2>
+                                <div class="section-block">
+                                    <h4>Conjuntos Homogêneos Multidimensionais:</h4>
+                                    <ul class="list">
+                                        <li><p>Vimos até aqui vetores como conjuntos homogêneos unidimensionais. Todas as variáveis são do mesmo tipo, e acessamos usando um único índice.</p></li>
+                                    	<pre class="prettyprint linenums:1 lang-cpp">
+int array[100];
+scanf("%d", &array[0]);</pre>
+
+                                        <li><p>No entanto, em computação, frequentemente precisamos de vetores <b>multidimensionais</b>.</p></li>
+                                        <li><p>Por exemplo: voltando aquele exemplo antigo de guardar as notas das 3 provas de cada aluno de uma turma, aprendemos que poderíamos criar 3 vetores de notas dos alunos (1 vetor para cada prova), sem a necessidade de ter 120 variáveis.</p></li>
+                                    	<pre class="prettyprint linenums:1 lang-cpp">
+double prova1[40], prova2[40], prova3[40];</pre>
+
+                                        <li><p>Mas e se agora existissem 100 avaliações? ou então <b>N</b> avaliações (indefinido) ?</p></li>
+                                    	<pre class="prettyprint linenums:1 lang-cpp">
+double prova1[40], prova2[40], prova3[40], ... , prova98[40], prova99[40], prova100[40];</pre> 	
+                                    	<li><p>Se torna totalmente inviável criar 100 vetores para resolver este problema, sendo assim, o interessante é que cada aluno possa ser um vetor de notas. Precisamos de um vetor de vetores, mais conhecido como <b>vetor multidimensional</b>.</p></li>
+                                    	<img src="/assets\images\Matrizes\notas.png" style = "width: 100%;">
+										<li><p>Podemos também declarar vetores com várias dimensões, tantas quanto forem necessárias.</p></li>
+                                    	<pre class="prettyprint linenums:1 lang-cpp">
+int exemplo1[10][20][30], exemplo2[130][200][150][50];</pre>
+                                        <p class="note-pink" style="background-color:#58BBEE;">Deve se atentar ao tamanho do vetor declarado, seu tamanho é definido pela <b>multiplicação</b> de suas dimensões, sendo o limite máximo aceito pelo judge <i>10</i><sup>8</sup> posições, caso contrário irá exceder o limite de memória (MLE).</p>
+                                    	<pre class="prettyprint linenums:1 lang-cpp">
+int array[1000][1000][1000] // Tamanho de 10³ x 10³ x 10³ = 10^9</pre>                                    	
+
+                                    </ul>   
+                                </div>
+                            </section><!--//doc-section-->
+							 <section id="matrizes" class="doc-section">
+                                <h2 class="section-title">Matrizes</h2>
+                                <div class="section-block">
+                                	<h4>O que são:</h4>
+                                	<ul class="list">
+                                			<li><p>Matrizes são vetores bidimensionais, usadas com mais frequência.</p></li>
+                                			<li><p>Uma matriz é uma tabela com <b>n</b> linhas e <b>m</b> colunas:</p></li>
+                                    		<img src="/assets\images\Matrizes\matriz.gif" class = "img-responsive" style = "margin: 5%;">
+                                    		<li><p>Como você já deve imaginar, trabalhar com matrizes em C é <b>muito parecido com vetores</b>.</p></li>
+                                    		<li><p>Os índices continuam indo de <b>zero</b> até <b>tamanho-1</b>, e você só vai adicionar uma nova dimensão (<b>mais um par de colchetes</b>).</p></li>
+                                    		<div id = "mat1"><img src="/assets\images\Matrizes\Inserir\mat1.png" class = "img-responsive"></div>
+                                    		<div id = "mat2" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat2.png" class = "img-responsive"></div>
+                                    		<div id = "mat3" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat3.png" class = "img-responsive"></div>
+                                    		<div id = "mat4" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat4.png" class = "img-responsive"></div>
+                                    		<div id = "mat5" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat5.png" class = "img-responsive"></div>
+                                    		<div id = "mat6" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat6.png" class = "img-responsive"></div>
+                                    		<div id = "mat7" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat7.png" class = "img-responsive"></div>
+                                    		<div id = "mat8" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat8.png" class = "img-responsive"></div>
+                                    		<div id = "mat9" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat9.png" class = "img-responsive"></div>
+                                    		<div id = "mat10" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat10.png" class = "img-responsive"></div>
+                                    		<div id = "mat11" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat11.png" class = "img-responsive"></div>
+                                    		<div id = "mat12" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat12.png" class = "img-responsive"></div>
+                                    		<div id = "mat13" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat13.png" class = "img-responsive"></div>
+                                    		<div id = "mat14" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat14.png" class = "img-responsive"></div>
+                                    		<div id = "mat15" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat15.png" class = "img-responsive"></div>
+                                    		<div id = "mat16" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat16.png" class = "img-responsive"></div>
+                                    		<div id = "mat17" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat17.png" class = "img-responsive"></div>
+                                    		<div id = "mat18" style="display: none;"><img src="/assets\images\Matrizes\Inserir\mat18.png" class = "img-responsive"></div>
+                                    		<div class = "center">
+                                    			<a  class="btn btn-blue" onclick="animation_prev('mat',18)">Prev</a>
+
+                                    			<a href="/assets/codes/aula8/matriz.c" class="btn btn-blue" download="">Download Code</a>
+
+                                    			<a  class="btn btn-blue"  onclick="animation_next('mat',18)">Next</a>
+                                    		</div>
+                                    </ul>
+                                </div>
+                                <div class="section-block" id="func-param">
+                                    <h2 class="block-title">Matrizes como Parâmetros de Funções</h2>
+                                    
+                                    <p>Já sabemos como podemos passar vetores como parâmetros de funções, existem duas alternativas:</p>
+                                    <pre class="prettyprint linenums:1 lang-cpp">
+void func(int* array);  // alternativa 1 - ponteiro
+void func(int array[]); // alternativa 2 - vetor</pre>
+                                    <p>Para vetores de mais dimensões utilizaremos a alternativa 2, passar como vetores. Além disso, indicar o tamanho do vetor nos colchetes, para o caso unidimensional, é <em>opcional</em>, mas para os segundos colchetes em diante é <b>obrigatório</b>.</p>
+
+                                    <pre class="prettyprint linenums:1 lang-cpp">
+void func(int mat[][M]); // indicar M é obrigatório
+void func(double mat[][M][P]); // matrizes de mais dimensões funcionam igual</pre>
+                                    <p>O motivo de termos que indicar os tamanhos das dimensões diferentes da primeira é abordado em detalhes na seção <a href="#materiais">Materiais Extras</a>. A utilização da matriz dentro da função é idêntica a outras matrizes em C.</p>
+
+                                    <h4>Example</h4>
+                                    <pre class="prettyprint linenums:1 lang-cpp">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;  // for rand()
+#define ROWS 5
+#define COLUMS 5
+                                       
+// conta os numeros pares em uma matriz
+int countEven(int m[ROWS][COLUMS]){
+    int r = 0, i, j;
+    for(i = 0; i < ROWS; i++){
+        for(j = 0; j < COLUMS; j++){
+            if(m[i][j]%2 == 0)
+                r++;
+        }
+    }
+    return r;
+}
+                                            
+// mostra uma matriz na tela
+void printMat(int m[][COLUMS]){ // note que ROWS eh opcional. COLUMS nao.
+    int i, j;
+    for(i = 0; i < ROWS; i++){
+        for(j = 0; j < COLUMS; j++)
+            printf("%d ", m[i][j]);
+        printf("\n");
+    }
+}
+                                            
+int main(){
+    int matriz[ROWS][COLUMS];
+    int i,j;
+    for(i = 0; i < ROWS; i++)
+        for(j = 0; j < COLUMS; j++)
+            matriz[i][j] = rand() % 100;
+                                            
+    int even = countEven(matriz);
+    printf("Existem %d numeros pares na matriz\n", even);
+    printMat(matriz);
+}
+                                    </pre>
+                                <a href="#" class="btn btn-blue" download="/assets/codes/aula8/func.c">Download Code</a>
+                                <a href="https://goo.gl/3pNbcn" class="btn btn-blue">Code Execution</a>
+                                <p>Para mais exemplos visite este <a href="https://www.geeksforgeeks.org/pass-2d-array-parameter-c/">site</a>. Ele inclui também a opção 1, passar matrizes como ponteiros, mas ela é mais complicada (veja seção <a href="#materiais">Materiais Extras</a> para saber o porquê)</p>
+                                </div>
+                            </section>                            
+                          
+                            
+                            <section id="recomendados" class="doc-section">
+                                <h2 class="section-title">Exercícios Recomendados</h2>
+                                <div class="section-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1181" target="_blank">Linha na Matriz</a></td>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1182" target="_blank">Coluna na Matriz</a></td>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1183" target="_blank">Acima da Diagonal Principal</a></td>
+                                                            
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1435" target="_blank">Matriz Quadrada I</a></td>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1478" target="_blank">Matriz Quadrada II</a></td>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1534" target="_blank">Matriz 123</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1190" target="_blank">Área Direita</a></td>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/2552" target="_blank">PãodeQuejoSweeper</a></td>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/2542" target="_blank">Iu-Di-Oh!</a></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div><!--//table-responsive-->
+                                </div>
+                            </section><!--//doc-section-->
+                            <section id="materiais" class="doc-section">
+                                <h2 class="section-title">Materiais Extras</h2>
+                                <div class="section-block" id="idxCalc">
+                                <h3 class="block-title">Vetores multidimensionais na memória</h3>
+                                <p>Na sessão <a href="#func-param" class="scrollto">Matrizes como Parâmetros de Funções</a> vimos que só podemos passar matrizes como vetores para usá-las em funções, e é obrigatório informar o tamanho das dimensões, exceto a primeira. Isso acontece pela forma como os vetores são salvos na memória, e como o computador calcula os endereços dos elementos do vetor.</p>
+
+                                <p>Os elementos de um vetor estão salvos em posições <em>contíguas</em> na memória. Isto vale para array de qualquer dimensão. Assim, a seguinte matriz:</p>
+
+                                <img class="img-responsive" src="/assets/images/Matrizes/matrizExemplo.jpg" alt="Exemplo de uma matriz">
+
+                                <p style="margin:15px;">Na verdade, na memória do computador, fica organizada em uma única dimensão:</p>
+                                
+                                <img class="img-responsive" src="/assets/images/Matrizes/matrizMem.jpg" alt="Matriz anterior na memória">
+
+                                <p>Como os elementos estão em posições contíguas, seus endereços também são contíguos. Logo, para saber o endereço de um elemento em qualquer array unidimensionais, o computador só precisa fazer o cálculo <code>addr = array + idx*sizeof(type)</code> onde addr é o endereço procurado, array é o primeiro endereço do vetor, idx é a posição desejada e type é o tipo do vetor. Por exemplo</p>
+                                
+                                <div id = "ptr1"><img src="/assets/images/Matrizes/Pointer/ptr1.png" class = "img-responsive"></div>
+                                <div id = "ptr2" style="display: none;"><img src="/assets/images/Matrizes/Pointer/ptr2.png" class = "img-responsive"></div>
+                                <div id = "ptr3" style="display: none;"><img src="/assets/images/Matrizes/Pointer/ptr3.png" class = "img-responsive"></div>
+                                <div id = "ptr4" style="display: none;"><img src="/assets/images/Matrizes/Pointer/ptr4.png" class = "img-responsive"></div>
+
+                                <div class = "center">
+                                <a  class="btn btn-blue" onclick="animation_prev('ptr',4)">Prev</a>
+                                <a href="/assets/codes/aula8/ptr.c" class="btn btn-blue" download="">Download Code</a>
+                                <a  class="btn btn-blue"  onclick="animation_next('ptr',4)">Next</a>
+                                </div>
+                                <p style="margin: 15px">Isso é perfeitamente possível de ser feito porque o computador sabe <b>quantos bytes pular</b> para chegar em qualquer elemento, já que todos ocupam um espaço definido pelo <b>tipo</b> do vetor. No entanto, se queremos, por exemplo, pular uma linha inteira de uma matriz, como saber qual o tamanho da linha? Não é possível, a menos que saibamos de antemão. Como o tamanho de uma linha é igual <em>ao número de colunas * tamanho de cada elemento</em>, conclui-se que precisamos informar o tamanho das colunas, para que o computador possa fazer o cálculo dos endereços. Assim, se não especificamos este tamanho (por exemplo, se passarmos uma matriz para uma função como ponteiro) temos que fazer o cálculo nós mesmos.</p>
+
+                                <p>Veja vários exemplos de como passar matrizes como parâmetros de funções neste <a href="https://www.geeksforgeeks.org/pass-2d-array-parameter-c/">site</a>.</p>
+
+
+                                </div>
+                            </section><!--//doc-section-->
+                            
+                  
+                        </div><!--//content-inner-->
+                    </div><!--//doc-content-->
+                    <div class="doc-sidebar hidden-xs">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                                <li><a class="scrollto" href="#intro">Introdu&#xE7;&#xE3;o</a></li>
+                                <li><a class="scrollto" href="#matrizes">Matrizes</a></li>
+                                <li><a class="scrollto" href="#func-param">Matriz em Funções</a></li>
+                                <li><a class="scrollto" href="#recomendados">Exercícios Recomendados</a></li>
+                                <li><a class="scrollto" href="#materiais">Materiais Extras</a>
+                                    <ul class="nav doc-sub-menu">
+                                        <li><a class="scrollto" href="#idxCalc">Matrizes em Memória</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul><!--//doc-menu-->
+                        </nav>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->              
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->        
+    </div><!--//page-wrapper-->
+    
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+            <small class="copyright">Created by:<a class="link" href="https://github.com/VerasThiago" target="_blank"><span> Thiago Veras</span></a> &amp; <a class="link" href="https://github.com/Gguidini" target="_blank"><span> Giovanni M Guidini</span></a></small>
+             <br> <!-- break line-->
+             <small class="copyright">Theme PRETTYDOCS by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a></small>
+ 
+        </div><!--//container-->
+    </footer><!--//footer-->
+    
+     
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="/assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>                                                                
+    <script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="/assets/js/animation.js"></script>
+    
+    <script>
+      prettyPrint();
+    </script>
+    
+</body>
+</html> 
+

@@ -1,0 +1,92 @@
+.handle-text {
+    font-size: 10pt;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    margin-top: -10px;
+}
+
+.tag-item {
+    font-size: 10pt;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+.name-text {
+    font-size: 14pt;
+}
+
+.tiny-icon {
+    width: 10pt;
+    height: 10pt;
+    margin: 5px;
+}
+
+.panel-blue {
+    border-top: 2px solid #40babd;
+}
+
+.panel-header {
+    border-bottom: 1px solid #dddddd;
+    padding-left: 10px;
+}
+
+.btn-edit {
+    color: #40babd
+}
+
+.login-error {
+    background: #f2dede;
+    font-family: monospace;
+    font-size: 10pt;
+    color: crimson;
+    padding-left: 5%;
+}
+
+.list-item {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10pt;
+    padding: 5px;
+}
+
+.date-item {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 8pt;
+    text-align: right;
+}
+.alert-news-item {
+    background: #ffcb30;
+}
+
+.news-news-item {
+    background: #3eb1c4;
+}
+
+.nav-btn {
+    color: #40babd;
+}
+
+.nav-btn:hover {
+    background: #40babd;
+    color: whitesmoke;
+}
+
+.info-box {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: "monospace";
+    opacity: 0.8;
+    font-weight: bold;
+}
+.info-box-success {
+    background-color: #dff0d8;
+    color: #427b43;
+
+}
+
+.info-box-fail {
+    background-color: #f2dede;
+    color: #a94442;
+}

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Arquivos Texto</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Thiago Veras & Giovanni Guidini">    
+    <link rel="shortcut icon" href="/assets/images/UnB-logo.png">  
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="/assets/plugins/elegant_font/css/style.css">
+    
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
+
+    <!-- Syntax Prettyprint -->
+    <link rel="stylesheet"  href="/assets/syntax/tomorrow_night.css">
+    <script src = "/assets/syntax/prettify.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .img-responsive{
+            width: 95%;
+            margin: 15px;
+        }
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+        .img-responsive-med{
+            width: 70%;
+            margin: 15px;
+        }
+        .img-responsive-sm{
+            width: 30%;
+            margin: 15px;
+        }
+
+    </style>
+
+</head> 
+
+<body class="body-green">
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="/index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">Aula </span><span class="text-bold">12</span>
+                        </a>
+                    </h1>
+                </div><!--//branding-->
+                <ol class="breadcrumb">
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/aulas">Voltar</a></li>
+                </ol>
+            </div><!--//container-->
+        </header><!--//header-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon glyphicon glyphicon-file"></i> Documentos de Texto</h1>
+                    <div class="meta" id = "lastupdate"></div>
+                </div><!--//doc-header-->
+                <div class="doc-body">
+                    <div class="doc-content">
+                        <div class="content-inner">
+
+                            <!-- INTRO -->
+                                <section id="intro" class="doc-section">
+                                        <h2 class="section-title">Introdução</h2>
+                                        <div class="section-block">
+                                            <ul class="list">
+                                                <li>Até agora aprendemos como mexer com variáveis na <b>memória</b> do computador. No entanto a memória é <b>volátil</b>, isto é, não retém informações após o fim da execução do programa.</li>
+                                                <li>Para que possamos guardar informações após a execução do programa, e mesmo que o computador seja desligado, utilizamos <b>arquivos</b>.</li>
+                                            </ul>   
+                                        </div>
+
+                                        <h2 class="block-title" id="arquivos">Arquivos</h2>
+                                        <div class="section-block">
+                                            <ul class="list">
+                                                <li>Um arquivo também é uma <b>abstração</b> do sistema operacional. Arquivos são maneiras convenientes de organizar dados da memória <em>secundária</em>, a memória <b>não volátil</b>. O Sistema operacional é o responsável por gerênciar os arquivos.</li>
+                                                <li>Para o programador, os arquivos são <em>streams</em>, isto é, sequências de bytes que podem ser manipulados (lidos, gravados, copiados, etc)</li>
+                                                <li>Um arquivo termina com um caractere especial, conhecido como EOF (End Of File). Esse caractere marca o final da sequência de bytes que compõem o arquivo.</li>
+                                                <li>Todos os arquivos tem um <b>nome</b> assosciado, que é o nome pelo qual o Sistema Operacional identifica o arquivo.</li>
+                                            </ul>
+                                        </div>
+
+                                        <h2 class="block-title" id="tipos">Tipos de Arquivos</h2>
+                                        <div class="section-block">
+                                            <p>Existem diversas <b>extensões</b> de arquivos no computador, mas em geral apenas 2 <b>tipos</b> de arquivos:</p>
+                                        <ul class="list">
+
+                                            <li>    <h4>Arquivos de Texto</h4>
+                                                <p>Cada byte do arquivo representa um caractere. Assim, o conjunto de bytes forma um texto. Um programa C, por exemplo, é um arquivo desse tipo, pode ser facilmente visualizado com qualquer editor de texto. Arquivos texto são fáceis de serem lidos por pessoas, mas costumam ocupar mais espaço para armazenar informações.</p>
+                                            </li>
+                                            <li>    <h4>Arquivos Binários</h4>
+                                                <p>são gravados os dados <b>como estariam na memória</b>, byte a byte. Por exemplo, uma variável inteira é gravada com 4 bytes com o conteúdo exato que está na memória. Não conseguimos visualizar com um editor de texto, é necessário um programa que reconheça aquela sequência de bytes e dê significado a ela. Difícil de ser lido por pessoas, mas costuma ocupar menos espaço para armazenar informações, uma vez que cada byte não precisa representar um caractere válido. Imagens e áudios são exemplos de arquivos binários.</p>
+                                            </li>
+                                        </ul>
+                                        <p>Nesta aula vamos conhecer melhor os arquivos de texto. Os arquivos binários ficarão para uma aula futura.</p>
+                                        </div>
+                                </section><!--//doc-section-->
+                                <!-- TRABALHANDO COM ARQUIVOS -->
+                                <section id="manipular" class="doc-section">
+                                    <h2 class="section-title">Manipulando Arquivos</h2>
+                                    <div class="section-block">
+                                        <ul class="list">
+                                            <li>Na linguagem C os arquivos são abstraídos por um <b>ponteiro para arquivo</b>. Todas as operações feitas no arquivo acontecem através deste ponteiro.</li>
+
+                                            <li>Este ponteiro é a ligação entre o seu programa e o arquivo sendo manipulado. Ele também guarda a posição atual do arquivo, que é automaticamente atualizada toda vez que uma leitura ou escrita acontece.</li>
+
+                                            <li>No mais, é um ponteiro como qualquer outro. Eles são declarados assim:
+
+                                            <pre class="prettyprint linenums:1 lang-cpp">
+FILE* fd; // ponteiro para arquivo</pre>
+
+                                            Neste caso o ponteiro se chama "fd", mas pode ter qualquer nome.
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+
+                                    <h2 class="block-title" id="abrir">Abrindo Arquivos</h2>
+                                    <div class="section-block">
+
+                                        <p>Antes de operarmos com os arquivos precisamos saber algumas informações sobre tal arquivo. Por exemplo: </p>
+                                        <ul>
+                                            <li>Em qual diretório o arquivo se encontra?</li>
+                                            <li>O arquivo já existe ou vamos criá-lo?</li>
+                                            <li>O arquivo existe mas queremos refazê-lo?</li>
+                                        </ul>
+
+                                        <p>Sabendo essas informações poderemos abrir o arquivo corretamente. A função que faz isso é <b>fopen()</b> (file open), que recebe 2 parâmetros, nesta ordem, <b>nome</b> do arquivo e <b>modo</b> em que abriremos o arquivo. Os modos disponíveis estão listados na tabela abaixo.</p>
+                                    </div>
+
+                                    <pre class="prettyprint linenums:1 lang-cpp">
+FILE* fd; // file descriptor
+char file[] = "file.txt"; // file name
+fd = fopen(file, "w"); // abrindo arquivo para escrita
+                                    </pre>
+
+                                    <h2 class="block-title" id="modos">Modos de Abertura de Arquivos Texto</h2>
+                                    <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Code</th>
+                                                <th>Nome</th>
+                                                <th>Descrição</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>"r"</td>
+                                                <td>Read</td>
+                                                <td>Abre um arquivo TEXTO para leitura, já deve existir o arquivo.</td>
+                                            </tr>
+                                            <tr>
+                                                    <td>"w"</td>
+                                                    <td>Write</td>
+                                                    <td>Abre (ou cria) um arquivo TEXTO para escrita. Se o arquivo já existir seu conteúdo anterior é descartado.</td>
+                                            </tr>
+                                            <tr>
+                                                    <td>"a"</td>
+                                                    <td>Append</td>
+                                                    <td>Abre (ou cria) um arquivo TEXTO para escrita. Ponteiro começa no final do arquivo.</td>
+                                            </tr>
+                                            <tr>
+                                                    <td>"r+"</td>
+                                                    <td>Read Plus</td>
+                                                    <td>Abre um arquivo TEXTO para leitura ou escrita. O arquivo deve existir e poder ser modificado.</td>
+                                            </tr>
+                                            <tr>
+                                                    <td>"w+"</td>
+                                                    <td>Write Plus</td>
+                                                    <td>Abre (ou cria) um arquivo TEXTO para leitura e escrita. Se o arquivo já existir seu conteúdo anterior é descartado.</td>
+                                            </tr>
+                                            <tr>
+                                                    <td>"a+"</td>
+                                                    <td>Append Plus</td>
+                                                    <td>Abre (ou cria) um arquivo TEXTO para leitura e escrita. Ponteiro começa no final do arquivo.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                    
+                                    <p>A função fopen() retorna um descriptor do arquivo, que é gerado pelo SO e associa o arquivo desejado ao ponteiro que criamos. Caso o arquivo não possa ser aberto por qualquer motivo o retorno será NULL. Assim, para saber se o arquivo foi aberto com sucesso basta testar se o ponteiro tem valor NULL.</p>
+
+                                    <p>Veja nos <a href="#fail" class="scrollto">materiais extras</a> alguns motivos que podem causar falha na abertura do arquivo.</p>
+
+                                    <pre class="prettyprint linenums:1 lang-cpp">
+FILE* fd;
+char file[] = "file.txt";
+fd = fopen(file, "r+");
+
+// testar se arquivo existe
+if(fd == NULL)
+    fd = fopen(file, "w"); // se nao existe, cria o arquivo
+                                    </pre>
+
+                                    <p>Depois de utilizarmos o arquivo é necessário <b>fechá-lo</b>. Isso é importante por 2 motivos: 
+                                        <ul>
+                                        <li> Liberar espaço alocado para as operações com o arquivo. </li>
+                                        <li> Garantir que as mudanças feitas no arquivo realmente foram salvas.</li>
+                                        </ul>
+
+                                    Veja nos <a href="#fechar" class="scrollto">materiais extras</a>  explicações mais detalhadas sobre a importância de fechar arquivos corretamente.
+                                    </p>
+
+                                    <p>Para fechar um arquivo usamos a função fclose(). Após fecharmos um arquivo a associação entre o arquivo e o ponteiro é desfeita, e poderemos associar o ponteiro à outro arquivo.</p>
+                                    <pre class="prettyprint linenums:1 lang-cpp">
+FILE* fd = fopen("file.txt", "r+");
+
+// utiliza o arquivo no programa....
+fclose(fd); // fecha o arquivo
+                                    </pre>
+
+                                    <h2 class="block-title" id="ops">Movimentação em Arquivos</h2>
+                                    <p>O ponteiro do arquivo também guarda a posição atual em que o arquivo está sendo manipulado. Lembre-se que um arquivo é uma sequência de bytes, assim, a posição atual significa qual byte da sequência estamos olhando. Toda vez que uma operação de leitura ou escrita acontece esta posição é automaticamente atualizada, mas por vezes queremos ir para uma posição específica no arquivo. Vejamos algumas das funções que nos ajudam a fazer isso.</p>
+
+                                    <ul class="list">
+                                        <li>Se quisermos ir ao começo do arquivo podemos usar a função rewind()
+
+                                        <pre class="prettyprint linenums:1 lang-cpp">
+rewind(fd); // retorna para o inicio do arquivo</pre>
+                                        </li>
+
+                                        <li>Para saber a posição atual do arquivo usamos ftell()
+                                        
+                                        <pre class="prettyprint linenums:1 lang-cpp">
+int pos;
+pos = ftell(fd);
+                                        </pre>
+                                        </li>
+
+                                        <li>Para ir para uma posição específica usamos a função fseek(). Ela recebe 3 parâmetros: o ponteiro para o arquivo, o offset <b>em bytes</b> para movimentação, e a <b>origem</b>. A origem pode receber 2 valores:
+                                            <ul class = "list">
+                                                <li>SEEK_SET - Beginning of file</li>
+                                                <li>SEEK_CUR - Current position of the file pointer</li>
+                                            </ul>
+
+                                        <pre class="prettyprint linenums:1 lang-cpp">
+fseek(fd, 15, SEEK_SET); // go to 15th byte from beggining
+                                        </pre>
+                                        </li>
+
+                                    </ul>
+
+                                    <p>Existem muitas outras funções para manipulação de arquivos. Elas fazem parte da biblioteca stdio.h . Leia a <a href="http://www.cplusplus.com/reference/cstdio/">referência</a> da biblioteca para conhecer mais funções (lembre-se que nem todas as funções desta biblioteca são sobre arquivos).</p>
+                                </section>
+
+                                <!-- ARQUIVOS TEXTO -->
+                                <section id="arq_texto" class="doc-section">
+                                        <h2 class="section-title">Arquivos Texto</h2>
+                                        <div class="section-block">
+                                            
+                                        <li><p>Para facilitar o entendimento, utilizaremos um arquivo chamdo <b>notas.txt</b>, com os seguintes dados:</p></li>
+                                        <pre class="prettyprint lang-md" style="width: 15%;    margin-left: 40%; ">
+Thiago 9.0
+Joao 8.7
+Maria 8.1
+Henrique 7.6</pre>                                            
+
+                                        <h2 class="block-title" id="leitura">Operação de Leitura</h2>
+                                        <ul class = "list">
+                                            <li><p>Para conseguir ler os dados de um arquivo, basta seguir os seguintes passos:</p></li>
+                                            <ol class = "list">
+                                                <li><p>Declarar as variáveis para leitura e um ponteiro para o arquivo;</p></li>
+                                                <pre class="prettyprint linenums:1 lang-cpp">
+typedef struct {
+    char nome[100];
+    double nota;
+}Estudante;
+
+int main(){
+    FILE *arquivo;
+    int i,n = 0;
+    Estudante aluno[100];</pre>
+                                                <li><p>Abrir o arquivo no modo <b>leitura</b>;</p></li>
+                                                <pre class="prettyprint linenums:1 lang-cpp">
+arquivo = fopen("notas.txt","r");</pre>
+                                                <li><p>Verificar se o arquivo foi aberto com sucesso;</p></li>
+                                                <pre class="prettyprint linenums:1 lang-cpp">
+if (arquivo == NULL){
+   printf("Error! opening file");
+   return 1;
+}</pre>                                             
+                                                <li><p>Percorcorrer o arquivo e ler os dados</p></li>
+                                                <ul class = "list">
+                                                    <li><p>Existem várias funções para ler os dados do arquivo, essas funções possuem os mesmos nomes que as funções já conhecidas, porém precedem de um 'f'.
+                                                    <li><p>As funções mais usadas são : <b>fscanf, fgetchar, fgets</b>.</p></li>
+                                                    <li><p>A função <b>fscanf</b> é uma função que recebe 3 parâmetros, o primeiro é o ponteiro para o arquivo, o segundo são os parametros de leitura (%d pra numero, %s pra sting ...) e o ultimo os endereços para salvar os dados (igual já conhecemos com o scanf)</p></li>
+                                                </ul>
+                                                <pre class="prettyprint linenums:1 lang-cpp">
+for(int i = 0; i < 4; i++){
+    fscanf(arquivo, "%s %lf",aluno[n].nome, &amp;aluno[n].nota);
+}</pre>                                                
+                                                <ul class = "list">
+                                                    <li><p>Porém, caso não for conhecido a quantidade de linhas do arquivo, devemos ler os dados enquanto (While) não chegarmos ao final do arquivo (End of File).</p></li>
+                                                </ul>
+                                                <pre class="prettyprint linenums:1 lang-cpp">
+while(fscanf(arquivo, "%s %lf", aluno[n].nome, &amp;aluno[n].nota)  != EOF){
+    n++;
+}</pre>    
+                                                <li>Operar com os dados</li>
+                                                <ul class = "list">
+                                                    <li><p>Vai do programador decidir o que fazer com os dados lidos.</p></li>
+                                                </ul>
+                                                <pre class="prettyprint linenums:1 lang-cpp">
+for(i = 0; i < n; i++){                                                
+    printf("Aluno: %s\n",aluno[i].nome);
+    printf("Nota: %.2lf\n",aluno[i].nota);                                                
+}</pre>
+                                                <li><p>Fechar o arquivo</p></li>
+                                                <pre class="prettyprint linenums:1 lang-cpp">
+fclose(arquivo);</pre>
+                                            </ol>
+
+                                        </u>
+                                        <h2 class="block-title" id="escrita">Operação de Escrita</h2>
+                                        <li><p>Para conseguir escrever os dados em um arquivo, basta novamente seguir os 3 primeiros passos mostrado anteriormente (com uma pequena mudança no passo 2) junto com esses novos passos:</p></li>
+                                            <ol class = "list" start="2">
+                                                <li><p>Abrir o arquivo no modo <b>escrita</b></p></li>
+                                                <pre class="prettyprint linenums:1 lang-cpp">
+arquivo = fopen("notas.txt","w"); </pre>
+                                            </ol>
+                                            <ol class = "list" start="4">
+                                                <li><p>Percorrer os dados para salvar no arquivo;</p></li>
+                                                 <ul class = "list">
+                                                    <li><p>A função utilizada para escrever em um arquivo de texto é a função <b>fprintf</b>, ou seja, a função printf imprime na tela uma mensagem, e a função fprintf imprime no arquivo a mensagem.</p></li>
+                                                    <li><p>Vamos supor que as notas dos alunos tiveram um aumento de 10% e agora necessita de atualizar o arquivo</p></li>
+                                                </ul>
+                                                <pre class="prettyprint linenums:1 lang-cpp">
+for(i = 0; i < n; i++){  
+    aluno[i].nota *= 1.1;                                              
+    fprintf(arquivo,"%s %lf\n",aluno[i].nome,aluno[i].nota);
+}</pre>                                                
+                                            </ol>
+                                        <li>O código completo você encontra aqui</li>
+                                        <a href="/assets/codes/aula12/read&write.c" download="" class="btn btn-green">Download Code</a>
+                                        </div>
+                                </section>
+
+                                <!-- METERIAIS EXTRAS -->
+                                <section id="materiais" class="doc-section">
+                                        <h2 class="section-title">Materiais Extras</h2>
+                                        <div class="section-block">
+
+                                            <h2 class="block-title" id="fail">Falhas na Abertura de Arquivos</h2>
+
+                                            <p>Alguns dos erros que podem ocorrer na abertura de arquivos são:</p>
+
+                                            <ul>
+                                                <li>O arquivo não existir no dietório corrente. Isso significa que o arquivo não existe no mesmo diretório em que o programa está rodando, mesmo que exista em outro diretório.
+
+                                                        <p>
+                                                            Se queremos acessar um arquivo em um diretório diferente daquele do programa podemos passar o caminho completo do arquivo, ou um relativo em relação ao diretório que estamos. Por exemplo, se estivermos no diretório "/Desktop" e queremos acessar um arquivo "file.txt" dentro da pasta "files/", que fica no Desktop podemos fazer
+                                                        </p>
+
+                                                        <pre class="prettyprint lang-cpp">
+FILE* fd = fopen("files/file.txt", "r+");
+                                                        </pre>
+
+                                                        <p>Se a pasta "files/" ficar no diretório "Documents" podemos fazer assim:</p>
+
+                                                                                                                                                                  <pre class="prettyprint lang-cpp">
+FILE* fd = fopen("../Documents/files/file.txt", "r+");
+                                                        </pre>
+
+                                                        <p>Lembre-se que ".." acessa o diretório acima do diretório atual. No caso, o diretório acima de Desktop é o diretório home.</p>
+                                                </li>
+                                                <li>Podemos não ter permissão de leitura ou escrita no arquivo, dependendo do lugar em que ele está salvo. Para resolver esse problema é necessário mudar as permissões do arquivo ou executar o programa como um usuário que tenha permissão sobre o arquivo.</li>
+                                            </ul>
+                                            <h2 class="block-title" id="fechar">Fechando Arquivos Corretamente</h2>
+
+                                            <p>O tempo de acesso de disco é muito inferior ao tempo de acesso da RAM, por isso o computador procura fazer o menor número possível de operações em disco possível. Uma das técnicas que permitem isso é o <em>buffering</em>.</p>
+
+                                            <p>Você irá aprender mais sobre isso na matéria de Organização de Arquivos, mas o importante agora é saber que quando o SO faz a ligação entre o ponteiro de arquivo e o arquivo ele também reserva um espaço na memória principal para operações com esse arquivo, i.e. o buffer do arquivo. Qualquer operação que fazemos com o arquivo, de leitura ou escrita, na verdade é realizada nesse buffer. Quando operações suficientes foram realizadas, ou se uma operação não pode ser feita no buffer, então o buffer é escrito no arquivo, e depois modificado na nova operação.</p>
+
+                                            <p>De qualquer forma, quando o arquivo é fechado, usando a função fclose(), esse buffer é então escrito para o arquivo. Caso o arquivo não seja fechado e o programa termine, é possível que algumas operações feitas no buffer não sejam passadas para o arquivo, e sejam perdidas. Por isso é fundamental fechar os arquivos antes do final do programa.</p>
+
+                                            <div class="callout-block" style="background-color: darkgreen;color: cornsilk">
+                                                Se uma mudança é essencial para o arquivo e precisamos que ela seja passada ao arquivo imediatamente, podemos usar a função fflush(fd). Ela força a escrita do buffer no stream necessário.
+                                            </div>
+                                        </div>
+                                </section>
+
+                            </div> <!-- Content inner -->
+                        </div> <!-- Doc content -->
+                                <!-- MENU LATERAL -->
+                                <div class="doc-sidebar hidden-xs">
+                                        <nav id="doc-nav">
+                                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                                                <li><a class="scrollto" href="#intro">Introdu&#xE7;&#xE3;o</a>
+                                                    <ul class="nav doc-sub-menu">
+                                                            <li><a class="scrollto" href="#arquivos">Arquivos</a></li>
+                                                            <li><a class="scrollto" href="#tipos">Tipos de Arquivos</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a class="scrollto" href="#manipular">Manipulando Arquivos</a>
+                                                    <ul class="nav doc-sub-menu">
+                                                            <li><a class="scrollto" href="#abrir">Abrindo Arquivos</a></li>
+                                                            <li><a class="scrollto" href="#modos">Modos de Abertura</a></li>
+                                                            <li><a class="scrollto" href="#ops">Movimentação em Arquivos</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a class="scrollto" href="#arq_texto">Arquivos Texto</a>
+                                                    <ul class="nav doc-sub-menu">
+                                                            <li><a class="scrollto" href="#leitura">Leitura</a></li>
+                                                            <li><a class="scrollto" href="#escrita">Escrita</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a class="scrollto" href="#materiais">Materiais Extras</a>
+                                                    <ul class="nav doc-sub-menu">
+                                                            <li><a class="scrollto" href="#fail">Sobre Falhas de Abertura</a></li>
+                                                            <li><a class="scrollto" href="#fechar">Sobre Fechar Arquivos</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul><!--//doc-menu-->
+                                        </nav>
+                                </div> <!--//doc-sidebar-->
+                </div> <!-- doc body -->
+            </div> <!-- container -->
+        </div> <!-- Doc Wrapper-->
+    </div> <!-- page wrapper -->
+
+
+    <footer id="footer" class="footer text-center">
+            <div class="container">
+                <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+                <small class="copyright">Created by:<a class="link" href="https://github.com/VerasThiago" target="_blank"><span> Thiago Veras</span></a> &amp; <a class="link" href="https://github.com/Gguidini" target="_blank"><span> Giovanni M Guidini</span></a></small>
+                <br> <!-- break line-->
+                <small class="copyright">Theme PRETTYDOCS by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a></small>
+    
+            </div><!--//container-->
+    </footer><!--//footer-->
+        
+        
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="/assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>                                                                
+    <script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="/assets/js/animation.js"></script>
+    <script type="text/javascript" src="/assets/js/lastupdate.js"></script>
+        
+    <script>
+        prettyPrint();
+        auto_update();
+    </script>
+
+</body>
+</html>

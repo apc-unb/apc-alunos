@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Structs</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Thiago Veras & Giovanni Guidini">    
+    <link rel="shortcut icon" href="/assets/images/UnB-logo.png">  
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="/assets/plugins/elegant_font/css/style.css">
+    
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
+
+    <!-- Syntax Prettyprint -->
+    <link rel="stylesheet"  href="/assets/syntax/tomorrow_night.css">
+    <script src = "/assets/syntax/prettify.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .img-responsive{
+            width: 95%;
+            margin: 15px;
+        }
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+        .img-responsive-med{
+            width: 70%;
+            margin: 15px;
+        }
+        .img-responsive-sm{
+            width: 30%;
+            margin: 15px;
+        }
+
+    </style>
+
+</head> 
+
+<body class="body-orange">
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="/index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">Aula </span><span class="text-bold">10</span>
+                        </a>
+                    </h1>
+                </div><!--//branding-->
+                <ol class="breadcrumb">
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/aulas">Voltar</a></li>
+                </ol>
+            </div><!--//container-->
+        </header><!--//header-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon glyphicon glyphicon-compressed"></i> Struct</h1>
+                    <div class="meta" id = "lastupdate"></div>
+                </div><!--//doc-header-->
+                <div class="doc-body">
+                    <div class="doc-content">
+                        <div class="content-inner">
+                            <section id="intro" class="doc-section">
+                                <h2 class="section-title">Introdu&#xE7;&#xE3;o</h2>
+                                <div class="section-block">
+                                    <ul class="list">
+                                        <li><p>Até o momento, vimos agrupamentos de dados de um <b>mesmo tipo</b>: vetores e matrizes.</p></li>
+                                        <li><p>Frequentemente, no entanto, precisamos agrupar um conjunto de dados <b>relacionados</b>, de <b>tipos não necessariamente iguais</b>.</p></li>
+                                        <li><p>Por exemplo:</p></li>
+                                        <ul class = "list">
+                                            <li>Nome, idade e sexo de uma pessoa.</li>
+                                            <li>Coordenadas de um ponto.</li>
+                                            <li>Status do personagem de um jogo</li>
+                                            <li>Atributos de um produto</li>
+                                        </ul>
+                                        <li><p>Para isso, utilizamos registros (também conhecido como structs).</p></li>
+                                        <li><p>Um registro é <b>novo tipo</b>, definido pelo programador, formado por um ou mais campos, que podem ter <b>tipos diferentes</b> de dados.</p></li>
+                                        <li><p>Por esse motivo, registros também são chamados de <b>variáveis compostas heterogêneas</b>.</p></li>
+                                      
+                                        
+
+                                    </ul>   
+                                </div>
+                            </section><!--//doc-section-->
+                            <section id="registros" class="doc-section">
+                                    <h2 class="section-title">Registros</h2>
+                                    <div class="section-block" id="declarar">
+                                        <h3 class="block-title">Declarando registros</h3>
+                                        <ul class = "list">
+                                            <li><p>Vamos supor que vamos criar um registro para um determinado monstro, criando a tebela dos dados, será maios ou menos assim:</p></li>
+                                            <img src="/assets\images\Structs\table.png" class = "center" style = "width: 30%;">
+                                            <li><p>Podemos ver que a variável <i>Nome</i> é do tipo <em>vetor de char (string)</em>; que <i>Código</i>, <i>Level</i>, <i>Vida</i>, <i>Ataque</i> e <i>Defesa</i> são do tipo <em>int</em>; que <i>Taxa de Captura</i> é do tipo <em>float</em>; e que <i>Paralisado</i> é do tipo booleano.</p></li>
+                                            <li><p>Todas essas variáveis são <b>relacionadas</b>, e estão agrupadas em um <b>novo domínio</b>.</p></li>
+                                            <li><p>Dizemos então que, da mesma maneira que existem os tipos inteiro, real, literal, etc, agora existe um novo tipo, Dados do Monstro, e também <b>podemos criar variáveis desse novo tipo</b>.</p></li>
+                                            <pre class="prettyprint linenums:1 lang-cpp">
+struct DadosMonstro {
+    int cod;
+    char nome[30];
+    float txcap;
+    int level, vida, atq, def;
+    int paralis;
+};
+</pre>
+                                            <li><p>Com a struct criada, basta declarar um variável com um nome qualquer, do tipo <b>struct DadosMonstro</b> como por exemplo:</p></li>
+                                            <pre class="prettyprint linenums:1 lang-cpp">
+struct DadosMonstro pikachu;
+struct DadosMonstro chikorita;</pre>
+                                            <li><p>Também é possível declarar um <b>vetor</b> deste tipo de dados.</p></li>
+                                            <pre class="prettyprint linenums:1 lang-cpp">
+struct DadosMonstro monstros[100];</pre>                    
+                                            <li>Se soubermos o número de variáveis que queremos criar é possível criar diretamente essas variáveis.</li>
+                                            <pre class="prettyprint linenums:1 lang-cpp">
+int main(){
+    struct {
+        int cod;
+        char nome[30];
+        float txcap;
+        int level, vida, atq, def;
+        int paralis;
+    } pikachu, chikorita;
+    // cria as variáveis pikachu e chikorita conforme definição.
+}
+                                            </pre>
+                                            <li>Também é possível associar a struct a um <em>identificador de tipo</em>, evitando que tenhamos que adicionar a palavra <em>struct</em> sempre que formos instanciar uma variável do novo tipo. Isto é feito com o uso da palavra reservada <b>typedef</b></li>
+                                            <pre class="prettyprint linenums:1 lang-cpp">
+typedef struct {
+    int cod;
+    char nome[30];
+    float txcap;
+    int level, vida, atq, def;
+    int paralis;
+} DadosMonstro; // associando "DadosMonstro" à definição da struct
+
+int main() {
+    DadosMonstro pikachu, chikorita; // não precisa de struct antes
+}
+                                            </pre>
+                                            </ul>
+                                    </div>
+                                    <div class="section-block" id="acessar">
+                                        <h3 class="block-title">Acessando registros</h3>
+                                        <ul class = "list">
+                                            <li><p>Para acessar uma das variáveis internas do registro, ou seja, um de seus campos, fazemos da seguinte maneira :</p></li>
+                                            <pre class="prettyprint linenums:1 lang-cpp">
+DadosMonstro monstros[3];
+
+for(i = 0; i < 3; i++){
+    printf("Digite o nome do monstro %d : ",i+1);
+    scanf("%s", monstros[i].nome);
+    printf("Digite o level do monstro %s : ",monstros[i].nome);
+    scanf("%d", &monstros[i].level);
+}
+
+for(i = 0; i < 3; i++)
+    printf("O monstro %s tem level : %d\n", monstros[i].nome, monstros[i].level);
+</pre>                                        
+
+                                        </ul>
+                                    </div>
+                            </section>
+
+                            <section id="ponteiros" class="doc-section">
+                                <h2 class="section-title">Ponteiros de Registros</h2>
+                                <div class="section-block" id="declarar">
+                                    <p>Um ponteiro de registro é declarado da mesma maneira que um ponteiro para qualquer outra variável, usando o operador asterisco.</p>
+
+                                    <p>Também podemos acessar os conteúdos da struct <em>desrreferenciando</em> seu ponteiro.</p>
+
+                                    <pre class="prettyprint linenums:1 lang-cpp">
+DadosMonstro* pt = &pikachu; // ponteiro para pikachu
+int codPikachu = (*pt).code; // código do pikachu
+float txPikachu = (*pt).txcap;
+                                    </pre>
+
+                                    <p>Mas existe um operador especial para acessar variáveis internas de um ponteiro de struct, o operador <b>seta</b> (->).</p>
+
+                                     <pre class="prettyprint linenums:1 lang-cpp">
+DadosMonstro* pt = &pikachu; // ponteiro para pikachu
+int codPikachu = pt->code; // código do pikachu
+float txPikachu = pt->txcap;
+                                    </pre>
+
+                                    <p>Ponteiros para registros são bastante úteis para alterar um registro em uma função diferente. Existem também estruturas de dados que envolvem structs que precisam de um ponteiro para a próxima struct da sequência, como listas, árvores, etc. Essas structs serão vistas em detalhes na matéria de Estruturas de Dados.</p>
+                                    <p>Para mais exemplos de declaração, acesso à elementos e uso de ponteiros veja este <a href="https://www.geeksforgeeks.org/structures-c/" target="_blank">site</a>.</p>
+                                </div>
+                            </section>
+
+                            <section id="funcs" class="doc-section">
+                                <h2 class="section-title">Registros e Funções</h2>
+                                <div class="section-block">
+                                    <p>Vamos observar alguns exemplos mais elaborados do uso de structs.</p>
+
+                                    <ol>
+                                        <li>Temos um empresa que começou a ser informatizada,
+                                            queremos cadastrar no máximo 100 funcionários com
+                                            as seguintes informações de cada funcionário: Nome;
+                                            Sexo; Salário; Matrícula; Endereço e Cargo.
+
+                                    <pre class="prettyprint linenums:1 lang-cpp">
+typedef struct {
+    char nome[50];
+    char sexo;
+    float salario;
+    int matricula;
+    char endereco[100];
+    char cargo[50];
+} Funcionario;
+
+void cadastrarFuncionario(Funcionario f[], int idx){
+    getchar();
+    printf("Qual o nome do funcionario?\n");
+    scanf(" %[^\n]", f[idx].nome);
+    getchar();
+    printf("Qual o sexo do funcionario?\n");
+    scanf(" %c", &f[idx].sexo);
+    printf("Qual o salario do funcionario?\n");
+    scanf("%f", &f[idx].salario);
+    printf("Qual a matricula do funcionario?\n");
+    scanf("%d", &f[idx].matricula);
+    printf("Qual o endereco do funcionario?\n");
+    scanf(" %[^\n]", f[idx].endereco);
+    printf("Qual o cargo do funcionario?\n");
+    scanf("%[^\n]", f[idx].cargo);
+}
+
+int main(){
+    Funcionario array[100]; // max de 100 funcionarios
+    int cadastrados = 0, done = 0;
+    while((!done) && (cadastrados < 100)){
+        printf("Funcionarios cadastrados: %d\n", cadastrados);
+        printf("(1) - Cadastrar novo funcionario\n(2) - Finalizar\n");
+        int op;
+        scanf("%d", &op);
+        while((op != 1) && (op != 2)){
+            printf("Opcao invalida\n");
+            scanf("%d", &op);
+        }
+        if(op == 1){
+            cadastrarFuncionario(array, cadastrados);
+            cadastrados++;
+        }
+        else
+            done = 1;
+    }
+    int i;
+    for(i = 0; i < cadastrados; i++){
+        printf("Funcionario %d\n", i);
+        printf("Nome: %s (%c)\n", array[i].nome, array[i].sexo);
+        printf("Endereco: %s\n", array[i].endereco);
+        printf("Matricula: %d\n", array[i].matricula);
+        printf("Cargo: %s\n", array[i].cargo);
+        printf("Salario: %f\n", array[i].salario);
+        printf("============================================\n");
+    }
+}
+                                    </pre>
+                                    <a href="/assets/codes/aula10/funcionario.c" download="" class="btn btn-orange">Download Code</a>
+                                    </li>
+                                    <li>Faça um simples programa para transformar um ponto polar em um ponto cartesiano.
+
+                                    <pre class="prettyprint linenums:1 lang-cpp">
+#define PI 3.1415
+
+typedef struct {
+    double x,y;
+} Pcart;
+
+typedef struct {
+    double r, angle;
+} Ppolar;
+
+Pcart polar2cart(Ppolar p){
+    Pcart r;
+    float rad = (p.angle*PI)/180.0;
+    r.x = p.r * cos(rad);
+    r.y = p.r * sin(rad);
+    return r;
+}
+
+Ppolar cart2polar(Pcart p){
+    Ppolar asw;
+    asw.r = sqrt(pow(p.x,2) + pow(p.y,2));
+    float rad = atan(p.y/p.x);
+    asw.angle = (rad*180)/PI;
+    return asw;
+}
+
+int main(){
+    Ppolar p = {13, 22.6};
+    Pcart q = polar2cart(p);
+    Ppolar o = cart2polar(q);
+    printf("Ponto cartesiano: (%.2lf, %.2lf)\n", q.x, q.y);
+    printf("Ponto polar: (%.2lf, %.2lf)\n", o.r, o.angle);
+}
+
+// TERMINAL OUTPUT
+// [aula10]$ ./ponto
+// Ponto cartesiano: (12.00, 5.00)
+// Ponto polar: (13.00, 22.60)
+                                    </pre>
+
+                                    <a href="/assets/codes/aula10/ponto.c" download="" class="btn btn-orange">Download Code</a>
+                                    </li>
+                                    <li>Veras é um aluno sempre preocupado com suas notas, e que busca subir seu IRA sempre. Sendo de computação, Veras criou um programa simples para ver em qual das matérias que está fazendo ele está com o melhor rendimento, e qual precisa se dedicar mais. Para isso ele usa registros para suas notas de cada matéria, ordenando-os de maneira crescente. Claro que o programa de verdade do Veras é bem mais complicado do que este, mas quando estava no primeiro semestre ele fez algo mais ou menos assim:
+
+                                <pre class="prettyprint linenums:1 lang-cpp">                        
+#include &lt;stdlib.h&gt;
+
+typedef struct {
+    int mat;
+    int pNum;
+    float nota;
+    int peso;
+} Nota;
+
+void matNome(int idx){
+    switch (idx) {
+        case 0: printf("APC\n");
+                break;
+        case 1: printf("ISC\n");
+                break;
+        case 2: printf("C1\n");
+                break;
+        case 3: printf("FTC\n");
+                break;
+        case 4: printf("InfoSoc\n");
+                break;
+        default: printf("Lembro dessa materia nao..\n");
+    }
+}
+// funcao de comparacao entre Notas
+int ehMenor(Nota* a, Nota* b){
+    float n_a = a->nota;
+    float n_b = b->nota;
+    if(n_a <= n_b)
+        return 1;
+    else
+        return 0;
+}
+
+void showNota(Nota* n){
+    printf("Materia: ");
+    matNome(n->mat);
+    printf("Prova numero %d\n", n->pNum);
+    printf("Nota: %.2f, peso: %d\n", n->nota, n->peso);
+}
+
+void stats(Nota* arr, int n){
+    // funcao para ordenar vetores. Faz parte da stdlib.h
+    Nota pior = arr[0];
+    Nota melhor = arr[0];
+    int i;
+    for(i = 1; i < n; i++){
+        if(ehMenor(&arr[i], &pior))
+            pior = arr[i];
+        else if(ehMenor(&melhor, &arr[i]))
+            melhor = arr[i];
+    }
+    printf("MELHOR NOTA\n");
+    showNota(&melhor);
+    printf("=============================\n");
+    printf("PIOR NOTA\n");
+    showNota(&pior);
+}
+
+int main(){
+    Nota vetor[10];
+    int sub[] = {0,0,1,1,2,2,3,3,4,4};
+    float nota[] = {10,10,6.5,8.2,4.5,7.9,4.2,6.5,7.8,8.5};
+    int i;
+    for(i = 0; i < 10; i++){
+        Nota a = {sub[i], (i%2)+1, nota[i], (i%3)+2};
+        vetor[i] = a;
+    }
+
+    stats(vetor, 10);
+}
+                                    </pre>
+                                    <a class="btn btn-orange" target="_blank" href="https://goo.gl/rArpuy">Code Execution</a>
+
+                                    <a href="/assets/codes/aula10/veras.c" download="" class="btn btn-orange">Download Code</a>
+                                    </li>
+                                    </ol>
+                                </div>
+                            </section>
+                            
+                            <section id="materiais" class="doc-section">
+                                    <h2 class="section-title">Materiais Extras</h2>
+    
+                                <div class="section-block">
+                                    <h2 id="regmem">Registros na Memória</h2>
+                                    <p>Sabemos usar structs, mas como elas estão armazenadas na mamória? De maneira interessante, elas são semelhantes aos vetores neste quesito também: os atributos da struct estão em endereços adjacentes da memória, conforme mostra a imagem.</p>
+
+                                    <ul>
+                                        <li>O primeiro endereço da struct é também o primeiro endereço do primeiro atributo.</li>
+                                        <li>Cada atributo ocupa a quantidade de bytes necessários para o seu tipo (e.g. int - 4 bytes, float - 4 bytes, char - 1 byte, etc)</li>
+                                        <li>Os atributos começam em endereços <b>alinhados</b> (i.e. múltiplos de 4), por isso os endereços 105-107 não estão sendo utilizados na figura.</li>
+                                    </ul>
+                                    <img class="img-responsive" src="/assets/images/Structs/structInMemory.jpg" alt="Imagem representando um registro na memória">
+                                </div>
+                                </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+                    </div><!--//doc-content-->
+                    <div class="doc-sidebar hidden-xs">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                                <li><a class="scrollto" href="#intro">Introdu&#xE7;&#xE3;o</a></li>
+                                <li><a class="scrollto" href="#registros">Registros</a></li>
+                                    <ul class="nav doc-sub-menu">
+                                        <li><a class="scrollto" href="#declarar">Declarar</a></li>
+                                        <li><a class="scrollto" href="#acessar">Acessar</a></li>
+
+                                    </ul>
+
+                                <li><a class="scrollto" href="#ponteiros">Ponteiros de Registros</a></li>
+                                <li><a class="scrollto" href="#funcs">Funções com Registros</a></li>
+                                <li><a class="scrollto" href="#materiais">Materiais Extras</a>
+                                    <ul class="nav doc-sub-menu">
+                                        <li><a class="scrollto" href="#regmem">Registro na Memória</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul><!--//doc-menu-->
+                        </nav>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->              
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->        
+    </div><!--//page-wrapper-->
+    
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+            <small class="copyright">Created by:<a class="link" href="https://github.com/VerasThiago" target="_blank"><span> Thiago Veras</span></a> &amp; <a class="link" href="https://github.com/Gguidini" target="_blank"><span> Giovanni M Guidini</span></a></small>
+             <br> <!-- break line-->
+             <small class="copyright">Theme PRETTYDOCS by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a></small>
+ 
+        </div><!--//container-->
+    </footer><!--//footer-->
+    
+     
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="/assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>                                                                
+    <script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="/assets/js/animation.js"></script>
+    <script type="text/javascript" src="/assets/js/lastupdate.js"></script>
+
+    
+    <script>
+      prettyPrint();
+      auto_update();
+    </script>
+    
+</body>
+</html> 
+

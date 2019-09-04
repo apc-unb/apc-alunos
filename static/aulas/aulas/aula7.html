@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Busca &#x26; Ordena&#xE7;&#xE3;o</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Thiago Veras & Giovanni Guidini">    
+    <link rel="shortcut icon" href="/assets/images/UnB-logo.png">  
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="/assets/plugins/elegant_font/css/style.css">
+    
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
+
+    <!-- Syntax Prettyprint -->
+    <link rel="stylesheet"  href="/assets/syntax/tomorrow_night.css">
+    <script src = "/assets/syntax/prettify.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .img-responsive{
+            width: 70%;
+        }
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+    </style>
+
+</head> 
+
+<body class="body-pink">
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="/index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">Aula </span><span class="text-bold">7</span>
+                        </a>
+                    </h1>
+                </div><!--//branding-->
+                <ol class="breadcrumb">
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/aulas">Voltar</a></li>
+                </ol>
+            </div><!--//container-->
+        </header><!--//header-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    
+                    <h1 class="doc-title"><i class="icon glyphicon glyphicon-eye-open"></i> Busca &#x26; Ordena&#xE7;&#xE3;o</h1>
+                    <div class="meta"><i class="fa fa-clock-o"></i> Last updated: April 28th, 2018</div>
+                </div><!--//doc-header-->
+                <div class="doc-body">
+                    <div class="doc-content">
+                        <div class="content-inner">
+                            <section id="intro" class="doc-section">
+                                <h2 class="section-title">Introdu&#xE7;&#xE3;o</h2>
+                                <div class="section-block">
+                                    <h4>Busca</h4>
+                                    <ul class="list">
+                                        <li><p>Busca é um método bastante utilizado em programação, pois frequentemente necessitamos de informações que podem ser adquiridas através dela.</p></li>
+                                        <li><p>Pode-se realizar busca em diversos lugares como: vetores (verificação da existência de um valor dentro dele), intervalos numéricos (qual o melhor ponto dentro de um intervalo que satisfaz o problema), strings (se um letra está contida em uma string) e etc.</p></li>
+                                        <li><p>Trataremos neste capítulo da <b>pesquisa sequencial</b> e da <b>pesquisa binária</b>.</p></li>
+                                    </ul>   
+                                    <h4>Ordenação</h4>
+                                    <ul class="list">
+                                        <li><p>A ordenação consiste em dispor elementos em uma certa sequência, seguindo algum critério. Por exemplo, a ordenação lexicográfica (alfabética) para dados literais, ou crescente e decrescente para dados numéricos.</p></li>
+                                        <li><p>Existem muitos algoritmos de ordenação conhecidos: <b>InsertionSort</b>, <b>ShellSort</b>, <b>BubbleSort</b>, <b>HeapSort</b>, <b>MergeSort</b> , <b>QuickSort</b>, dentro Outros.</p></li>
+                                        <li><p>Aqui veremos o <em>BubbleSort</em>. Outros algoritmos de ordenação serão vistos na matéria de Estruturas de Dados.</p></li>    
+                                    </ul>
+
+                                </div>
+                            </section><!--//doc-section-->
+                            <section id="linear" class="doc-section">
+                                <h2 class="section-title">Busca Linear</h2>
+                                <div class="section-block">
+                                    <ul class="list">
+                                        <li><p>Vamos supor que temos 4 portas fechadas, e atrás de cada porta contém 1 número, qual estratégia poderíamos tomar para encontrar o número 3?</p></li>
+                                        <li><p>O método trivial seria abrir qualquer porta aleatoriamente enquanto não encontrar o número 3.</p></li>
+                                        <div id = "random1"><img src="/assets\images\Busca\Random\seq1.png" class = "img-responsive"></div>
+                                        <div id = "random2" style="display: none;"><img src="/assets\images\Busca\Random\seq2.png" class = "img-responsive"></div>
+                                        <div id = "random3" style="display: none;"><img src="/assets\images\Busca\Random\seq3.png" class = "img-responsive"></div>
+                                        <div id = "random4" style="display: none;"><img src="/assets\images\Busca\Random\seq4.png" class = "img-responsive"></div>
+                                        <div id = "random5" style="display: none;"><img src="/assets\images\Busca\Random\seq5.png" class = "img-responsive"></div>
+                                        <a  class="btn btn-pink" onclick="animation_prev('random',5)">Prev</a>
+                                        <a  class="btn btn-pink" style = "margin-left: 50%;" onclick="animation_next('random',5)">Next</a>
+                                        <li><p>Obviamente este método não é nem de perto o mais eficiente.</p></li>
+                                        <li><p>Outra estratégia seria começando na primeira porta e ir abrindo as próximas na sequência. Este método se chama <b>Busca Linear</b>.</p></li>
+                                        <div id = "linear1"><img src="/assets\images\Busca\Linear\seq1.png" class = "img-responsive"></div>
+                                        <div id = "linear2" style="display: none;"><img src="/assets\images\Busca\Linear\seq2.png" class = "img-responsive"></div>
+                                        <div id = "linear3" style="display: none;"><img src="/assets\images\Busca\Linear\seq3.png" class = "img-responsive"></div>
+                                        <div id = "linear4" style="display: none;"><img src="/assets\images\Busca\Linear\seq4.png" class = "img-responsive"></div>
+                                        <div id = "linear5" style="display: none;"><img src="/assets\images\Busca\Linear\seq5.png" class = "img-responsive"></div>
+                                        <a  class="btn btn-pink" onclick="animation_prev('linear',5)">Prev</a>
+                                        <a  class="btn btn-pink" style = "margin-left: 50%;" onclick="animation_next('linear',5)">Next</a>
+                                        <li><p>Verificamos sequencialmente (ou seja, um após o outro) cada elemento. Se encontramos o valor desejado, então a pesquisa foi bem sucedida. </p></li>
+                                        <li><p>Caso todos os elementos do conjunto sejam verificados e o elemento desejado não esteja entre eles, dizemos que a pesquisa foi mal sucedida.</p></li>
+                                        <pre class = "prettyprint linenums:1 lang-cpp">
+int i, valor, achou;
+int conjunto[] = {3,6,7,10,4,12,9,5,8};
+valor = 5;
+ 
+i = 0;
+achou = 0;
+ 
+while ((i < 10) && (!achou)) {
+    if (conjunto[i] == valor)
+        achou = 1;
+    else
+        i++;
+}
+ 
+if (achou)
+    printf("%d encontrado na posicao %d.\n", valor, i + 1);
+else
+    printf("%d nao encontrado.\n", valor);</pre>
+                                    <a href="/assets/codes/aula7/buscaLinear.c" class="btn btn-pink" download="">Download Code</a>
+                                    <a href="https://goo.gl/zkgLT5	" class="btn btn-pink" target="blank">Code Execution</a>
+                                    <div id = "lin1"><img src="/assets\images\Busca\Linear\lin1.png" class = "img-responsive"></div>
+                                    <div id = "lin2" style="display: none;"><img src="/assets\images\Busca\Linear\lin2.png" class = "img-responsive"></div>
+                                    <div id = "lin3" style="display: none;"><img src="/assets\images\Busca\Linear\lin3.png" class = "img-responsive"></div>
+                                    <div id = "lin4" style="display: none;"><img src="/assets\images\Busca\Linear\lin4.png" class = "img-responsive"></div>
+                                    <div id = "lin5" style="display: none;"><img src="/assets\images\Busca\Linear\lin5.png" class = "img-responsive"></div>
+                                    <div id = "lin6" style="display: none;"><img src="/assets\images\Busca\Linear\lin6.png" class = "img-responsive"></div>
+                                    <div id = "lin7" style="display: none;"><img src="/assets\images\Busca\Linear\lin7.png" class = "img-responsive"></div>
+                                    <div id = "lin8" style="display: none;"><img src="/assets\images\Busca\Linear\lin8.png" class = "img-responsive"></div>
+                                    <div id = "lin9" style="display: none;"><img src="/assets\images\Busca\Linear\lin9.png" class = "img-responsive"></div>
+                                    
+                                    <a  class="btn btn-pink" onclick="animation_prev('lin',9)">Prev</a>
+                                    <a  class="btn btn-pink" style = "margin-left: 50%;" onclick="animation_next('lin',9)">Next</a>
+                                    </ul>
+                                    
+                                </div>
+                            </section><!--//doc-section-->
+                            <section id="binary" class="doc-section">
+                                <h2 class="section-title">Busca bin&#xE1;ria</h2>
+                                <div class="section-block">
+                                    <ul class="list">
+                                        <li><p>A pesquisa binária utiliza a técnica de “dividir e conquistar”.</p></li>
+                                        <li><p>Primeiro, testamos se o elemento procurado é <b>menor</b> que o elemento do meio do vetor. Se for o caso, então passamos a buscar apenas na <b>primeira metade do vetor</b>.</p></li>
+                                        <li><p>Se não, testamos se o elemento procurado é <b>maior</b> que o elemento do meio do vetor. Se for o caso, então passamos a buscar apenas na <b>segunda metade do vetor</b>.</p></li>
+                                        <li><p>Caso contrário o valor procurado é igual ao elemento que está no meio do vetor.</p></li>
+                                        <li>Esse procedimento é repetido até que o elemento seja encontrado ou não haja mais elementos a testar.</p></li>
+                                        <li><p>Suponha que desejamos buscar o número 6 no mesmo vetor anterior, porém agora foi informado que o vetor está <b>ordenado</b> em ordem crescente, como aplicar a busca binária ?</p></li>
+                                        <div id = "bin1"><img src="/assets\images\Busca\Binary\bin1.png" class = "img-responsive"></div>
+                                        <div id = "bin2" style="display: none;"><img src="/assets\images\Busca\Binary\bin2.png" class = "img-responsive"></div>
+                                        <div id = "bin3" style="display: none;"><img src="/assets\images\Busca\Binary\bin3.png" class = "img-responsive"></div>
+                                        <div id = "bin4" style="display: none;"><img src="/assets\images\Busca\Binary\bin4.png" class = "img-responsive"></div>
+                                        <div id = "bin5" style="display: none;"><img src="/assets\images\Busca\Binary\bin5.png" class = "img-responsive"></div>
+                                        <div id = "bin6" style="display: none;"><img src="/assets\images\Busca\Binary\bin6.png" class = "img-responsive"></div>
+                                        <div id = "bin7" style="display: none;"><img src="/assets\images\Busca\Binary\bin7.png" class = "img-responsive"></div>
+                                        <div id = "bin8" style="display: none;"><img src="/assets\images\Busca\Binary\bin8.png" class = "img-responsive"></div>
+                                        
+                                        <a  class="btn btn-pink" onclick="animation_prev('bin',8)">Prev</a>
+                                        <a  class="btn btn-pink" style = "margin-left: 50%;" onclick="animation_next('bin',8)">Next</a>
+                                        <p class="note-pink"><b>Observação 1:</b> O vetor precisa estar <b>ordenado</b> para conseguir realizar a busca binária.</p>
+                                        <p class="note-pink"><b>Observação 2:</b> Note que, a cada teste, descartamos uma das metades do (sub)vetor pesquisado.</p>
+                                        
+                                        <pre class = "prettyprint linenums:1 lang-cpp">
+int inicio, fim, meio, valor, achou;
+int conjunto[] = {3,4,5,6,7,8,9,10,12};
+
+valor = 6;
+inicio = 0;
+fim = 8;
+achou = 0;
+
+while ((inicio <= fim) && (!achou)) {
+    meio = (inicio + fim) / 2;
+    if (valor < conjunto[meio])
+        fim = meio - 1;
+    else if (valor > conjunto[meio])
+        inicio = meio + 1;
+    else
+        achou = 1;
+}
+if (achou)
+    printf("%d encontrado na posicao %d.\n", valor, meio + 1);
+else
+    printf("%d nao encontrado.\n", valor);</pre>
+                                        <a href="/assets/codes/aula7/buscaBinaria.c" class="btn btn-pink" download="">Download Code</a>
+                                        <a href="https://goo.gl/5dUWiU" class="btn btn-pink" target="blank">Code Execution</a>    
+                                        <li><p>Resumindo, a eficiência da busca binária é muito superior a uma busca linear (no pior caso), pois a cada iteração metade do sub-vetor é descartada. Sua complexidade é de O(log(n)) enquanto a complexidade da busca linear é O(n) (Assunto sobre complexidade será tratado futuramente).</p></li>
+                                        <li><p>Segue um exemplo da comparação entre as duas buscas.</p></li>
+                                        <img src="/assets/images/Busca/binaryVSlinear.gif" alt="Binary Search VS Linear Search">
+                                    </ul>
+                                </div>
+                            </section><!--// ORDENAÇÃO -->
+                            <section id="sort" class="doc-section">
+                                <h2 class="section-title">Ordena&#xE7;&#xE3;o</h2>
+                                <div id="bubble" class="section-block">
+                                    <h3>BubbleSort</h3>
+                                    <ul class="list">
+                                       <li> Ordenar uma coleção significa dispor seus elementos seguindo um critério determinado.
+                                            Esta operação é bastante comum em computação, e por isso existem vários algoritmos para fazê-la.
+                                            A principal diferença entre os algoritmos é sua <b>eficiência</b>.
+                                       </li>
+                                       <li> Como contato inicial vamos analisar o algoritmo <b>BubbleSort</b>. Ele é um algoritmo simples, apesar de não muito eficiente.</li>
+                                       <li> A ideia do BubbleSort é organizar os elementos do conjunto colocando um elemento por vez no seu lugar certo. Isso reduz o tamanho do vetor a ser
+                                           organizado em 1 para cada elemento que é colocado em sua posição correta.
+                                       </li>
+                                       
+                                    </ul>
+
+                                    <div id = "bub1"><img src="/assets\images\Busca\Bubble\bub1.png" class = "img-responsive"></div>
+                                    <div id = "bub2" style="display: none;"><img src="/assets\images\Busca\Bubble\bub2.png" class = "img-responsive"></div>
+                                    <div id = "bub3" style="display: none;"><img src="/assets\images\Busca\Bubble\bub3.png" class = "img-responsive"></div>
+                                    <div id = "bub4" style="display: none;"><img src="/assets\images\Busca\Bubble\bub4.png" class = "img-responsive"></div>
+                                    <div id = "bub5" style="display: none;"><img src="/assets\images\Busca\Bubble\bub5.png" class = "img-responsive"></div>
+                                    <div id = "bub6" style="display: none;"><img src="/assets\images\Busca\Bubble\bub6.png" class = "img-responsive"></div>
+                                    <div id = "bub7" style="display: none;"><img src="/assets\images\Busca\Bubble\bub7.png" class = "img-responsive"></div>
+                                    <div id = "bub8" style="display: none;"><img src="/assets\images\Busca\Bubble\bub8.png" class = "img-responsive"></div>
+                                    <div id = "bub9" style="display: none;"><img src="/assets\images\Busca\Bubble\bub9.png" class = "img-responsive"></div>
+                                    <div id = "bub10" style="display: none;"><img src="/assets\images\Busca\Bubble\bub10.png" class = "img-responsive"></div>
+                                    <div id = "bub11" style="display: none;"><img src="/assets\images\Busca\Bubble\bub11.png" class = "img-responsive"></div>
+                                    <div id = "bub12" style="display: none;"><img src="/assets\images\Busca\Bubble\bub12.png" class = "img-responsive"></div>
+                                    <div id = "bub13" style="display: none;"><img src="/assets\images\Busca\Bubble\bub13.png" class = "img-responsive"></div>
+                                    <div id = "bub14" style="display: none;"><img src="/assets\images\Busca\Bubble\bub14.png" class = "img-responsive"></div>
+                                    <div id = "bub15" style="display: none;"><img src="/assets\images\Busca\Bubble\bub15.png" class = "img-responsive"></div>
+                                    <div id = "bub16" style="display: none;"><img src="/assets\images\Busca\Bubble\bub16.png" class = "img-responsive"></div>
+                                    <div id = "bub17" style="display: none;"><img src="/assets\images\Busca\Bubble\bub17.png" class = "img-responsive"></div>
+                                    <div id = "bub18" style="display: none;"><img src="/assets\images\Busca\Bubble\bub18.png" class = "img-responsive"></div>
+                                    
+                                    <a  class="btn btn-pink" onclick="animation_prev('bub',18)">Prev</a>
+                                    <a  class="btn btn-pink" style = "margin-left: 50%;" onclick="animation_next('bub',18)">Next</a>
+                                    
+                                       <h3>Exemplo</h3>
+                                       <p>Vamos analisar um exemplo de funcionamento do algoritmo antes de mostrá-lo. Suponha um vetor de inteiros com n 
+                                           elementos que queremos ordenar em ordem crescente.
+                                       </p>
+                                       <ol class="list">
+                                           <li>Tomamos o primeiro elemento e analisamos o seu sucessor no array. Caso o sucessor seja menor que o antecessor,
+                                               trocamos os dois de lugar.
+                                           </li>
+                                           <li>Repetimos o passo 1 para todos os pares até o final do array. Ao final desse processo o elemento de maior valor
+                                               ficará na última posição do array.
+                                           </li>
+                                           <li>Repetimos a operação n vezes, uma para cada elemento. Ao final do processo o vetor estará ordenado.</li>
+                                       </ol>
+                                   
+                                <pre class="prettyprint linenums:1 lang-cpp">
+void bubbleSort(int v[], int n){
+    int i, j;
+    // passo 3
+    for(j = 0; j < n; j++){
+        // passo 2
+        for(i = 0; i < n-1; i++){
+            // passo 1
+            if(v[i] > v[i+1]){
+                int aux = v[i];
+                v[i] = v[i+1];
+                v[i+1] = aux;
+            }
+        }
+    }
+}
+
+int main(){
+    int v[] = {-10, 2, 0, 4, 6, 2, -5, 20, 7, 9};
+    int n = 10, i;
+    printf("Vetor original com %d elementos\n", n);
+    for(i = 0; i < n; i++)
+        printf("%d ", v[i]);
+    printf("\n");
+    // ordenar o vetor
+    bubbleSort(v, n);
+    printf("Vetor ordenado com %d elementos\n", n);
+    for(i = 0; i < n; i++)
+        printf("%d ", v[i]);
+    printf("\n");
+}
+</pre>
+                            <a href="/assets/codes/aula7/bubble.c" class="btn btn-pink" download="">Download Code</a>
+                            <a href="https://goo.gl/6gTzxe"class="btn btn-pink" target="blank">Code Execution</a>
+                        <p class="note-pink" style="background-color: rgb(234, 83, 149, 0.5);"><b>Pergunta:</b> Se quisessemos organizar o vetor em ordem decrescente, o que precisaria ser mudado?</p>    
+                        </div>
+
+
+                        <div class="section-block" id="analiseBubble">
+                        <h3>Análise Inicial do BubbleSort</h3>
+                        <p>Note que o vetor, ao final da execução do algoritmo, está ordenado em ordem crescente, como era o objetivo.
+                           Este algoritmo vai funcionar para qualquer vetor de inteiros. No entanto, como cientistas da computação sempre devemos estar
+                           preocupados em criar programas funcionais e <b>eficientes</b>. Vamos analisar este algoritmo acima:
+                        </p>        
+                        <ol class="list">
+                            <li>O algoritmo precisa percorrer o vetor inteiro várias vezes em sua execução (exatamente n² vezes).</li>
+                            <li>O número de operações a serem executadas é sempre o mesmo, indepentente de como os valores estão no vetor original,
+                                isto é, o tempo de "ordenar" um vetor já ordenado e de ordenar um vetor completamente não-ordenado, neste algoritmo, é o mesmo.</li>
+                            <li>É possível que o vetor fique ordenado antes do final da execução do algoritmo, mas ele não pára quando o vetor está ordenado, levando sempre
+                                o mesmo tempo de execução.</li>
+                        </ol>
+
+                        <p>Com estas observações, podemos melhorar nosso algoritmo. A ideia básica continua sendo a mesma, mas a <em>eficiência</em>
+                        aumenta, pois melhoramos a performace dele para alguns casos mais comuns, adicionando as seguintes mudanças.</p>
+                        
+                        <ol class="list">
+                            <li>Adicionamos uma flag "<b>ok</b>" para indicar se uma passada pelo vetor não produziu nenhuma mudança. Isto é,
+                                se percorremos o vetor inteiro e nenhuma mudança foi necessária, podemos parar.</li>
+                            <li>Sabemos que a cada execução do passo 2 um elemento vai para a sua posição final. Podemos tirar vantagem desse
+                                fato fazendo com que menos pares sejam comparados por iteração do loop mais interno.
+                            </li>
+                        </ol>
+                        <pre class="prettyprint linenums:1 lang-cpp">
+void betterBubbleSort(int v[], int n){
+    int i, j, ok = 0;
+    // passo 3
+    for(j = 0; j < n && ok == 0; j++){
+        // passo 2
+        ok = 1;
+        for(i = 0; i < n-j-1; i++){
+            // passo 1
+            if(v[i] > v[i+1]){
+	            ok = 0;
+	            int aux = v[i];
+	            v[i] = v[i+1];
+	            v[i+1] = aux;
+            }
+        }
+    }
+}
+                                
+int main(){
+    int v[] = {-10, 2, 0, 4, 6, 2, -5, 20, 7, 9};
+    int n = 10, i;
+    printf("Vetor original com %d elementos\n", n);
+    for(i = 0; i < n; i++)
+        printf("%d ", v[i]);
+    printf("\n");
+    // ordenar o vetor
+    betterBubbleSort(v, n);
+    printf("Vetor ordenado com %d elementos\n", n);
+    for(i = 0; i < n; i++)
+        printf("%d ", v[i]);
+    printf("\n");
+}
+                        </pre>
+                        <a href="/assets/codes/aula7/betterBubble.c" class="btn btn-pink" download="">Download Code</a>
+                        <a href="https://goo.gl/okVHGh"class="btn btn-pink" target="blank">Code Execution</a>
+                        
+                        <p>A mudança pode parecer pequena, mas aumenta bastante a eficiência do algoritmo. Por exemplo, repare que o primeiro BubbleSort, no link de execução
+                            possui 283 passos, enquanto o segundo só possui 190, uma melhora de quase 33%. <br>
+                            Uma análise mais detalhada do BubbleSort está na seção <a class="scrollto" href="#AnaliseBubbleSort">Análise do BubbleSort</a>.
+                        </p>
+                        </div>
+                            </section><!--//doc-section-->
+                            
+                            <section id="recomendados" class="doc-section">
+                                <h2 class="section-title">Exercícios Recomendados</h2>
+                                <div class="section-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1171" target="_blank">Frequência de Números</a></td>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/2311" target="_blank">Saltos Ornamentais</a></td>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1104" target="_blank">Troca de Cartas</a></td>
+                                                            
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1551" target="_blank">Frase Completa</a></td>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1259" target="_blank">Pares e Ímpares</a></td>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/2137" target="_blank">A Biblioteca do Senhor Severino</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/2345" target="_blank">Assigning Teams</a></td>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1025" target="_blank">Onde está o Mármore?</a></td>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/2534" target="_blank">Exame Geral</a></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div><!--//table-responsive-->
+                                    <h6>Questões desafio (Nivel: Médio / Difícil)</h6>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/2720" target="_blank">Presentes Grandes</a></td>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1586" target="_blank">Cabo de Guerra</a></td>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/2540" target="_blank">Dividindo Coca</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1912" target="_blank">Ajude Seu Madruga</a></td>
+                                                    <td><a href="http://codeforces.com/contest/794/problem/B" target="_blank">Cutting Carrot</a></td>
+                                                    <td><a href="https://uva.onlinejudge.org/external/110/11057.pdf" target="_blank">Exact Sum</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div><!--//table-responsive-->
+                                </div>
+                            </section><!--//doc-section-->
+                            <section id="materiais" class="doc-section">
+                                <h2 class="section-title">Materiais Extras</h2>
+                                <div class="section-block" id="introAnalise">
+                                    <h3>Análise de Algoritmos Básica</h3>
+                                    <p>A análise de algoritmos estuda a correção e o desempenho de algoritmos.  
+                                        Em outras palavras, a análise de algoritmos procura respostas para perguntas do seguinte tipo:  
+                                        "Este algoritmo resolve o meu problema?
+                                        Quanto tempo o algoritmo consome para processar uma 'entrada' de tamanho n?".
+                                    <br>
+                                        A análise feita é uma estimativa de tempo (e espaço) utilizado por um determinado algoritmo <em>independente do hardware utilizado</em>. Esta estimativa consistem em analisar o número de <b>operações</b> do algoritmo para diversos casos possíveis,
+                                        em geral o melhor caso, o caso médio e o pior caso.
+                                    </p>
+                                        
+                                        <p><b>Definimos uma operação como uma linha de código executada, e contamos quantas vezes cada linha é executada</b>.</p>
+                                       
+                                    <!-- Analise da Busca linear como exemplo -->
+                                    <p>No algoritmo da busca linear, por exemplo, se existir um vetor com os números: 1, 46, 4, -1, 20, caso o número buscado seja o número 1, o programa irá executar apenas uma verificação, porém este é o melhor caso para a situação e não é assim que se avalia a complexidade de um algoritmo. Sendo assim, o método correto consiste em analizar no <b>pior caso</b>, ou seja, quando o número não pertence ao conjunto ou ele está na última posição do vetor, necessitando de 6 operações (n operações para um vetor de tamanho n) e assim sua complexidade é linear O(n), pois para um vetor de tamanho n será necessáario n operações para completar o algoritmo.</p>
+                                    
+                                        <h3>Notação assintótica</h3>
+                                    <p> Com a análise das operações, chegamos a uma função que descreve o crescimento do tempo de execução do algoritmo. Em geral, esta
+                                    função pode ser bastante complicada, e não é tão prática de se trabalhar, por isso usamos a <b>notação assintótica</b>. Nesta notação, consideramos apenas o termo de maior <em>ordem</em>. No caso da busca linear, seria o n.
+                                    </p>
+                                    
+                                    <p> A notação assintótica que veremos é a <em>Big-O</em>. Ele representa um <b>limite assintótico superior</b>, isto quer dizer que o algoritmo pode ter uma execução <em>melhor</em> do que a notação indica, mas no <em>pior caso</em> ela será a analisada. Como em geral estamos interessados na execução do algoritmo no pior caso, a notação Big-O é muito interessante. Assim, dizemos que o algoritmo de busca linear tem ordem de complexidade O(n).
+
+                                    <br>
+                                    Algoritmos com limite assintótico melhor são mais eficientes, e preferíveis a outros com limites maiores.
+                                    </p>
+                                    <img src="/assets/images/Busca/BigOGraph.png" alt="Gráfico de comparação Big-O" style="max-width:100%;margin:10px;">
+                                </div>
+                                
+                                <div class="section-block" id="AnaliseBubbleSort">
+                                    <h4>Análise do BubbleSort</h4>
+                                    <p>Primeiramente vamos recaptular os passos necessários para a execução do algoritmo.</p>
+                                    <ol class="list">
+                                        <li>Tomamos o primeiro elemento e analisamos o seu sucessor no array. Caso o sucessor seja menor que o antecessor,
+                                            trocamos os dois de lugar.
+                                        </li>
+                                        <li>Repetimos o passo 1 para todos os pares até o final do array. Ao final desse processo o elemento de maior valor
+                                            ficará na última posição do array.
+                                        </li>
+                                        <li>Repetimos a operação n vezes, uma para cada elemento. Ao final do processo o vetor estará ordenado.</li>
+                                    </ol>
+                                    <p>Pegando só a função do BubbleSort, e considerando cada linha como uma operação, podemos ter uma estimativa da complexidade.</p>
+
+                                    <pre class="prettyprint linenums:1 lang-cpp">
+void bubbleSort(int v[], int n){
+    int i, j; // executado 1 vez
+    // passo 3 - executado n vezes
+    for(j = 0; j < n; j++){
+        // passo 2 - executado n vezes
+        for(i = 0; i < n-1; i++){
+            // passo 1
+            if(v[i] > v[i+1]){  // executado toda vez
+                int aux = v[i];
+                v[i] = v[i+1];
+                v[i+1] = aux;
+            }
+        }
+    }
+}
+                                    </pre>
+                                    <ol class="list">
+                                        <li>A primeira linha é executada somente 1 vez.</li>
+                                        <li>O laço do passo 3 é executado n vezes.</li>
+                                        <li>O laço do passo 2 é executado n vezes para cada execução do passo 3, portanto n² vezes.</li>
+                                        <li>A condição if do passo 1 é executada sempre, portanto n² vezes.</li>
+                                    </ol>
+                                    <p>Portanto a estimativa seria da ordem de 1+ 2n² + &alpha;, onde &alpha; é a quantidade de vezes que as operações internas ao if do passo 1 são executadas.<br>
+                                    Removendo as constantes e variáveis de menor ordem temos que a complexidade do BubbleSort, assintóticamente, é <b>O(n²)</b>. Conforme vimos na <a class="scrollto" href="#analiseBubble">Análise Inicial</a>
+                                este algoritmo terá o mesmo tempo para qualquer caso. As melhorias apresentadas naquela seção aceleram o algoritmo para alguns casos. O algoritmo melhorado é O(1) no melhor caso,
+                                mas continua O(n²) no pior caso. Uma análise mais completa do algoritmo pode ser vista. <a href="https://en.wikipedia.org/wiki/Bubble_sort" target="_blank">aqui</a>.</p>
+
+                                <p>Algoritmos de ordenação com complexidade O(n²), por exemplo, BubbleSort, Insertion Sort, Selection Sort, etc não são usados em
+                                    aplicações mais complexas, pois demoram demais para vetores grandes. Por exemplo, para vetores com 10 elementos o tempo seria 10² = 100 operações.
+                                    Para vetores com 100 elementos, temos 100² = 10000 operações. Para vetores com 1000 elementos, 1000² = 1000000 operações. Um computador consegue executar,
+                                    em geral, 10<sup>8</sup> operações em 1 segundo. Assim, este algoritmo demora muito para vetores com muito mais de 1000 elementos.
+                                </p>
+
+                                </div>
+                            </section><!--//doc-section-->
+                            
+                  
+                        </div><!--//content-inner-->
+                    </div><!--//doc-content-->
+                    <div class="doc-sidebar hidden-xs">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                                <li><a class="scrollto" href="#intro">Introdu&#xE7;&#xE3;o</a></li>
+                                <li><a class="scrollto" href="#linear">Busca Linear</a></li>
+                                <li><a class="scrollto" href="#binary">Busca Bin&#xE1;ria</a></li>
+                                <li><a class="scrollto" href="#sort">Ordena&#xE7;&#xE3;o</a>
+                                    <ul class="nav doc-sub-menu">
+                                        <li><a class="scrollto" href="#bubble">BubbleSort</a></li>
+                                        <li><a class="scrollto" href="#analiseBubble">Análise Inicial do BubbleSort</a></li>
+                                    </ul>
+                                </li>
+                                <li><a class="scrollto" href="#recomendados">Exercícios Recomendados</a></li>
+                                <li><a class="scrollto" href="#materiais">Materiais Extras</a>
+                                    <ul class="nav doc-sub-menu">
+                                        <li><a class="scrollto" href="#introAnalise">Análise de Algoritmos Básica</a></li>
+                                        <li><a class="scrollto" href="#AnaliseBubbleSort">Análise do BubbleSort</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul><!--//doc-menu-->
+                        </nav>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->              
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->        
+    </div><!--//page-wrapper-->
+    
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+            <small class="copyright">Created by:<a class="link" href="https://github.com/VerasThiago" target="_blank"><span> Thiago Veras</span></a> &amp; <a class="link" href="https://github.com/Gguidini" target="_blank"><span> Giovanni M Guidini</span></a></small>
+             <br> <!-- break line-->
+             <small class="copyright">Theme PRETTYDOCS by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a></small>
+ 
+        </div><!--//container-->
+    </footer><!--//footer-->
+    
+     
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="/assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>                                                                
+    <script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="/assets/js/animation.js"></script>
+    
+    <script>
+      prettyPrint();
+    </script>
+    
+</body>
+</html> 
+

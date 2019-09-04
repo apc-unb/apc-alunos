@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Representação de Algoritmos</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Thiago Veras & Giovanni Guidini">    
+    <link rel="shortcut icon" href="/assets/images/UnB-logo.png">  
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="/assets/plugins/elegant_font/css/style.css">
+    
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
+
+    <!-- Syntax Prettyprint -->
+    <link rel="stylesheet"  href="/assets/syntax/tomorrow_night.css">
+    <script src = "/assets/syntax/prettify.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .img-responsive{
+            width: 80%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+        }
+    </style>
+
+</head> 
+
+<body class="body-orange">
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="/index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">Aula </span><span class="text-bold">0</span>
+                        </a>
+                    </h1>
+                </div><!--//branding-->
+                <ol class="breadcrumb">
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/aulas">Voltar</a></li>
+                </ol>
+            </div><!--//container-->
+        </header><!--//header-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon glyphicon glyphicon-globe"></i> Representação de Algoritmos</h1>
+                    <div class="meta"><i class="fa fa-clock-o"></i> Last updated: August 14th, 2018</div>
+                </div><!--//doc-header-->
+                <div class="doc-body">
+                    <div class="doc-content">
+                        <div class="content-inner">
+                            <section id="intro" class="doc-section">
+                                <h2 class="section-title">Introdução</h2>
+                                <div class="section-block" id = "logic">
+                                    <h3 class="block-title">Lógica</h3>
+                                    <p> A lógica relaciona-se com a razão, investiga a correção do
+                                        pensamento/raciocínio. Estuda e ensina a colocar ordem no pensamento. No nosso caso, usaremos a lógica, tanto a matemática como a de programação, para nos ajudar a compreender, modelar e propor soluções viáveis para problemas computacionais.</p>
+                                    
+                                    <p> Lógica de Programação é a técnica de desenvolver sequências lógicas para atingir um determinado objetivo. Essas sequências lógicas são adaptadas para linguagem de computador pelo programador a fim de produzir <em>software</em>. Veremos mais sobre isso em seguida.</p>
+                                </div>
+                                <div class="section-block" id = "algorithm">
+                                    <h3 class="block-title">Algoritmo</h3>
+                                    <p>Um algoritmo é uma <b>sequência finita </b> de passos para realizar uma tarefa ou solucionar um problema. Esses passos serão definidos a partir das <b>sequências lógicas</b> desenvolvidas para atingir algum objetivo, e são ordenados convenientemente. A <b>ordem</b> dos passos é muito importante. Mudando a ordem dos passos alteramos um  algoritmo.</p>
+
+                                    <p><b>Algoritmos não são exclusivos da Computação</b>, mas fazem parte do nosso dia a dia:</p>
+
+                                    <ul>
+                                        <li>Instruções para uso de medicamentos.</li>
+                                        <li>Manual de instruções de montagem.</li>
+                                        <li>Receitas culinárias.</li>
+                                    </ul>
+                                        
+                                    <p>Os algoritmos são importantes em Ciência da Computação porque os computadores fazem exatamente aquilo que dizemos para eles fazerem. Dessa forma, precisamos estabelecer muito claramente quais passos ele deve seguir para cumprir uma determinada tarefa. </p>
+                                    
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/XWe4iohhmIw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="display:block; margin-left:auto; margin-right:auto;margin-top: 1em; margin-bottom: 1em;"></iframe>
+
+
+                                    <p>Na prática, criamos algoritmos com o objetivo de
+                                    automatizar tarefas:</p>
+                                    
+                                    <ul> 
+                                        <li>Obter os resultados esperados.</li> 
+                                        <li>Repetibilidade.</li>
+                                        <li>Confiabilidade.</li>
+                                        <li>Tempo e qualidade constantes.</li>
+                                    </ul>
+                                    
+                                </div>
+                            </section><!--//doc-section-->
+                            <section id="data" class="doc-section">
+                                <h2 class="section-title">Dados e Informação</h2>
+                                <div class="section-block" id = "info">
+                                    <p>Um dado é uma sequência de símbolos. São elementos
+                                        conhecidos de um problema (são os fatos em sua forma
+                                        primária, como observamos no mundo).</p>
+
+                                    <p>Quando organizamos os dados atribuimos significado, eles
+                                        ganham valor, tornam-se <b>informação</b>. Além disso, Um mesmo conjunto de dados pode ser utilizado para
+                                        representar informações de natureza distintas.</p>
+
+                                    Por exemplo:
+                                    <ul class="list">
+                                        <li> 1.89 (dado) </li>
+                                        <li>"A altura de José é 1.89m" (informação) </li>
+                                        <li>"O tempo de execução do algoritmo foi de 1.89s" (informação)</li>
+                                        <li>"Aqui estão 1.89Kg de banana" (informação)</li>
+                                    </ul>
+
+                                    <pre>
+DADO e INFORMAÇÃO não são termos exclusivos da computação.
+Foram cunhados por outras áreas,tais como a semiótica.</pre>
+                                </div>
+                                <div class="section-block" id = "io">
+                                    <h3 class="block-title">Entrada e Saída</h3>
+                                    <p>A solução de qualquer problema envolve um processamento, que manipula dados de entrada e gera dados de saída. Solucionar o problema consiste exatamente em gerar dados de saída esperados a partir dos dados de entrada.</p>
+
+                                    <ul>
+                                        <li><b>Dados de Entrada</b> - Disponíveis no ambiente. Necessários para a resolução do problema.</li>
+                                        <li><b>Dados de Saída</b> - Resultados desejados. Informação, relatórios, mensagens de erro, etc.</li>
+                                        <li><b>Processamento</b> - Algoritmo para manipular os dados.</li>
+                                    </ul>
+
+                                    <img class="img-responsive" src="/assets/images/Dados.png" alt="Fluxograma de dados">
+                                </div>
+                            </section><!--//doc-section-->
+                            <section id="progLogic" class="doc-section">
+                                <h2 class="section-title">Lógica de programação</h2>
+                                <div class="section-block">
+                                    <ul class="list">
+                                        <li><p>Nesta disciplina, queremos aprender a:</p></li>
+                                        <ul class="list">
+                                            <li><p>Dado um problema,</p></li>
+
+                                            <li><p>determinar uma sequência de instruções tal que,</p></li>
+
+                                            <li><p>fornecidos os dados de entrada,</p></li>
+
+                                            <li><p>a execução da sequência da instruções</p></li>
+
+                                            <li><p>resulte como saída a solução do problema.</p></li>
+                                        </ul>
+
+                                        <li><p><h2>Exemplo de um Algoritmo para trocar um Pneu:<h2></p></li>
+<pre class="prettyprint">Entrada: carro, macaco mecânico, pneu reserva
+
+Saída: carro com o pneu trocado</pre>
+
+                                        <p>Faça:</p>
+<pre class="prettyprint linenums:0 lang-cpp">
+Afrouxar ligeiramente os parafusos;
+
+Suspender o carro;
+
+Retirar os parafusos e o pneu;
+
+Colocar o pneu reserva;
+
+Apertar os parafusos;
+
+Abaixar o carro;
+
+Dar o aperto final nos parafusos.</pre>
+                                    <ul class="list">
+                                        <li><p> Ou seja, construímos um algortimo que é generalizado para qualquer carro, basta seguir os passos do algortimo desenvolvido com as devidas entradas que a saída será a mesma.</p></li>
+                                    </ul>
+                                    <li><p><h2>Exemplo de um Algoritmo para tirar a média entre 3 números:<h2></p></li>
+<pre class="prettyprint">Entrada: número A, número B, número C
+
+Saída: média dos 3 números</pre>
+                                        <p>Faça:</p>                               
+<pre class="prettyprint linenums:0 lang-cpp">
+Somar os números A, B e C
+
+Dividir a soma por 3</pre>
+                                    <ul class="list">
+                                        <li><p>A mesma ideia serve para esse exemplo, independente de quais sejam os números representados por A, B ou C, a resposta sempre será a média dos 3 números.</p></li>
+                                    </ul>    
+                                    </ul>
+                                </div>
+                            </section><!--//doc-section-->
+                            <section id="representation" class="doc-section">
+                                <h2 class="section-title">Representação de Algoritmos</h2>
+                                <div class="section-block">
+                                    <ul>
+                                        <li><p>Existem diversas formas de representação de algoritmos.</p></li>
+
+                                        <li><p>Não existe um consenso sobre qual é a melhor forma, cada uma tem vantagens e desvantagens.</p></li>
+
+                                        <li><p>Algumas formas tratam os problemas apenas no nível lógico, abstraindo os detalhes relacionados de implementação.</p></li>
+
+                                        <li><p>Outras formas entram em mais detalhes e são mais específicas, porém que podem obscurecer a idéia principal.</p></li>
+
+                                        <li><p>Entre as formas mais conhecidas, podemos citar:</p></li>
+                                        
+                                        <ul>
+                                            <li><p>Descrição Narrativa;</p></li>
+
+                                            <li><p>Fluxograma Convencional;</p></li>
+
+                                            <li><p>Pseudocódigo, também conhecido como portugol.</p></li>
+                                        </ul>
+                                        <li><p><h2>Descrição Narrativa</h2></p></li>
+                                            <ul>
+                                                <li><p>Nesta forma de representação os algoritmos são expressos diretamente em <b>linguagem natural</b>.</p></li>
+
+                                                <li><p>Uso da linguagem natural pode gerar <b>ambiguidades e imprecisões</b>.</p></li>
+
+                                                <li><p>Por exemplo, no algoritmo do pneu, o que significa <i>“Afrouxar ligeiramente o parafuso”?</i></p></li>
+
+                                                <li><p>Não seria mais preciso dizer <i>“Afrouxar o parafuso, girando o mesmo 33.8° no sentido anti-horário”</i>?</p></li>
+
+                                                <li><p>Quando criamos algoritmos, frequentemente precisamos utilizar <b>estruturas condicionais e de repetição</b>. Isto é, precisamos tomar decisões ou repetir passos.</p></li>
+
+                                                <li><p> Exemplo de um Algoritmo para trocar uma lâmpada:</p></li>
+                                                 <div id = "lamp1"><img src="/assets\images\Representação\lamp1.png" class = "img-responsive"  height="42" width="42"></div>
+                                                <div id = "lamp2" style="display: none;"><img src="/assets\images\Representação\lamp2.png" class = "img-responsive" width="51" height="41"></div>               
+                                                <div id = "lamp3" style="display: none;"><img src="/assets\images\Representação\lamp3.png" class = "img-responsive"></div>
+                                                <div style="text-align:center">
+                                                <a  class="btn btn-orange" onclick="animation_prev('lamp',3)">Prev</a>
+                                                <a  class="btn btn-orange" style = "margin-left: 50%;" onclick="animation_next('lamp',3)">Next</a>                                        
+                                            </ul>
+
+                                        <li><p><h2>Fluxograma Convencional e Pseudocódigo</h2></p></li>
+                                        <ul>
+                                            <li><p>Esses métodos não serão abordados na matéria porém podem conferir nos vídeos a seguir:</p></li>
+                                            <iframe width="560" height="315" src="https://www.youtube.com/embed/orSLpujvsaA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="display:block; margin-left:auto; margin-right:auto;margin-top: 1em; margin-bottom: 1em;"></iframe>
+                                            <iframe width="560" height="315" src="https://www.youtube.com/embed/PZhU0XRrleY?start=30" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="display:block; margin-left:auto; margin-right:auto;margin-top: 1em; margin-bottom: 1em;"></iframe>
+                                            
+                                            
+                                        </ul>
+
+                                    </ul>
+                                </div>
+                            </section><!--//doc-section-->
+                            
+                        </div><!--//content-inner-->
+                    </div><!--//doc-content-->
+                    <div class="doc-sidebar hidden-xs">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                                <li><a class="scrollto" href="#intro">Introdução</a></li>
+                                <ul class="nav doc-sub-menu">
+                                    <li><a class="scrollto" href="#logic">Lógica</a></li>
+                                    <li><a class="scrollto" href="#algorithm">Algoritmo</a></li>
+                                </ul>
+                                <li><a class="scrollto" href="#data">Dados e Informação</a></li>
+                                <ul class="nav doc-sub-menu">
+                                    <li><a class="scrollto" href="#io">Entrada e Saída</a></li>
+                                </ul>
+                                <li><a class="scrollto" href="#progLogic">Lógica de Programação</a></li>
+                                <li><a class="scrollto" href="#representation">Representação de algoritmos</a></li>
+                            </ul><!--//doc-menu-->
+                        </nav>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->              
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->        
+    </div><!--//page-wrapper-->
+    
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+            <small class="copyright">Created by:<a class="link" href="https://github.com/VerasThiago" target="_blank"><span> Thiago Veras</span></a> &amp; <a class="link" href="https://github.com/Gguidini" target="_blank"><span> Giovanni M Guidini</span></a></small>
+             <br> <!-- break line-->
+             <small class="copyright">Theme PRETTYDOCS by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a></small>
+ 
+        </div><!--//container-->
+    </footer><!--//footer-->
+    
+     
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="/assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>                                                                
+    <script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="/assets/js/animation.js"></script>
+    
+    <script>
+      prettyPrint();
+    </script>
+    
+</body>
+</html> 
+

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Algoritmos Computacionais</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Thiago Veras & Giovanni Guidini">    
+    <link rel="shortcut icon" href="/assets/images/UnB-logo.png">  
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="/assets/plugins/elegant_font/css/style.css">
+    
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
+
+    <!-- Syntax Prettyprint -->
+    <link rel="stylesheet"  href="/assets/syntax/tomorrow_night.css">
+    <script src = "/assets/syntax/prettify.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .img-responsive{
+            width: 80%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+        }
+    </style>
+
+    <style type="text/css">
+        .tg .tg-s6z2{text-align:center}
+        .tg .tg-baqh{text-align:center;vertical-align:top}
+        .tg .tg-r8a3{font-size:14px;background-color:#f1a6c8;text-align:center}
+    </style>
+
+</head> 
+
+<body class="body-pink">
+        <div class="page-wrapper">
+            <!-- ******Header****** -->
+            <header id="header" class="header">
+                <div class="container">
+                    <div class="branding">
+                        <h1 class="logo">
+                            <a href="/index.html">
+                                <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                                <span class="text-highlight">Aula </span><span class="text-bold">1</span>
+                            </a>
+                        </h1>
+                    </div><!--//branding-->
+                    <ol class="breadcrumb">
+                        <li><a href="/index.html">Home</a></li>
+                        <li><a href="/aulas">Voltar</a></li>
+                    </ol>
+                </div><!--//container-->
+            </header><!--//header-->
+            <div class="doc-wrapper">
+                <div class="container">
+                    <div id="doc-header" class="doc-header text-center">
+                        <h1 class="doc-title"><span class="icon-holder"><i class="material-icons" >computer</i></span> Algoritmos Computacionais</h1>
+                        <div class="meta"><i class="fa fa-clock-o"></i> Last updated: August 15th, 2018</div>
+                    </div><!--//doc-header-->
+                    <div class="doc-body">
+                        <div class="doc-content">
+                            <div class="content-inner">
+                                <section id="intro" class="doc-section">
+                                    <h2 class="section-title">Introdução</h2>
+                                    <div class="section-block" id="intro">
+                                        <p>Algoritmos são uma sequência de passos para se chegar a um determinado objetivo e não precisam necessariamente que um computador os execute. Um <b>algoritmo computacional</b> é ,então, uma sequência de <b>instruções</b> que podem ser executadas por um computador e que manipulam e geram <b>dados</b>.</p>
+
+                                        <p>Para que um computador possa executar um algoritmo computacional, é necessário que uma <b>implementação</b> deste algoritmo seja feita em uma linguagem de programação que o computador "conheça" e depois transformado em linguagem de máquina para poder ser executado.</p>
+
+                                        <img class="img-responsive" src="/assets/images/alg_flow.png" alt="Flow de implementação de algoritmo">
+
+                                        <div class="callout-block note-pink" style="margin-top: 2em;">
+                                            <div class="icon-holder">
+                                                <i class="fa fa-info-circle"></i>
+                                            </div><!--//icon-holder-->
+                                            <div class="content">
+                                                <p>Alguns algoritmos não podem ser executados por um computador. Pode ser porque o computador não tenha recursos para executá-los (trocar um pneu), seja porque eles são indecidíveis.</p>
+                                            </div><!--//content-->
+                                        </div>
+                                        
+
+                                    </div>
+                                </section><!--//doc-section-->
+
+                                <section id="types" class="doc-section">
+                                        <h2 class="section-title">Tipos de dados</h2>
+                                        <p>Para que sejam manipulados por computadores, os <b>dados</b> devem estar em um <b>formato</b> adequado e devem obedecer a um conjunto de <b>restrições</b>.</p>
+                                        <p>Por isso os dados possuem <b>tipos</b>:</p>
+                                        <ul>
+                                            <li><p>Numérico – guarda números inteiros ou reais;</p></li>
+                                            <li><p>Literal – guarda caracteres (texto);</p></li>
+                                            <li><p>Lógico – guarda valores lógicos (verdadeiro ou falso), também chamados de <b>booleanos</b>, em homenagem ao matemático George Boole.</p></li>
+                                        </ul> 
+                                        <div class="section-block" id="num">
+                                            <h3 class="block-title">Numérico</h3>
+                                            <p>Dados numéricos são apenas os números como conhecemos e são divididos em 2 grupos: os inteiros e os reais</p>
+                                            <p>Dados do tipo <b>inteiro</b> são números, positivos ou negativos, que não possuem parte fracionária, pertencentes ao conjunto dos inteiros.</p>
+                                            <p>  <code>Exemplo: 36; 0; -18;</code>
+                                            <p>Dados do tipo <b>real</b> são aqueles que podem possuir compnentes decimais ou fracionários, e também podem ser positivos ou negativos, pertencentes ao conjunto dos <b>racionais</b></p>
+                                            <pre class = "prettyprint  lang-cpp">
+Exemplo: 36.01; 0.0; -18.5; 42;</pre>
+                                        </div>
+                                        <div class="section-block" id="lit">
+                                            <h3 class="block-title">Literal</h3>
+                                            <p>Dados <b>literais</b> são sequências de <b>caracteres</b> que podem conter letras, dígitos e/ou símbolos especiais. Também são chamados de alfanumérico, cadeia de caracteres ou, ainda, <b>string</b>. Observe que também é válida uma <b>string vazia</b>!</p>
+                                            <p>Usualmente são representados nos algoritmos pela coleção de caracteres delimitada por aspas (“ ”). Em algumas linguagens de programação, existe a diferenciação entre um caractere único (‘A’) e um conjunto de caracteres (“Olá Mundo”).</p>
+                                            <pre class = "prettyprint  lang-cpp">
+Exemplo: "Quem?"; "APC-2018-2"; "Olá Mundo!";</pre>
+                                        </div>
+                                        <div class="section-block" id="logic">
+                                            <h3 class="block-title">Lógicos</h3>
+                                            <p>São caracterizados como tipos lógicos (ou booleanos), os dados que podem assumir apenas os valores <b>verdadeiro</b> ou <b>falso</b> (mas <b>nunca os dois ao mesmo tempo</b>).</p>
+                                            <p>Se definimos que Verdadeiro = 1, e Falso = 0, então um dado booleano pode ser representado em apenas 1 bit.</p>
+                                        </div>
+                                      
+                                        
+                                    </section><!--//doc-section-->
+                                    <section id="conc" class="doc-section">
+                                            <h2 class="section-title">Conceitos</em> </h2>
+
+                                            <p>Os conceitos básicos necessários para escrever um algoritmo computacional são:</p>
+                                            <div class="section-block" id="const">
+                                                    <h3 class="block-title">Constantes</h3>
+                                                    <p>Constantes são valores que não se modificam ao longo da execução do programa.</p>
+                                                    <p>Uma constante criada pelo usuário deve ter um nome (nome da variável), um tipo (inteiro, real, etc) e um valor (10, 10.5, "ola"). Nenhum desses três elementos pode ser modificado pelo programa.</p>
+                                                    <pre class = "prettyprint  lang-cpp">
+const float PI = 3.141522;
+const char NOME_ALUNO[] = "Marcos";</pre>                                            
+                                                    <p>Por convenção, é utilizado apenas <b>letras maiúsculas</b> e <b>underscore (" _ ") no nome de constantes.</b></p>
+                                                    <p>Constantes criadas pelo usuário tipicamente ocupam uma <b>região de memória</b> cujo conteúdo <b>nunca muda</b>.</p>
+                                                    <p>Outro ponto são os valores literais no código, pois também são considerados constantes.</p>                  
+                                                    <pre class = "prettyprint  lang-cpp">
+x = 2 * x;  // O 2 é uma constante
+printf("Olá Mundo!\n"); // A string Olá mundo! é uma constante</pre>
+                                            </div>
+                                            <div class="section-block" id="var">
+                                                    <h3 class="block-title">Variáveis</h3>
+                                                    <p>Uma variável é uma <b>região de memória</b>. Isto é, ao
+                                                    <b>declarar</b> uma variável, o programador está reservando
+                                                    memória da máquina para ser usada por seu programa.</p>
+
+                                                    <p>Para que não precisemos nos referir ao <b>endereço</b> de
+                                                    memória de uma variável diretamente, as linguagens de
+                                                    programação nos permitem atribuir-lhe um <b>nome</b>.</p>
+
+                                                    <p>Toda variável deve também ter um <b>tipo</b> declarado.</p>
+
+                                                    <img src="/assets/images/Representação/var_mem.jpg" alt="Representação de variável na memória" class="img-responsive">
+
+                                                    <h3>Exemplos: </h3>
+
+                                                        <table class="table table-pink tg">
+                                                        <colgroup>
+                                                        <col style="width: 147px">
+                                                        <col style="width: 91px">
+                                                        <col style="width: 90px">
+                                                        </colgroup>
+                                                          <tr>
+                                                            <th class="tg-r8a3">Declaração</th>
+                                                            <th class="tg-r8a3">Memória</th>
+                                                            <th class="tg-r8a3">Conteúdo</th>
+                                                          </tr>
+                                                          <tr>
+                                                            <td class="tg-s6z2">int a = 10;</td>
+                                                            <td class="tg-s6z2">0x00000000</td>
+                                                            <td class="tg-s6z2">10</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td class="tg-s6z2">int b;</td>
+                                                            <td class="tg-s6z2">0x00000004</td>
+                                                            <td class="tg-s6z2">??</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td class="tg-s6z2" rowspan="2">string name = "Stark";</td>
+                                                            <td class="tg-s6z2">0x00000008</td>
+                                                            <td class="tg-s6z2">'S' 't' 'a' 'r'</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td class="tg-s6z2">0x0000000C</td>
+                                                            <td class="tg-s6z2">'k' ? ? ?</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td class="tg-s6z2">bool achou;</td>
+                                                            <td class="tg-s6z2">0x00000010</td>
+                                                            <td class="tg-s6z2">??</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td class="tg-s6z2">float pi = 3.15;</td>
+                                                            <td class="tg-s6z2">0x00000014</td>
+                                                            <td class="tg-s6z2">3.15</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td class="tg-baqh">...</td>
+                                                            <td class="tg-baqh">...</td>
+                                                            <td class="tg-baqh">...</td>
+                                                          </tr>
+                                                        </table>
+
+                                                    <ul>
+                                                    
+                                                    <li>Note que podemos assinalar um valor inicial para uma variável. Isso é chamado <b>inicialização da variável</b>.</li>
+
+                                                    <li>Quando <b>não</b> inicializamos uma variável, o valor armazenado no espaço de memória reservado para ela é <b>desconhecido</b>.</li>
+
+                                                    <li>Variáveis de <b>tipos</b> deferentes possuem <b>tamanhos em memória</b> diferentes.</li>
+                                                    </ul>
+                                                    <div class="callout-block note-pink" style="margin-top: 2em;">
+                                                            <div class="icon-holder">
+                                                                <i class="fa fa-exclamation-triangle"></i>
+                                                            </div><!--//icon-holder-->
+                                                            <div class="content">
+                                                                <h4 class="callout-title">Atenção!</h4>
+                                                                <p>o <b>conteúdo</b>, i.e., o valor armazenado em uma variável, pode <b>mudar</b> ao longo da execução, mas <b>seu nome e seu tipo são constantes</b>!</p>
+                                                            </div><!--//content-->
+                                                        </div>
+                                            </div>
+                                            <div class="section-block" id="resv">
+                                                    <h3 class="block-title">Palavras Reservadas</h3>
+                                                    <p>Palavras reservadas, são <b>identificadores</b> que têm um significado especial para o compilador, por isso <b>não podem ser utilizadas</b> pelo programador para nomear variáveis e constantes.</p>
+
+                                                    <p>Por exemplo, na Linguagem ANSI C, algumas palavras reservadas são:</p>
+                                                    <pre class = "prettyprint  lang-c">
+return union const float short unsigned continue for signed void default goto sizeof volatile do 
+if static while auto double int struct break else long switch case enum register typedef char extern</pre>
+                                            </div>
+                                    </section><!--//doc-section-->
+                                    <section id="vars" class="doc-section">
+                                            <h2 class="section-title">Variáveis</em> </h2>
+                                            <div class="section-block" id="name">
+                                                    <h3 class="block-title">Nomes de Variáveis</h3>
+                                                    <p>Ao definirmos o nome de uma variável temos que seguir algumas regras básicas:</p>
+
+                                                    <ul class="list">
+                                                        <li>O <b>primeiro caractere</b> deve ser uma letra.</li>
+                                                        <li>Os caracteres seguintes só podem ser <b>letras, underscore (_) ou algarismos</b>.</li>
+                                                        <li>O nome das variáveis é <em>case sensitive</em>, ou seja, existe diferença entre letras maiúsculas e minúsculas (var &ne; Var)</li>
+                                                        <li>Nenhuma <b>palavra reservada</b> pode ser usada como nome de variável.</li>
+                                                        <li>Duas variáveis diferentes no mesmo escopo não podem ter o mesmo nome.</li>
+                                                        <li>Procure dar nomes <b>mnemônicos</b> às variáveis, isto é, nomes significativos, mas não muito longos.</li>
+                                                    </ul>
+
+                                                    <h5>Exemplos:</h5>
+                                                    <pre class="prettyprint">
+=> NOMES VÁLIDOS
+nota        salario     X
+valor       total       w
+valor_min   valor_max   n1
+
+=> NOMES INVÁLIDOS
+5B      (não começa com letra)
+X+Y     (Possui caractere inválido)
+while   (Palavra reservada)
+                                                    </pre>
+                                            </div>
+                                            <div class="section-block" id="decl">
+                                                    <h3 class="block-title">Declaração de Variáveis</h3>
+
+                                                <p>Variáveis geralmente são declaradas no início do programa. Elas precisam ter um <b>nome</b> e um <b>tipo</b>. Os tipos básicos são:</p>
+
+                                                <ul>
+                                                    <li>Inteiro - int</li>
+                                                    <li>Real - float</li>
+                                                    <li>Caractere - char</li>
+                                                    <li>Literal - string</li>
+                                                    <li>Lógico - bool</li>
+                                                </ul>
+
+                                                <p>O tipo da variável vem primeiro, seguido pelo nome. Você pode declarar mais de uma variável de um mesmo tipo em uma única linha, separando o nome delas por vírgula (o tipo aparece só uma vez). </p>
+
+                                                <h5>Exemplo:</h5>
+                                                <pre class="prettyprint">
+string nome;
+int qtd;
+float valor, valor_total;
+bool go;</pre>
+
+                                            </div>
+
+                                    </section><!--//doc-section-->
+                                    <section id="scanf" class="doc-section">
+                                            <h2 id="exp_ops" class="section-title">Expressões e Operadores</h2>
+                                            <div class="section-block">
+                                                <h3 id="op_art" class="block-title">Operadores Aritméticos</h3>
+                                                <p>Para realizar cálculos, podemos escrever expressões aritméticas. Nessas expressões, podem aparecer apenas variáveis e constantes  numéricas e os seguintes operadores:</p>
+                                                <table class="table tg">
+                                                        <tr class="tg">
+                                                          <th style="background-color: #f1a6c8;">Prioridade</th>
+                                                          <th style="background-color: #f1a6c8;">Operador</th>
+                                                          <th style="background-color: #f1a6c8;">Operação</th>
+                                                          <th style="background-color: #f1a6c8;">Tipo</th>
+                                                          <th style="background-color: #f1a6c8;">Exemplo</th>
+                                                        </tr>
+                                                        <tr>
+                                                          <td rowspan="5">Maior<br>
+                                                            <span style="font-size: 8em;">&#8595;</span>
+                                                            <br>Menor</td>
+                                                          <td>( )</td>
+                                                          <td>Altera prioridade</td>
+                                                          <td>Unário</td>
+                                                          <td>5 * (1 + 2) = 15</td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>-, +</td>
+                                                          <td>Troca, mantém<br>o sinal</td>
+                                                          <td>Unário</td>
+                                                          <td>-(-1) = 1<br>+(-5) = 5</td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>^</td>
+                                                          <td>Exponenciação</td>
+                                                          <td>Binário</td>
+                                                          <td>2^3 = 8</td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>*, /</td>
+                                                          <td>Multiplicação,<br>Divisão</td>
+                                                          <td>Binário</td>
+                                                          <td>1.0 / 2 = 0.5<br>1.0 * 2 = 2.0</td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>- , +</td>
+                                                          <td>Subtração, Soma</td>
+                                                          <td>Binário</td>
+                                                          <td>1 + 1 = 2</td>
+                                                        </tr>
+                                                      </table>
+                                            </div>
+                                            <div id="exp_log" class="section-block">
+                                                <h3 class="block-title">Expressões Lógicas</h3>
+                                                <p>Quando precisamos verificar condições, utilizamos <b>expressões relacionais e lógicas</b>.</p>
+                                                <p>Expressões relacionais <b>comparam</b> valores, e retornam <b>verdadeiro</b> ou <b>falso</b>:</p>
+                                                <table class="table tg">
+                                                        <tr>
+                                                        <th style="background-color: #f1a6c8;">Prioridade</th>
+                                                          <th style="background-color: #f1a6c8;">Operador</th>
+                                                          <th style="background-color: #f1a6c8;">Operações</th>
+                                                          <th style="background-color: #f1a6c8;">Tipo</th>
+                                                          <th style="background-color: #f1a6c8;">Exemplo</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td rowspan="2">Maior<br>
+                                                            <span style="font-size: 6em;">&#8595;</span>
+                                                            <br>Menor</td>
+                                                          <td>&lt; , &lt;=,<br>&gt;,&nbsp;&nbsp;&gt;=<br></td>
+                                                          <td>menor, menor ou igual<br>maior, maior ou igual<br></td>
+                                                          <td>binário</td>
+                                                          <td>0  &lt;   0   :   F<br><br>1  &lt;= 2   :   V<br><br>-1  &gt; -5&nbsp;&nbsp;:   V<br><br></td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>=, !=</td>
+                                                          <td>igual, diferente</td>
+                                                          <td>binário</td>
+                                                          <td>1  =  1  :   V<br><br>0 != 0&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;F</td>
+                                                        </tr>
+                                                      </table>
+                                            </div>
+                                            <div id="exp_op" class="section-block">
+                                                <h3 class="block-title">Operadores Lógicos</h3>
+                                                <p>Expressões lógicas têm operandos com o valor <b>verdadeiro</b> ou <b>falso</b> e geram um resultado também <b>verdadeiro</b> ou <b>falso</b>, de acordo com os operadores:</p>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                            <table class="table">
+                                                            <tr>
+                                                                <th style="background-color: #f1a6c8;">Prioridade</th>
+                                                              <th style="background-color: #f1a6c8;">Operador</th>
+                                                              <th style="background-color: #f1a6c8;">Operações</th>
+                                                              <th style="background-color: #f1a6c8;">Tipo</th>
+                                                            </tr>
+                                                            <tr>
+                                                                    <td rowspan="3">Maior<br>
+                                                                        <span style="font-size: 6em;">&#8595;</span>
+                                                                        <br>Menor</td>
+                                                              <td>NÃO</td>
+                                                              <td>não lógico<br>(negação)</td>
+                                                              <td>binário</td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td>E<br></td>
+                                                              <td>e lógico<br>(conjunção)</td>
+                                                              <td>binário</td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td>OU<br></td>
+                                                              <td>ou lógico<br>(disjunção)</td>
+                                                              <td>binário</td>
+                                                            </tr>
+                                                          </table>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                            <table class="table">
+                                                                    <tr>
+                                                                      <th style="background-color: #f1a6c8;">A<br></th>
+                                                                      <th style="background-color: #f1a6c8;">B</th>
+                                                                      <th style="background-color: #f1a6c8;"><span style="font-weight:bold">NÃO </span>A</th>
+                                                                      <th style="background-color: #f1a6c8;"><span style="font-weight:bold">NÃO</span> B<br></th>
+                                                                      <th style="background-color: #f1a6c8;">A <span style="font-weight:bold">E</span> B</th>
+                                                                      <th style="background-color: #f1a6c8;">A <span style="font-weight:bold">OU</span> B</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                      <td>V</td>
+                                                                      <td>V</td>
+                                                                      <td>F</td>
+                                                                      <td>F</td>
+                                                                      <td>V</td>
+                                                                      <td>V</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                      <td>V</td>
+                                                                      <td>F</td>
+                                                                      <td>F</td>
+                                                                      <td>V</td>
+                                                                      <td>F</td>
+                                                                      <td>V</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                      <td>F</td>
+                                                                      <td>V</td>
+                                                                      <td>V</td>
+                                                                      <td>F</td>
+                                                                      <td>F</td>
+                                                                      <td>V</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                      <td>F</td>
+                                                                      <td>F</td>
+                                                                      <td>V</td>
+                                                                      <td>V</td>
+                                                                      <td>F</td>
+                                                                      <td>F</td>
+                                                                    </tr>
+                                                                  </table>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                    </section><!--//doc-section-->
+                                
+                            </div><!--//content-inner-->
+                        </div><!--//doc-content-->
+
+                    <div class="doc-sidebar hidden-xs">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                                <li><a class="scrollto" href="#intro">Introdução</a></li>
+                                <li><a class="scrollto" href="#types">Tipos de Dados</a></li>
+                                <ul class="nav doc-sub-menu">
+                                    <li><a class="scrollto" href="#num">Numérico</a></li>
+                                    <li><a class="scrollto" href="#lit">Literal</a></li>
+                                    <li><a class="scrollto" href="#logic">Lógicos</a></li>
+                                </ul>
+                                <li><a class="scrollto" href="#conc">Conceitos</a></li>
+                                <ul class="nav doc-sub-menu">
+                                        <li><a class="scrollto" href="#const">Constantes</a></li>
+                                        <li><a class="scrollto" href="#var">Variáveis</a></li>
+                                        <li><a class="scrollto" href="#resv">Palavras Reservadas</a></li>
+
+                                </ul>
+                                <li><a class="scrollto" href="#vars">Variáveis</a></li>
+                                <ul class="nav doc-sub-menu">
+                                        <li><a class="scrollto" href="#name">Nomes de Variáveis</a></li>
+                                        <li><a class="scrollto" href="#decl">Declaração de Variáveis</a></li>
+                                </ul>
+                                <li><a class="scrollto" href="#exp_ops">Expressões e Operadores</a>
+                                    <ul class="nav doc-sub-menu">
+                                            <li><a class="scrollto" href="#op_art">Operadores Aritméticos</a></li>
+                                            <li><a class="scrollto" href="#exp_log">Expressões Lógicas</a></li>
+                                            <li><a class="scrollto" href="#exp_op">Operadores Lógicos</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul><!--//doc-menu-->
+                        </nav>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->              
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->        
+    </div><!--//page-wrapper-->
+    
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+            <small class="copyright">Created by:<a class="link" href="https://github.com/VerasThiago" target="_blank"><span> Thiago Veras</span></a> &amp; <a class="link" href="https://github.com/Gguidini" target="_blank"><span> Giovanni M Guidini</span></a></small>
+             <br> <!-- break line-->
+             <small class="copyright">Theme PRETTYDOCS by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a></small>
+ 
+        </div><!--//container-->
+    </footer><!--//footer-->
+    
+     
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="/assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>                                                                
+    <script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="/assets/js/animation.js"></script>
+    
+    <script>
+      prettyPrint();
+    </script>
+    
+</body>
+</html> 

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Ponteiros</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Thiago Veras & Giovanni Guidini">    
+    <link rel="shortcut icon" href="/assets/images/UnB-logo.png">  
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="/assets/plugins/elegant_font/css/style.css">
+    
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
+
+    <!-- Syntax Prettyprint -->
+    <link rel="stylesheet"  href="/assets/syntax/tomorrow_night.css">
+    <script src = "/assets/syntax/prettify.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .img-responsive{
+            width: 80%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+        }
+
+        .note-green{
+            background-color: #75c181;
+        }
+    </style>
+
+</head> 
+
+<body class="body-green">
+        <div class="page-wrapper">
+            <!-- ******Header****** -->
+            <header id="header" class="header">
+                <div class="container">
+                    <div class="branding">
+                        <h1 class="logo">
+                            <a href="/index.html">
+                                <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                                <span class="text-highlight">Aula </span><span class="text-bold">Extra</span>
+                            </a>
+                        </h1>
+                    </div><!--//branding-->
+                    <ol class="breadcrumb">
+                        <li><a href="/index.html">Home</a></li>
+                        <li><a href="/aulas">Voltar</a></li>
+                    </ol>
+                </div><!--//container-->
+            </header><!--//header-->
+            <div class="doc-wrapper">
+                <div class="container">
+                    <div id="doc-header" class="doc-header text-center">
+                        <h1 class="doc-title"><span class="icon-holder glyphicon glyphicon-new-window"></span> Ponteiros</h1>
+                        <div class="meta"><i class="fa fa-clock-o"></i> Last updated: October 6th, 2018</div>
+                    </div><!--//doc-header-->
+                    <div class="doc-body">
+                        <div class="doc-content">
+                            <div class="content-inner">
+                                <section id="mem" class="doc-section">
+                                    <h2 class="section-title">Memória</h2>
+                                    <div class="section-block" id="what">
+                                        <h3 class="block-title">O que é a memória?</h3>
+
+                                        <p>A memória RAM é o armazenamento primário do computador, onde ficam informações (dados e instruções) dos programas sendo atualmente executados pelo computador. Isso significa, entre outras coisas, que as variáveis dos nossos programas ficam <em>armazenadas</em> na memória durante a execução.</p>
+
+                                        <p>No nosso caso, podemos ver a memória como um grande <em>array</em> de <b>endereços</b>.Como a memória é <em>byte addressed</em>, cada endereço é referente a <b>1 byte</b> (8 bits).</p>
+
+                                        <img src="/assets/images/Ponteiros/mem.png" alt="Representação da memória" class="img img-responsive">
+
+
+                                    <div class="callout-block note-green" style="margin-top:1em;">
+                                        <div class="icon-holder">
+                                            <i class="fa fa-info-circle"></i>
+                                        </div><!--//icon-holder-->
+                                        <div class="content">
+                                            <p>Cada posição da memória guarda exatamente 1 byte, e é referenciada por um <em>endereço</em>. O endereço é representado em base <em>hexadecimal</em>.</p>
+                                        </div><!--//content-->
+                                        </div><!--//callout-block-->
+                                    </div>
+                                    <div class="section-block" id="size">
+                                        <h3 class="block-title">Qual o tamanho da memória?</h3>
+
+                                        <p>Calculamos o <b>tamanho</b> da memória a partir do <b>tamanho</b> dos endereços. No exemplo acima, um endereço era um número hexadecimal de 4 dígitos:</p>
+
+                                        <h1 style="padding-left: 30%;font-size: 5em;">0xFF00</h1>
+                                        
+                                        <ul>
+                                            <li>0x indica que o número está em base hexadecimal.</li>
+                                            <li>Cada dígito hexadecimal equivale a 4 dígitos binários (veja <a href="#table" class="scrollto">tabela de bases</a>).</li>
+                                            <li>Portanto, cada <b>endereço</b> do nosso exemplo possui 16 bits.</li>
+                                        </ul>
+
+                                        <p>Como cada byte da memória precisa de um endereço correspondente, calculamos o tamanho da memória vendo quantos endereços diferentes a memória é capaz de endereçar. No exemplo, cada endereço possui <b>16 bits</b>, que podem representar <b>2<sup>16</sup></b> endereços, ou seja, <b>esta</b> memória é de <b>64 KiB</b>.</p>
+
+                                        <p>O que <b>determina</b> o tamanho da memória é o <b>tipo de processador</b>:</p>
+
+                                        <ul>
+                                            <li>Processador x86 faz endereçamento com 32 bits. Portanto o tamanho máximo é 2<sup>32</sup> bytes = 4GiB</li>
+                                            <li>Processador x64 faz endereçamento com 48 bits. Portanto o tamanho máximo é 2<sup>48</sup> bytes = 256TiB</li>
+                                        </ul>
+                                    </div>
+                                    <div class="section-block" id="how">
+                                        <h3 class="block-title">Como usamos a memória?</h3>
+
+                                        <p>Podemos utilizar a memória para:</p>
+                                        <ul>
+                                            <li>Utilizamos a memória toda vez que alocamos espaço para <b>variáveis</b> em nossos programas.</li>
+                                            <li>Ler valores de variáveis e escrever novos valores para elas. Os valores lidos e escritos são <b>sempre</b> bytes.</li>
+                                        </ul>
+                                    </div>
+                                </section><!--//doc-section-->
+
+                                <section id="types" class="doc-section">
+                                    <h2 class="section-title">Tipos de Variáveis</h2>
+                                    <div class="section-block" id="in">
+                                        <h3 class="block-title">O que está na memória?</h3>
+                                        <p>Do ponto de vista da <b>máquina</b>, na memória estão armazenados apenas <b>bits</b>. Veja no exemplo, em que cada byte é representado em base hexadecimal.</p>
+
+                                        <img src="/assets/images/Ponteiros/mem_bytes.png" alt="Representação da memória com bytes povoados." class="img img-responsive" style="margin-bottom:1em;">
+
+                                        <p>Já do ponto de vista do <b>programador</b>, o que está armazenado na memória <b>depende</b> do <b>tipo de variável</b> associado ao endereço que nos referimos.</p>
+
+                                        <ul>
+                                            <li>Se avaliarmos o byte do endereço 0xFF00 como um <b>char</b>, ele será avaliado como <b>'\n'</b></li>
+                                            <li>Se avaliarmos o byte no endereço 0xFF03 como um <b>char</b>, ele será avaliado como <b>'û'</b></li>
+                                            <li>Interpretando a sequência de 4 bytes a partir do endereço 0xFF01 como <b>int</b>, ela será avaliada como <b> 1047548</b></li>
+                                            <li>Interpretando a sequência de 4 bytes a partir do endereço 0xFF00 como um <b>float</b>, ela será avaliada como <b>6.16598e-33</b></li>
+                                        </ul>
+
+                                    <div class="callout-block note-green" style="margin-top:1em;">
+                                        <div class="icon-holder">
+                                            <i class="fa fa-info-circle"></i>
+                                        </div><!--//icon-holder-->
+                                        <div class="content">
+                                        <p>O <b>tipo da variável</b> define 3 coisas:
+                                            <ol>
+                                                <li>Quantos bytes a variável ocupa na memória</li>
+                                                <li>Como interpretar o padrão de bytes</li>
+                                                <li>Operações aritméticas (veremos adiante)</li>
+                                            </ol></p>
+                                        </div><!--//content-->
+                                        </div><!--//callout-block-->
+                                    </div>                                    
+                                </section>
+
+                                <section id="pointer" class="doc-section">
+                                    <h2 class="section-title">Tipo Ponteiro</h2>
+                                    <p>Conhecemos variáveis do tipo <em>int, float, double, char, etc</em>. Todos esses tipos de variáveis armazenam <b>dados</b> do programa. Agora vamos conhecer o tipo <em>ponteiro</em>, que armazena <b>endereços de variáveis</b> do programa. Elas são do tipo ponteiro porque <b>apontam</b> para um espaço na memória.</p>
+
+                                    <p>Os tipos ponteiros são tipos <em>inteiros</em>, uma vez que existe um número inteiro de posições da memória. Para declarar um ponteiro para um tipo, acrescentamos um <b>asterisco</b> (*) na frente do nome do tipo.</p>
+
+                                    <pre class="prettyprint linenums:1 lang-cpp">
+int* ip;       /* ponteiro para inteiro */
+char* cp;      /* ponteiro para char */
+float* fp;     /* ponteiro para float */
+</pre>
+
+                                    <h3 class="block-title" id="exp">Exemplos</h3>
+
+                                    <img src="/assets/images/Ponteiros/pointers.png" alt="Exemplo de ponteiros" class="img img-responsive">
+
+                                    <ul>
+                                        <li>Interpretando a sequência de 2 bytes a partir do endereço 0xFF03 como um <b>char*</b> ela será avaliada como <b>0xFBFC</b></li>
+                                        <li>Interpretando a sequência de 2 bytes a partir do endereço 0xFF04 como um <b>char*</b> ela será avaliada como <b>0xFCE0</b></li>
+                                        <li>Interpretando a sequência de 2 bytes a partir do endereço 0xFF04 como um <b>int*</b> ela será avaliada como <b>0xFCE0</b></li>
+                                        <li>Interpretando a sequência de 2 bytes a partir do endereço 0xFF03 como um <b>double*</b> ela será avaliada como <b>0xFBFC</b></li>
+                                        <li>Interpretando a sequência de 2 bytes a partir do endereço 0xFF03 como um <b style="color: red;">void*</b> ela será avaliada como <b>0xFBFC</b></li>
+                                        <li>Interpretando a sequência de 2 bytes a partir do endereço 0xFF04 como um <b style="color: red;">void*</b> ela será avaliada como <b>0xFCEO</b></li>
+                                    </ul>
+
+                                    <div class="section-block">
+                                        <h3 class="block-title" id="void">Tipo void*</h3>
+                                        <p><b>void</b> é um tipo especial. Não é possível criar variáveis do <b>tipo void</b>, porém, podemos criar variáveis do tipo <b>ponteiro para void</b>. A utilidade é armazenar endereços de variáveis de <b>qualquer tipo</b></p>
+
+                                        <p>Na prática, isso quer dizer que uma variável do tipo <b>void*</b> pode armazenar o endereço de uma variável do tipo int, ou char, ou double, ou qualquer outro tipo.</p>
+                                        
+                                         <p>Assim, podemos ter ponteiros para <b>qualquer</b> tipo, inclusive para <b>outros ponteiros</b>, isto é, podemos ter ponteiros para ponteiros. Eles são definidos da mesma forma que os ponteiros normais:</p>
+
+                                        <pre class="prettyprint lang-cpp linenums:1">
+int i = 50; /* inteiro */
+int* pi; /* ponteiro de inteiro */
+int** ppi; /* ponteiro de ponteiro de inteiro */
+void* ptr; /* ponteiro void */
+void** pptr; /* ponteiro de ponteiro void */</pre>
+                                    <div class="callout-block note-green" style="margin-top:1em;">
+                                        <div class="icon-holder">
+                                            <i class="fa fa-info-circle"></i>
+                                        </div><!--//icon-holder-->
+                                        <div class="content">
+                                            <h4 class="callout-title">Conclusões sobre ponteiros</h4>
+                                            <ol>
+                                                <li>O espaço ocupado por um ponteiro de <b>qualquer tipo</b> é sempre o mesmo, e é o mesmo tamanho de um <b>endereço</b> definido pelo processador.</li>
+                                                <li>A interpretação de um ponteiro de <b>qualquer tipo</b> é smepre a mesma, um <b>endereço</b> da memória.</li>
+                                            </ol>
+                                        </div><!--//content-->
+                                        </div><!--//callout-block-->
+                                    </div>
+                                </section>
+                                <section section id="aritmetica" class="doc-section">
+                                    <h2 class="section-title">Aritmética</h2>
+                                    <h3 class="block-title" id = "ref">Referenciação</h2>
+                                    <p>Aprendemos que é possível criar variáveis que armazenam o endereço de outras variáveis. Como vou saber qual é o endereço de uma variável, para que eu possa armazená-lo?</p>
+                                    <p>Com o operador <b>&</b>. A linguagem C nos dá este operador que retorna o endereço de uma variável</p>
+
+                                    <pre class="prettyprint lang-cpp linenums:1">
+int main() {
+  int a = 50;
+  int b = 10;
+  int* pi = &amp;a;
+  int c = 520;
+  int** ppi = &amp;pi;
+  return 0;
+}</pre>
+                                    <a class="btn btn-green" href="https://goo.gl/dihhsR" target="_blank" rel="noopener noreferrer">Code Execution</a>
+
+                                    <h3 class="block-title" id = "unref">Desreferenciação</h2>
+                                    <p>Agora que já sabemos como armazenar os endereços das minhas variáveis. O que eu faço com eles?</p>
+                                    
+                                    <p>Conhecendo o <b>endereço</b> de uma variável, é possível conhecer o seu <b>valor</b> sem usar seu nome diretamente!</p>
+                                    
+                                    <p>E quando precisarei conhecer o valor de uma variável sem usar seu nome diretamente?</p>
+                                    
+                                    <ul><li><p>Quando eu conhecer <b>ão o nome</b>, mas apenas o <b>endereço</b> de uma variável, ou seja, em <b>funções</b>!</p></li></ul>
+                                    
+                                    <p>Através do operador <b>*</b>, fazemos o que chamamos de <b>desreferenciação</b>.</p>
+
+                                    <p>A <b>peração de desreferenciar</b> é auto-explicativa.</p>
+
+                                    <p>Quando possuímos um ponteiro para uma variável, costumamos dizer que possuímos uma <b>referência</b> para esta variável.</p>
+
+                                    <p>Se <b>desreferenciamos</b> um ponteiro, tiramos a <b>referência</b> e passamos a lidar com a <b>variável</b> propriamente dita.</p>
+
+                                    <p>Quando mandamos imprimir o <b>valor</b> de um ponteiro, o que vemos é um número escrito na base <b>hexadecimal</b>.</p>
+
+                                    <pre class="prettyprint lang-cpp linenums:1">
+int main() {
+    int x = 50;
+    int y = 40;
+    int *ptr = &x;
+    printf("%x\n",ptr);
+    return 0;
+}</pre>        
+                                    <a class="btn btn-green" href="https://goo.gl/ZLbAey" target="_blank" rel="noopener noreferrer">Code Execution</a>
+
+                                    <p>Ou seja, quando imprimimos o <b>valor</b> de um ponteiro, imprimimos o que ele significa: um <b>endereço de memória</b>.</p>
+
+                                    <p>Quando mandamos imprimir o <b>valor</b> de um ponteiro <b>desreferenciado</b>, o que vemos é o <b>conteúdo</b> da variável para a qual ele aponta.</p>
+                                        
+                                    <pre class="prettyprint lang-cpp linenums:1">
+int main() {
+    int x = 50;
+    int y = 40;
+    int *ptr = &x;
+    printf("%x\n",ptr);
+    int valor = *ptr;
+    printf("%d\n",valor);
+    return 0;
+}</pre>        
+                                    <a class="btn btn-green" href="https://goo.gl/tb2KVP" target="_blank" rel="noopener noreferrer">Code Execution</a>
+        
+                                    <p>Ou seja, ao <b>desreferenciar</b> um ponteiro, podemos tanto ler o <b>valor</b> da variável apontada, quanto <b>escrever</b> no valor da variável apontada.</p>
+                        
+                                    <pre class="prettyprint lang-cpp linenums:1">
+int main() {
+    int x = 50;
+    int y = 40;
+    int *ptr = &x;
+    printf("%x\n",ptr);
+    *ptr = 30;
+    int valor = *ptr;
+    printf("%d\n",valor);
+    return 0;
+}</pre>        
+                                <a class="btn btn-green" href="https://goo.gl/NNv7UT" target="_blank" rel="noopener noreferrer">Code Execution</a>
+                                
+                                
+                                </section>
+                                <section id="extras" class="doc-section">
+                                    <h2 class="section-title">Materiais Extras</h2>
+                                    <div class="section-block" id="table">
+                                        <h3 class="block-title">Tabela de Bases</h3>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Decimal</th>
+                                                        <th>Hexadecimal</th>
+                                                        <th>Binário</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>00</td>
+                                                        <td>0</td>
+                                                        <td>0000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>01</td>
+                                                        <td>1</td>
+                                                        <td>0001</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>02</td>
+                                                        <td>2</td>
+                                                        <td>0010</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>03</td>
+                                                        <td>3</td>
+                                                        <td>0011</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>04</td>
+                                                        <td>4</td>
+                                                        <td>0100</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>05</td>
+                                                        <td>5</td>
+                                                        <td>0101</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>06</td>
+                                                        <td>6</td>
+                                                        <td>0110</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>07</td>
+                                                        <td>7</td>
+                                                        <td>0111</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>08</td>
+                                                        <td>8</td>
+                                                        <td>1000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>09</td>
+                                                        <td>9</td>
+                                                        <td>1001</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>10</td>
+                                                        <td>A</td>
+                                                        <td>1010</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>11</td>
+                                                        <td>B</td>
+                                                        <td>1011</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>12</td>
+                                                        <td>C</td>
+                                                        <td>1100</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>13</td>
+                                                        <td>D</td>
+                                                        <td>1101</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>14</td>
+                                                        <td>E</td>
+                                                        <td>1110</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>15</td>
+                                                        <td>F</td>
+                                                        <td>1111</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                    </div>
+                                </section>
+                            </div><!--//content-inner-->
+                        </div><!--//doc-content-->
+
+                    <div class="doc-sidebar hidden-xs">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+                                <li><a class="scrollto" href="#mem">Memória</a></li>
+                                <ul class="nav doc-sub-menu">
+                                    <li><a class="scrollto" href="#what">O que é a Memória?</a></li>
+                                    <li><a class="scrollto" href="#size">Qual o tamanho da Memória?</a></li>
+                                    <li><a class="scrollto" href="#how">Como usamos a Memória?</a></li>
+                                </ul>
+                                <li><a class="scrollto" href="#types">Tipos de Variáveis</a></li>
+                                <ul class="nav doc-sub-menu">
+                                    <li><a class="scrollto" href="#in">O que está na memória?</a></li>
+                                </ul>
+                                <li><a class="scrollto" href="#pointer">Tipo Ponteiro</a></li>
+                                <ul class="nav doc-sub-menu">
+                                    <li><a class="scrollto" href="#void">Tipo void*</a></li>
+                                </ul>
+                                <li><a class="scrollto" href="#aritmetica">Aritmética</a></li>
+                                <ul class="nav doc-sub-menu">
+                                    <li><a class="scrollto" href="#ref">Referenciação</a></li>
+                                    <li><a class="scrollto" href="#unref">Desreferenciação</a></li>
+
+                                </ul>
+                                <li><a class="scrollto" href="#extras">Materiais Extras</a></li>
+                                <ul class="nav doc-sub-menu">
+                                    <li><a class="scrollto" href="#table">Tabela de Bases</a></li>
+                                </ul>
+
+                            </ul><!--//doc-menu-->
+                        </nav>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->              
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->        
+    </div><!--//page-wrapper-->
+    
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+            <small class="copyright">Created by:<a class="link" href="https://github.com/VerasThiago" target="_blank"><span> Thiago Veras</span></a> &amp; <a class="link" href="https://github.com/Gguidini" target="_blank"><span> Giovanni M Guidini</span></a></small>
+             <br> <!-- break line-->
+             <small class="copyright">Theme PRETTYDOCS by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a></small>
+ 
+        </div><!--//container-->
+    </footer><!--//footer-->
+    
+     
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="/assets/plugins/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>                                                                
+    <script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="/assets/js/animation.js"></script>
+    
+    <script>
+      prettyPrint();
+    </script>
+    
+</body>
+</html>
