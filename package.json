@@ -5,9 +5,11 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "webpack && node server.js",
+    "start-dev": "webpack-dev-server --open --config webpack.dev.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack --config webpack.prod.js",
+    "watch": "webpack --watch --config webpack.dev.js"
   },
   "author": "",
   "license": "ISC",
@@ -44,6 +46,7 @@
     "transform-runtime": "0.0.0",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7",
+    "webpack-merge": "^4.2.2",
     "xml-loader": "^1.2.1"
   }
 }

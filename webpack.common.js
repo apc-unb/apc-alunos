@@ -7,7 +7,6 @@ module.exports = {
     students_main: './area_restrita/src/index.js',
     tests_main: './area_restrita/src/provas_react.jsx'
   },
-  mode: 'development',
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
