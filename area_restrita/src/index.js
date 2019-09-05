@@ -13,14 +13,12 @@ const validateLogin = (login) => {
 }
 
 function auth(matricula, senha) {
-    console.log("Sending data:", matricula, senha);
     sessionStorage.__pwd = senha;
     if(validateLogin(matricula)) {
         axios.post( 'http://' + config.apihost + '/student', {
             "matricula": matricula,
             "password": senha,
         }).then( function (response) {
-            console.log("Response:", JSON.stringify(response));
             if (response.data.userexist == true) {
                 // Saves data to session
                 sessionStorage.setItem("connInfo", JSON.stringify(response.data));

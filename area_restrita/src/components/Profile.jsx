@@ -28,9 +28,14 @@ class Profile extends React.Component {
         }
     }
     
-    updateEmail(email_id, pwd_id, root) {
+    dismissModal(modal) {
+        modal.classList.remove('show');
+        modal.classList.remove('in');
+        modal.classList.add('fade');
+    }
 
-        dismissModal(document.getElementById(root));
+    updateEmail(email_id, pwd_id, root) {
+        this.dismissModal(document.getElementById(root));
 
         let new_email = document.getElementById(email_id).value;
         let pwd = document.getElementById(pwd_id).value;
@@ -70,8 +75,7 @@ class Profile extends React.Component {
     }
 
     updatePassword(newpwd_id, pwd_id, root) {
-
-        dismissModal(document.getElementById(root));
+        this.dismissModal(document.getElementById(root));
         
         let new_pwd = document.getElementById(newpwd_id).value;
         let pwd = document.getElementById(pwd_id).value;
@@ -222,7 +226,7 @@ class Profile extends React.Component {
                                 </span>
                                 <input id="handle-cf" type="text" className="form-control" name="password" placeholder="Handle"/>
                                 <span className="input-group-addon btn-edit" onClick={() => this.updateHandle('handle-cf')}>
-                                    <i class="glyphicon glyphicon-send"></i>
+                                    <i className="glyphicon glyphicon-send"></i>
                                 </span>
                             </div>
                         }
@@ -239,7 +243,7 @@ class Profile extends React.Component {
                             </span>
                             <input id="handle-uri" type="text" className="form-control" name="password" placeholder="Handle"/>
                             <span className="input-group-addon btn-edit" onClick={() => this.updateHandle('handle-uri')}>
-                                <i class="glyphicon glyphicon-send"></i>
+                                <i className="glyphicon glyphicon-send"></i>
                             </span>
                         </div>
                         }
