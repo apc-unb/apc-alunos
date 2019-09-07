@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import UpdateForm from './UpdateForm.jsx';
 
 const axios = require('axios');
+const APIHOST = process.env.NODE_ENV == "production" ? process.env.APIHOST : "184.172.214.210"
+const APIPORT = process.env.NODE_ENV == "production" ? process.env.APIPORT : "32637"
 
 // Profile class renders the Profile card.
 // Receives information from the API through props.
@@ -40,7 +42,8 @@ class Profile extends React.Component {
         let new_email = document.getElementById(email_id).value;
         let pwd = document.getElementById(pwd_id).value;
         var profile = this;
-        axios.put('http://' + config.apihost + '/students', {
+        const url = 'http://' + APIHOST + ':' + APIPORT + '/students';
+        axios.put( url, {
             'id': this.props.ID,
             'email': new_email,
             'password': pwd
@@ -79,7 +82,8 @@ class Profile extends React.Component {
         
         let new_pwd = document.getElementById(newpwd_id).value;
         let pwd = document.getElementById(pwd_id).value;
-        axios.put('http://' + config.apihost + '/students', {
+        const url = 'http://' + APIHOST + ':' + APIPORT + '/students';
+        axios.put(url, {
             'id': this.props.ID,
             'newpassword': new_pwd,
             'password': pwd
@@ -135,7 +139,8 @@ class Profile extends React.Component {
             }     
             this.setState({handle_uri: handle});
         }
-        axios.put("http://" + config.apihost + "/students", data ).then( (response) => {
+        const url = 'http://' + APIHOST + ':' + APIPORT + '/students';
+        axios.put(url, data ).then( (response) => {
                 console.log("Request ok");
             }).catch( (error) => {
                 console.log("Erro:", error);

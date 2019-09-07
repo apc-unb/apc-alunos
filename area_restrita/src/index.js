@@ -5,6 +5,8 @@ import HomeScreen from './alunos_react.jsx';
 import AuthComponent from './components/Auth.jsx';
 
 const axios = require('axios');
+const APIHOST = process.env.NODE_ENV == "production" ? process.env.APIHOST : "184.172.214.210"
+const APIPORT = process.env.NODE_ENV == "production" ? process.env.APIPORT : "32637"
 
 const validateLogin = (login) => {
     return String(login).split('').reduce((isDigit, char) => {
@@ -15,7 +17,8 @@ const validateLogin = (login) => {
 function auth(matricula, senha) {
     sessionStorage.__pwd = senha;
     if(validateLogin(matricula)) {
-        axios.post( 'http://' + config.apihost + '/student', {
+        const url = 'http://' + APIHOST + ':' + APIPORT + '/student';
+        axios.post( url, {
             "matricula": matricula,
             "password": senha,
         }).then( function (response) {
