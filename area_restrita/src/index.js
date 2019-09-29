@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import HomeScreen from './alunos_react.jsx';
 import AuthComponent from './components/Auth.jsx';
+import Header from './components/Header.js';
 
 const axios = require('axios');
 const APIHOST = process.env.NODE_ENV == "production" ? process.env.APIHOST : "184.172.214.210"
@@ -44,6 +45,8 @@ function auth(matricula, senha) {
     return ;
 }
 
+// Adds header
+ReactDOM.render(<Header/>, document.getElementById('header-bar'));
 // Verifica se esta com uma sessão acontecendo
 if (sessionStorage.connInfo){
     console.log("Continuing previous session")

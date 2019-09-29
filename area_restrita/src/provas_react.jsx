@@ -1,30 +1,10 @@
 'use strict';
 
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
-// Verifies if page can be leaded
-function loadPage() {
-    if(!sessionStorage.connInfo){
-        console.log("Error: you are not logged in.");
-        let nogo = document.createElement('div');
-        nogo.classList.add("alert", "alert-danger");
-        nogo.innerHTML = '<p><strong>Atenção!</strong>&nbsp;Você deve fazer o <a href="alunos.html" class="alert-link">login</a> para ver as provas da sua turma.</p>';
-        document.getElementById('page-root').appendChild(nogo);
-        return false;
-    } 
+import Header from './components/Header.js';
 
-    // TODO: Pegar info da turma do aluno e carregar componentes
-    ReactDOM.render(<ExamMenu/>, document.getElementById('page-root'));
-    return true;
-}
-
-// TODO: Implementar Tasks assim que ficarem prontas na API
-// type Task struct {
-//     ExamId   primitive.ObjectID `bson:"classid,omitempty"`
-//     Statement string             `json:"statement"`
-//     Score     float32            `json:"score"`
-//     Tags      []string           `json:"tags"`
-//   }
 function Task(props) {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const idx = letters.charAt(props._idx);
@@ -139,4 +119,18 @@ class ExamMenu extends React.Component {
             </div>
         );
     }
+}
+
+// Header bar
+ReactDOM.render(<Header/>, document.getElementById('header-bar'));
+// Verifies if page can be leaded
+if(!sessionStorage.connInfo){
+    console.log("Error: you are not logged in.");
+    let nogo = document.createElement('div');
+    nogo.classList.add("alert", "alert-danger");
+    nogo.innerHTML = '<p><strong>Atenção!</strong>&nbsp;Você deve fazer o <a href="alunos.html" class="alert-link">login</a> para ver as provas da sua turma.</p>';
+    document.getElementById('page-root').appendChild(nogo);
+} else {
+    // TODO: Pegar info da turma do aluno e carregar componentes
+    ReactDOM.render(<ExamMenu/>, document.getElementById('page-root'));
 }
