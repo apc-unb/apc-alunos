@@ -5,7 +5,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   entry: {
     students_main: './area_restrita/src/index.js',
-    tests_main: './area_restrita/src/provas_react.jsx'
+    tests_main: './area_restrita/src/provas_react.jsx',
+    trabalho_main: './area_restrita/src/trabalho.jsx'
   },
   output: {
     filename: '[name].bundle.js',

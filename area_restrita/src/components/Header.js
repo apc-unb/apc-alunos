@@ -15,7 +15,7 @@ const Header = () => {
                     <li><a href="trabalho.html" className="nav-btn">Trabalho</a></li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
-                <li><button onClick={() => logout()} className="btn navbar-btn btn-primary" style={{"margin-right": "10px"}}>
+                <li><button onClick={() => logout()} className="btn navbar-btn btn-primary" style={{"marginRight": "10px"}}>
                     <span className="glyphicon glyphicon-log-out"></span>&nbsp;Sair
                 </button>
                 </li>

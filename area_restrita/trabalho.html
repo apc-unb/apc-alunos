@@ -15,37 +15,36 @@
     <!-- Global CSS -->
     <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">  
     <link rel="stylesheet" href="/assets/css/alunos.css"> 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Plugins CSS -->    
     <link rel="stylesheet" href="/assets/plugins/elegant_font/css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
-    <!-- React -->
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <!-- Our React App code -->
-    <script src="/assets/js/provas_react_production.js" type="text/javascript"></script>
-    <!-- Axios -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!-- Hide this -->
+    <script>
+    function logout() {
+        sessionStorage.removeItem("connInfo");
+        window.location.reload();
+    }
+    </script>
 </head> 
 
-<body class="landing-page" onload="loadPage()">
-    
-       <!-- ******Header****** -->
-        <nav class="navbar navbar-default navbar-blue" id="header-bar">
+<body class="landing-page">
 
-        </nav>
+    <!-- ******Header****** -->
+    <nav class="navbar navbar-default navbar-blue" id="header-bar">
+
+    </nav>
 
     <div class="page-wrapper" id="page-root" style="padding: 10px;">
-        
-    </div>
 
+    </div>
     <!-- Footer area -->
     <footer class="footer text-center">
         <div class="container">
@@ -57,12 +56,13 @@
             <small class="copyright">Theme PRETTYDOCS by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a></small>
         </div><!--//container-->
     </footer><!--//footer-->
-
+    
     <!-- Main Javascript -->          
     <script type="text/javascript" src="/assets/plugins/jquery-1.12.3.min.js"></script>
     <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>                                                                     
     <script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
     <script type="text/javascript" src="/assets/js/main.js"></script>
-        
+    <!-- React -->
+    <script type="text/javascript" src="/dist/trabalho_main.bundle.js"></script>
 </body>
 </html> 

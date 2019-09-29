@@ -3,6 +3,9 @@ const app = express();
 const path = require('path');
 const moment = require('moment');
 const log = require('loglevel');
+const formidable = require('formidable');
+const util = require('util');
+
 log.setDefaultLevel(log.levels.INFO);
 
 const port = process.env.PORT || 3000;
@@ -13,9 +16,17 @@ app.use( (req, res, next) => {
   next();
 });
 
-// create a GET route
-app.get('/express_backend', (req, res) => {
-  res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
+app.post('/envioDeTrabalho', (req, res) => {
+  let form = new formidable.IncomingForm();
+  form.uploadDir = "./tmp/";
+  form.keepExtensions = true;
+
+  form.parse(req, function(err, fields, files) {
+
+    res.writeHead(200, {'content-type': 'text/plain'});
+    res.write('received upload:\n\n');
+    res.end(util.inspect({fields: fields, files: files}));
+  });
 });
 
 // Serve the bundled jsx files
