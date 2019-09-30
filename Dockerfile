@@ -12,7 +12,7 @@ COPY package-lock.json .
 COPY server.js .
 COPY dist ./dist
 COPY static/ ./static
-COPY area_restrita ./area_restrita
+COPY app ./app
 
 # Install dependencies
 RUN npm install

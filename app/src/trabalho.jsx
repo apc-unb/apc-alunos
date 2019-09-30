@@ -11,6 +11,7 @@ import axios from 'axios';
 const FilePicker = (props) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [loaded, setLoaded] = useState(0);
+    const [envio, setEnvio] = useState("");
 
     const onChangeHandler = (event) => {
         if(checkMimeType(event.target.files[0]) && checkFileSize(event.target.files[0])){
@@ -61,12 +62,9 @@ const FilePicker = (props) => {
         const data = new FormData();
         const connInfo = JSON.parse(sessionStorage.connInfo);
         data.append('studentID', connInfo.student.ID);
-        data.append('matricula', connInfo.student.matricula);
-        data.append('classID', connInfo.student.ClassID);
-        data.append('email', connInfo.student.email);
-        data.append('firstname', connInfo.student.firstname);
-        data.append('lastname', connInfo.student.lastname);
+        data.append('studentName', (connInfo.student.firstname + " " + connInfo.student.lastname));
         data.append('file', selectedFile);
+        data.append('envio', envio);
         // Envia o formulario
         axios.post('/envioDeTrabalho', data, {
             onUploadProgress: ProgressEvent => setLoaded((ProgressEvent.loaded / ProgressEvent.total)*100),

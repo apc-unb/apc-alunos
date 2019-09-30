@@ -19,6 +19,7 @@ function auth(matricula, senha) {
     sessionStorage.__pwd = senha;
     if(validateLogin(matricula)) {
         const url = 'http://' + APIHOST + ':' + APIPORT + '/student';
+        console.log("URL:", url);
         axios.post( url, {
             "matricula": matricula,
             "password": senha,
