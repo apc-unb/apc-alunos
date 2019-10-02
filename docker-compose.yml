@@ -1,0 +1,88 @@
+version: '3.3'
+
+networks: 
+  nginx-net:
+  internal-net:
+
+services:
+
+  apc-api:
+    image : apcunb/apc-api
+    ports:
+      - 8080:8080
+    depends_on:
+      - apc-mongo
+    networks: 
+      - internal-net
+      - nginx-net
+  
+  apc-admin:
+    image : apcunb/apc-admin
+    ports:
+      - 5000:5000
+    depends_on:
+      - apc-api
+    networks:
+      - internal-net
+      - nginx-net
+
+  apc-alunos:
+    image : apcunb/apc-alunos
+    build: .
+    ports:
+      - 4000:4000
+    depends_on:
+      - apc-api
+    networks:
+      - internal-net
+      - nginx-net       
+
+  apc-mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - internal-net
+
+  apc-prometheus:
+    image : apcunb/apc-prometheus
+    ports:
+      - 9090:9090
+    networks: 
+      - internal-net
+      - nginx-net
+
+  apc-grafana:
+    image : apcunb/apc-grafana
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-apc}
+      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-123}
+    depends_on:
+      - apc-prometheus
+    networks: 
+      - internal-net
+      - nginx-net
+
+  apc-nginx:
+    image : apcunb/apc-nginx
+    ports:
+      - 80:80
+    environment:
+      - HOST=localhost
+    networks:
+      - nginx-net
+    depends_on:
+      - apc-api
+      - apc-prometheus
+      - apc-grafana
+
+  local:
+    image: busybox
+    depends_on:
+      - apc-mongo
+      - apc-admin
+      - apc-api
+
+
