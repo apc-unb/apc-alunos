@@ -5,52 +5,12 @@ const moment = require('moment');
 const log = require('loglevel');
 const formidable = require('formidable');
 const util = require('util');
-const nodemailer = require("nodemailer");
-
-const { google } = require("googleapis");
-const OAuth2 = google.auth.OAuth2;
-const config = require('./config/config.json');
+const mailTransporter = require('./service/mailTransporter.js');
 
 log.setDefaultLevel(log.levels.DEBUG);
 
 const port = process.env.PORT || 3000;
 
-const oauth2Client = new OAuth2(
-  config.clientID, // ClientID
-  config.secretKey, // Client Secret
-  "https://developers.google.com/oauthplayground" // Redirect URL
-);
-
-oauth2Client.setCredentials({
-  refresh_token: config.refreshToken
-});
-const accessToken = oauth2Client.getAccessToken();
-
-const smtpTransport = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-       type: "OAuth2",
-       user: "apc.cic.unb@gmail.com", 
-       clientId: config.clientID,
-       clientSecret: config.secretKey,
-       refreshToken: config.refreshToken,
-       accessToken: accessToken
-  }
-});
-
-const emailDefaultMessage = (taName, studentName) => {
-  return (
-    `Olá ${taName},
-    
-    O aluno ${studentName} fez um novo envio de trabalho. Você foi escalado para corrigi-lo.
-    O trabalho encontra-se em anexo neste e-mail.
-    
-    Por favor confirme o recebimento deste email na plataforma do curso.
-    
-    Atenciosamente,
-    Prof. Carla Castanho.
-  `);
-};
 // Log requests for debug
 app.use( (req, res, next) => {
   log.debug(`[${moment().format("DD/MM hh:mm:ss a")}] ${req.method} ${req.url}`);
@@ -79,32 +39,33 @@ app.post('/envioDeTrabalho', (req, res) => {
 
   form.parse(req, (err, fields, files) => {
 
-    const studentName = fields.studentName;
-    const studentID = fields.studentID;
-    const trabNumber = fields.envio;
-
     if(err !== null){
       res.sendStatus(500).end(err.message);
     }
 
+    const studentName = fields.studentName;
+    const trabNumber = fields.envio;
+
     // TODO: Get TA email from API
     taEmail = "giovanni.guidini@gmail.com";
-    const message = {
-      from: "apc.cic.unb@gmail.com",
-      to: taEmail,
-      subject: "Novo trabalho para ser corrigido",
-      text: emailDefaultMessage("Fulano", studentName),
-      attachments: [
-        {
-          name: files.file.name,
-          path: files.file.path
-        }
-      ]
-    }
-
-    smtpTransport.sendMail(message, (error, response) => {
+    var messageToSend = mailTransporter.emailDefaultMessage({
+      "taEmail": taEmail,
+      "taName": "Fulano",
+      "studentName": studentName,
+      "envio": trabNumber,
+      "file": files.file
+    });
+  
+    var file = files.file;
+    
+    mailTransporter.smtpTransport.sendMail(messageToSend, (error, response) => {
       error ? console.log(error) : console.log(response);
       smtpTransport.close();
+
+      if(!error){
+        fs.unlinkSync(file.path);
+        console.log("Trabalho removido do servidor.");
+      }
     });
 
     res.writeHead(200, {'content-type': 'text/plain'});
