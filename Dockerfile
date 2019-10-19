@@ -1,23 +1,19 @@
 FROM node
 
-ENV APIHOST="184.172.214.210"
-ENV APIPORT="32637"
-ENV PORT="8001"
+ENV APIHOST="localhost"
+ENV APIPORT="80"
+ENV PORT="4000"
 ENV NODE_ENV="production"
 
 WORKDIR /app
-# Copy only necessary files
-COPY package.json .
-COPY package-lock.json .
-COPY server.js .
-COPY dist ./dist
-COPY static/ ./static
-COPY area_restrita ./area_restrita
-
+# Copy all files to container
+COPY . .
 # Install dependencies
 RUN npm install
+# Build dist
+RUN npm run build
 # Expose port
-EXPOSE 8001
+EXPOSE 4000
 # Start server
 CMD npm run start
 
