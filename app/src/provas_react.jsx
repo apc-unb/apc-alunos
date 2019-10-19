@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom';
 
 import Header from './components/Header.js';
 
+const APIHOST = process.env.NODE_ENV == "production" ? process.env.APIHOST : "localhost"
+const APIPORT = process.env.NODE_ENV == "production" ? process.env.APIPORT : "8080"
+
 function Task(props) {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const idx = letters.charAt(props._idx);
@@ -51,7 +54,8 @@ class Exam extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://' + config.apihost + '/tasks/' + this.state.id).then( (response) => {
+        const url = 'http://' + APIHOST + ':' + APIPORT + '/task/' + this.state.id;
+        axios.get(url).then( (response) => {
             this.setState({"tasks": response.data, "loaded": true});
         }).catch( (error) => {
             console.log(error);
@@ -87,7 +91,8 @@ class ExamMenu extends React.Component {
     }
     componentDidMount() {
         let connInfo = JSON.parse(sessionStorage.connInfo);
-        axios.get('http://' + config.apihost + '/exams/' + connInfo.class.ID)
+        const url = 'http://' + APIHOST + ':' + APIPORT + '/exam/' + connInfo.class.ID;
+        axios.get(url)
         .then( (response) => {
             this.setState({"data" : response.data, "ready": true});
         })
