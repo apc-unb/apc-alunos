@@ -6,6 +6,7 @@ ENV PORT="4000"
 ENV NODE_ENV="production"
 
 WORKDIR /app
+RUN mkdir tmp
 # Copy all files to container
 COPY . .
 # Install dependencies

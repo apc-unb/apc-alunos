@@ -6,10 +6,28 @@ const log = require('loglevel');
 const formidable = require('formidable');
 const util = require('util');
 const mailTransporter = require('./service/mailTransporter.js');
+const fs = require('fs');
 
 log.setDefaultLevel(log.levels.DEBUG);
 
 const port = process.env.PORT || 3000;
+
+const form = new formidable.IncomingForm();
+form.uploadDir = "./tmp/";
+form.keepExtensions = true;
+form.on('fileBegin', function (name, file){
+  file.path = form.uploadDir + file.name;
+});
+form.on('error', (err) => {
+  log.error("Error Uploading file:", err.message);
+  request.resume();
+});
+form.on('aborted', (err) =>  {
+    log.warn("User abroted upload");
+});
+form.on('end', () => {
+    log.info('Upload completed');
+});
 
 // Log requests for debug
 app.use( (req, res, next) => {
@@ -20,22 +38,6 @@ app.use( (req, res, next) => {
 // @POST
 // Envio de trabalho
 app.post('/envioDeTrabalho', (req, res) => {
-  let form = new formidable.IncomingForm();
-  form.uploadDir = "./tmp/";
-  form.keepExtensions = true;
-  form.on('fileBegin', function (name, file){
-    file.path = form.uploadDir + file.name;
-  });
-  form.on('error', (err) => {
-    log.error("Error Uploading file:", err.message);
-    request.resume();
-  });
-  form.on('aborted', (err) =>  {
-      log.warn("User abroted upload");
-  });
-  form.on('end', () => {
-      log.info('Upload completed');
-  });
 
   form.parse(req, (err, fields, files) => {
 
@@ -59,13 +61,19 @@ app.post('/envioDeTrabalho', (req, res) => {
     var file = files.file;
     
     mailTransporter.smtpTransport.sendMail(messageToSend, (error, response) => {
-      error ? console.log(error) : console.log(response);
-      smtpTransport.close();
-
-      if(!error){
-        fs.unlinkSync(file.path);
-        console.log("Trabalho removido do servidor.");
+        error ? console.log(error) : console.log(response);
+        
+        if(error === null){
+          fs.access(file.path, err => {
+            if(!err){
+              fs.unlinkSync(file.path);
+            } else {
+              console.log(err.message);
+            }
+          })
+          console.log("Trabalho removido do servidor.");
       }
+      smtpTransport.close();
     });
 
     res.writeHead(200, {'content-type': 'text/plain'});

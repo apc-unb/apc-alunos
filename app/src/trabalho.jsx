@@ -72,6 +72,7 @@ const FilePicker = (props) => {
             toast.success('Trabalho recebido com sucesso :D');
         }).catch( err => {
             toast.error('Ocorreu um erro: ' + err.message);
+            setLoaded(0);
         });
     }
 
