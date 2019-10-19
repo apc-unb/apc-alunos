@@ -8,6 +8,13 @@ services:
 
   apc-api:
     image : apcunb/apc-api
+    environment:
+      - DRAGONT_MONGO_HOST=apc-mongo
+      - DRAGONT_MONGO_PORT=27017
+      - DRAGONT_JWT_KEY=SUPER_SECRET
+      - DRAGONT_CODEFORCES_KEY=f3d968eea83ad8d5f21cad0365edcc200439c6f0
+      - DRAGONT_CODEFORCES_SECRET=b30c206b689d5ba004534c6780aa7be8e234a7f3
+      - DRAGONT_LOG_LEVEL=debug
     ports:
       - 8080:8080
     depends_on:
@@ -29,13 +36,8 @@ services:
   apc-alunos:
     image : apcunb/apc-alunos
     build: .
-    environment:
-      - APIHOST="apc-api"
-      - APIPORT="8080"
-      - PORT="45000"
-      - NODE_ENV="production"
     ports:
-      - 45000:45000
+      - 4000:4000
     depends_on:
       - apc-api
     networks:
@@ -82,14 +84,11 @@ services:
       - apc-api
       - apc-prometheus
       - apc-grafana
-      - apc-admin
-      - apc-alunos
 
-  # local:
-  #   image: busybox
-  #   depends_on:
-  #     - apc-mongo
-  #     - apc-api
-  #     - apc-alunos
+  local:
+    image: busybox
+    depends_on:
+      - apc-mongo
+      - apc-api
 
 
