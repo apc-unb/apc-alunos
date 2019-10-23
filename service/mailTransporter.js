@@ -18,11 +18,11 @@ oauth2Client.setCredentials({
 
 const accessToken = oauth2Client.getAccessToken();
 
-const emailDefaultBody = (taName, studentName, envio) => {
+const emailDefaultBody = (taName, studentName) => {
     return (
         `Olá ${taName},
         
-        O aluno ${studentName} fez um novo envio de trabalho (Trabalho ${envio}).
+        O aluno ${studentName} fez um novo envio de trabalho.
         Você foi escalado para corrigi-lo.
         O trabalho encontra-se em anexo neste e-mail.
         
@@ -38,7 +38,7 @@ const emailDefaultMessage = (data) => {
         from: DEFAULT_SENDER,
         to: data.taEmail,
         subject: DEFAULT_SUBJECT,
-        text: emailDefaultBody(data.taName, data.studentName, data.envio),
+        text: emailDefaultBody(data.taName, data.studentName),
         attachments: [
           {
             name: data.file.name,

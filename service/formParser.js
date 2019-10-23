@@ -1,7 +1,24 @@
 const formidable = require('formidable');
 const log = require('loglevel');
+const logFormat = require('loglevel-format');
+
+const logDefaults = {
+    template: '[%t] <%l>: %m',
+    messageFormatter: function(data){
+        return data;  
+    },
+    timestampFormatter: function (date) {
+        return date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
+    },
+    levelFormatter: function (level) {
+        return level.toUpperCase();
+    },
+    appendExtraArguments: false
+};
 
 log.setDefaultLevel(log.levels.INFO);
+logFormat.apply(log, logDefaults);
+
 
 form = new formidable.IncomingForm();
 form.uploadDir = "./tmp/";

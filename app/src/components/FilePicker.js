@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {Progress} from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
-import ProjectModal from './ProjectModal';
+import ProjectReceivedModal from './ProjectModal';
 
 import axios from 'axios';
 
@@ -67,7 +67,7 @@ export default function FilePicker(props) {
         axios.post('/envioDeTrabalho', data, {
             onUploadProgress: ProgressEvent => setLoaded((ProgressEvent.loaded / ProgressEvent.total)*100),
         }).then( res => {
-            ReactDOM.render(<ProjectModal/>, document.getElementById("submissionModalRoot"));
+            ReactDOM.render(<ProjectReceivedModal/>, document.getElementById("submissionModalRoot"));
         }).catch( err => {
             toast.error('Ocorreu um erro: ' + err.message);
             setLoaded(0);
@@ -76,6 +76,7 @@ export default function FilePicker(props) {
 
     return (
         <form method="post" action="#" id="#">
+            <ProjectReceivedModal/>
             <div>
                 <ToastContainer />
             </div>

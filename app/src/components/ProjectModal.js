@@ -1,48 +1,91 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles(theme => ({
-  paper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+const styles = theme => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(2),
   },
-}));
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+  button: {
+    margin: theme.spacing(1),
+    fontSize: 16
+  }
+});
 
-export default function ProjectModal() {
-  const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
+const DialogTitle = withStyles(styles)(props => {
+  const { children, classes, onClose, ...other } = props;
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h3">{children}</Typography>
+      {onClose ? (
+        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+});
+
+const DialogContent = withStyles(theme => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiDialogContent);
+
+const DialogActions = withStyles(theme => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
+
+export default function ProjectReceivedDialog() {
   const [open, setOpen] = React.useState(true);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
   const handleClose = () => {
     setOpen(false);
   };
 
   return (
-      <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        open={open}
-        onClose={handleClose}
-      >
-        <div className={classes.paper}>
-          <h2 id="simple-modal-title">Seu Trabalho foi enviado</h2>
-          <div id="simple-modal-description">
-            <p>Seu trabalho foi enviado foi recebido e será enviado para o monitor que irá corrigi-lo em breve.</p>
-                <p>Fique atento ao processo de correção:</p>
-                <ul>
-                    <li>Recebimento do trabalho</li>
-                    <li>Trabalho enviado para o monitor</li>
-                    <li>Trabalho aguardando correção pelo monitor</li>
-                    <li>Trabalho corrigido</li>
-                </ul>
-                <p>Caso seu trabalho não mude para o status "Enviado para o monitor" em 24h fale com seu professor!</p>
-          </div>
-        </div>
-      </Modal>
+    <div>
+      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          Seu Trabalho foi recebido
+        </DialogTitle>
+        <DialogContent dividers>
+          <p>Seu trabalho foi enviado foi recebido e será enviado para o monitor que irá corrigi-lo em breve.</p>
+          <p>Fique atento ao processo de correção:</p>
+            <ul>
+                <li>Recebimento do trabalho</li>
+                <li>Trabalho enviado para o monitor</li>
+                <li>Trabalho aguardando correção pelo monitor</li>
+                <li>Trabalho corrigido</li>
+            </ul>
+          <p variant="body1">Caso seu trabalho não mude para o status "Enviado para o monitor" em 24h fale com seu professor!</p>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}  variant="contained" color="primary" className={styles.button}>
+            Eu entendi
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 }
