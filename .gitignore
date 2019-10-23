@@ -1,8 +1,9 @@
 # Node stuff
 node_modules/
+package-lock.json
 
 # VScode stuff
 .vscode/
-
+config/
 # distribution
 dist/
