@@ -14,20 +14,22 @@ const port = process.env.PORT || 3000;
 
 // Log requests for debug
 app.use( (req, res, next) => {
-  log.debug(`[${moment().format("DD/MM hh:mm:ss a")}] ${req.method} ${req.url}`);
+  log.debug(`${req.method} ${req.url}`);
   next();
 });
 
 // @POST
 // Envio de trabalho
 app.post('/envioDeTrabalho', async (req, res) => {
-  r = await form.parse(req, projectProcessor.processProjectSubmission);
-
-  if(r.error === null){
-    res.end(r[1]);
-  } else {
-    res.sendStatus(500).end(r[1]);
-  }
+  form.parse(req, (err, fields, files) => {
+    if(err) {
+      log.error("Não foi possível enviar o trabalho:", err.message);
+      res.sendStatus(500).end(err.message);
+    } else {
+      projectProcessor.processProjectSubmission(fields, files);
+      res.end("Upload completed.");
+    }
+  });
 });
 
 // Serve the bundled jsx files

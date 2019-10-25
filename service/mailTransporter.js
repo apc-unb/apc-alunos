@@ -18,19 +18,26 @@ oauth2Client.setCredentials({
 
 const accessToken = oauth2Client.getAccessToken();
 
-const emailDefaultBody = (taName, studentName) => {
+const emailDefaultBody = (taName, studentName, projectID) => {
     return (
-        `Olá ${taName},
-        
-        O aluno ${studentName} fez um novo envio de trabalho.
-        Você foi escalado para corrigi-lo.
-        O trabalho encontra-se em anexo neste e-mail.
-        
-        Por favor confirme o recebimento deste email na plataforma do curso.
-        
-        Atenciosamente,
-        Prof. Carla Castanho.
-    `);
+        `<html>
+            <body>
+                <h3>Olá ${taName},</h3>
+
+                <p>O aluno ${studentName} fez uma nova submissão de trabalho e você foi escalado para corrigí-lo.</p>
+                <p>O trabalho está em anexo.</p>
+                <p>Lembre-se de confirmar o recebimento do trabalho clicando no botão abaixo.</p>
+
+                <form action="http://localhost:8080/project/status" method="PUT">
+                    <input type="hidden" name="_id" value=${projectID}>
+                    <input type="hidden" name="status" value="Received">
+                    <input type="submit" value="Confirmar Recebimento">
+                </form>
+
+                <p>Caso haja algum problema, a submissão do trabalho possui ID <code>${projectID}</code></p>
+            </body>
+        </html>`
+    );
 };
 
 const emailDefaultMessage = (data) => {
@@ -38,7 +45,7 @@ const emailDefaultMessage = (data) => {
         from: DEFAULT_SENDER,
         to: data.taEmail,
         subject: DEFAULT_SUBJECT,
-        text: emailDefaultBody(data.taName, data.studentName),
+        html: emailDefaultBody(data.taName, data.studentName, data.projectID),
         attachments: [
           {
             name: data.file.name,

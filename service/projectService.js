@@ -31,15 +31,9 @@ class projectService {
   
   constructor() {  }
 
-  processProjectSubmission(err, fields, files) {
-
-      if(err !== null){
-        log.error("Não foi possível enviar o trabalho:", err.message);
-        return [false, err.message];
-      }
+  processProjectSubmission(fields, files) {
   
       const studentName = fields.studentName;
-  
       // Send Project to API
       // To register submission and get TA email
       const projectInfo = {
@@ -47,19 +41,20 @@ class projectService {
         "ProjectTypeID": fields.ProjectTypeID,
         "ClassID": fields.ClassID,
         "filename": files.file.name,
-        "status": "Entrega ao monitor não confirmada"
       }
-
+      
       axios.post(sendProjectUrl, projectInfo).then( res => {
-
+        
         const messageToSend = mailTransporter.emailDefaultMessage({
           "taEmail": res.data.content.monitorEmail,
           "taName": res.data.content.monitorName,
+          "projectID": res.data.content.projectID,
           "studentName": studentName,
           "file": files.file
         });
-      
+        
         var file = files.file;
+        const projectID = res.data.content.projectID;
         
         mailTransporter.smtpTransport.sendMail(messageToSend, (error, response) => {
             // Log
@@ -69,9 +64,17 @@ class projectService {
               // Remove o arquivo e fecha o transportador
               removeFileFromServer(file.path);
               smtpTransport.close();
-              // TODO: Avisa a api que o email foi entregue
+              // Faz o update na API
+              axios.post('http://' + APIHOST + ':' + APIPORT + '/project/status', {
+                "_id": projectID,
+                "status": "Pending"
+              });
             } else {
-              // TODO: Avisa a API que nao conseguiu entregar o email
+              // Avisa a API que nao conseguiu entregar o email
+              axios.post('http://' + APIHOST + ':' + APIPORT + '/project/status', {
+                "_id": projectID,
+                "status": "Failed"
+              });
             }
         });
       }).catch(err => {
