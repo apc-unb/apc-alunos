@@ -1,6 +1,18 @@
 import React from 'react';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 const Header = () => {
+
+    const logout = () => {
+        cookies.remove('jwt');
+        sessionStorage.removeItem('APC_sessionClass');
+        sessionStorage.removeItem('APC_sessionNews');
+        sessionStorage.removeItem('APC_sessionStudent');
+        sessionStorage.removeItem('APC_sessionProgress');
+        window.location.reload();
+    }
+
     return (
         <div className="container-fluid">
             <div className="navbar-header">

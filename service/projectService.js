@@ -12,7 +12,7 @@ const sendProjectUrl = 'http://' + APIHOST + ':' + APIPORT + '/project'
 const log = require('loglevel');
 
 var logDefaults = {
-  template: '[%t] <%l>: %m',
+  template: '[%t] (%l): %m',
   messageFormatter: function(data){
     return data;  
   },

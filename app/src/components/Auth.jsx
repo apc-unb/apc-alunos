@@ -1,9 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import ApiService from '../../../service/api/ApiService';
 
-const AuthComponent = ({ onSubmit}) => {
+
+const AuthComponent = () => {
     const [matricula, setMatricula] = useState('');
     const [password, setPassword] = useState('');
     const [infoIn, setInfoIn] = useState(false);
+
+    const validateLogin = (login) => {
+        return String(login).split('').reduce((isDigit, char) => {
+            return '0123456789'.includes(char) & isDigit;
+        }, true);
+    }
+
+    async function auth(matricula, senha) {
+
+        if(validateLogin(matricula)) {
+            const status = await ApiService.login(matricula, senha);
+            if(status === 200){
+                window.location= '/alunos'
+            } else {
+                document.getElementById('login-error-alert').classList.remove('hide');
+                document.getElementById("pwd").value = '';
+            }
+        }
+        return;
+    }
 
     useEffect( () => {
         if(matricula != '' && password != ''){
@@ -55,7 +78,7 @@ const AuthComponent = ({ onSubmit}) => {
                     <div className="col-sm-offset-2 col-sm-10">
                     <button
                         className="btn btn-blue"
-                        onClick={() => onSubmit(matricula, password)}
+                        onClick={() => auth(matricula, password)}
                         disabled={!infoIn}
                     >Submit</button>
                     </div>
