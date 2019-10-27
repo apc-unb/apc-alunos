@@ -3,10 +3,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import Grades from './components/Grades.jsx';
-import Activities from './components/Activities.jsx';
-import News from './components/News.jsx';
-import Profile from './components/Profile.jsx'
+import Grades from './components/Grades.js';
+import Activities from './components/Activities.js';
+import News from './components/News.js';
+import Profile from '../../components/Profile.jsx'
 
 function ClassInfo(props) {
     return (

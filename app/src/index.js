@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import HomeScreen from './alunos_react.jsx';
+import HomeScreen from './screens/HomeScreen/Home.view.js';
 import Header from './components/Header.js';
 
 import Auth from '../../service/api/Auth';

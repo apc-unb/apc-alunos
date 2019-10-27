@@ -1,14 +1,42 @@
+// React
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+// Back-end
 import ApiService from '../../../service/api/ApiService';
+// Third party
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+
 
 
 const AuthComponent = () => {
     const [matricula, setMatricula] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [loginError, setLoginError] = useState(false);
     const [infoIn, setInfoIn] = useState(false);
+    const [open, setOpen] = useState(true);
+    
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     const validateLogin = (login) => {
+        if(login === "") return false;
+
         return String(login).split('').reduce((isDigit, char) => {
             return '0123456789'.includes(char) & isDigit;
         }, true);
@@ -24,81 +52,62 @@ const AuthComponent = () => {
                 document.getElementById('login-error-alert').classList.remove('hide');
                 document.getElementById("pwd").value = '';
             }
+        } else {
+            setLoginError(true);
         }
-        return;
     }
 
     useEffect( () => {
-        if(matricula != '' && password != ''){
+        if(matricula !== "" && password !== ""){
             setInfoIn(true);
         }
     }, [password, matricula]);
 
     return (
-        <div id="auth-modal" className="modal show">
-        <div className="modal-dialog">
-            <div className="modal-content">
-            <div className="modal-header" style={{textAlign: "center"}}>
-                <h3 className="modal-title" style={{marginBottom: "10px"}}>Seção restrita</h3>
-                <p className="handle-text">Esta página é somente para alunos.</p>
-                <p className="handle-text">Se não souber sua senha entre em contato com seu professor.</p>
-            </div>
-            <div className="modal-body">
-            <div className="form-horizontal">
-                <div className="form-group">
-                    <p className="login-error hide" id="login-invalid-alert">
-                        <span className="glyphicon glyphicon-alert"></span>
-                        <strong> Login inválido.</strong>
-                            Seu login é a matrícula sem barra.
-                    </p>
-                    <label className="control-label col-sm-2" htmlFor="email">Login:</label>
-                    <div className="col-sm-10">
-                    <input
-                        type="email"
-                        className="form-control"
-                        id="email"
-                        placeholder="Matrícula sem barra"
-                        onChange={(event) => setMatricula(event.target.value)}
-                    />
-                    </div>
-                </div>
-                <div className="form-group">
-                    <label className="control-label col-sm-2" htmlFor="pwd">Senha:</label>
-                    <div className="col-sm-10">
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="pwd"
-                        placeholder="Senha"
-                        onChange={(event) => setPassword(event.target.value)}
-                    />
-                    </div>
-                </div>
-                <div className="form-group">
-                    <div className="col-sm-offset-2 col-sm-10">
-                    <button
-                        className="btn btn-blue"
-                        onClick={() => auth(matricula, password)}
-                        disabled={!infoIn}
-                    >Submit</button>
-                    </div>
-                </div>
-            </div> 
-        </div>
-        <div className="modal-footer">
-            <div className="alert alert-danger alert-dismissable hide" style={{textAlign: "left"}} id="login-error-alert">
-                <a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Erro!</strong> Usuário não encontrado. <p>Se você não lembra sua senha, contate seu professor.</p>
-            </div>
-            <div className="alert alert-danger alert-dismissable hide" style={{textAlign: "left"}} id="network-error-alert">
-                <a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Erro!</strong> Alguma coisa deu errado. Verifique sua conexão de internet e tente novamente.
-            </div>
-        </div>
-        </div>
-    
-    </div>
-    </div>
+        <Dialog open={open} aria-labelledby="auth-modal">
+            <DialogTitle id="form-dialog-title">Seção restrita</DialogTitle>
+            <DialogContent>
+            <DialogContentText>
+                Esta página é somente para alunos.
+                Se não souber sua senha entre em contato com seu professor.
+            </DialogContentText>
+            <FormControl error={loginError}>
+                <InputLabel htmlFor="component-helper">Login</InputLabel>
+                <Input
+                id="component-helper"
+                required={true}
+                value={matricula}
+                onChange={(event) => setMatricula(event.target.value)}
+                aria-describedby="component-helper-text"
+                />
+                <FormHelperText id="component-helper-text">Matrícula sem barra</FormHelperText>
+            </FormControl>
+            <FormControl>
+                <InputLabel htmlFor="adornment-password">Senha</InputLabel>
+                <Input
+                id="adornment-password"
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                endAdornment={
+                    <InputAdornment position="end">
+                    <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => setShowPassword(!showPassword)}
+                    >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                    </InputAdornment>
+                }
+                />
+            </FormControl>
+            </DialogContent>
+            <DialogActions>
+            <Button onClick={() => auth(matricula, password)} color="primary" disabled={!infoIn}>
+                Entrar
+            </Button>
+            </DialogActions>
+        </Dialog>
     )
 };
 

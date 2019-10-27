@@ -3,7 +3,7 @@ const log = require('loglevel');
 const logFormat = require('loglevel-format');
 
 const logDefaults = {
-    template: '[%t] <%l>: %m',
+    template: '[%t] (%l): %m',
     messageFormatter: function(data){
         return data;  
     },

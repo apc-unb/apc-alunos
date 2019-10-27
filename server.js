@@ -6,7 +6,7 @@ const log = require('loglevel');
 
 const { projectService, removeAllFilesFromDir } = require('./service/projectService');
 const projectProcessor = new projectService();
-const form = require('./service/formParser');
+const form = require('./utils/formParser');
 
 log.setDefaultLevel(log.levels.DEBUG);
 

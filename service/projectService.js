@@ -1,7 +1,7 @@
 const logFormat = require('loglevel-format');
 
 
-const mailTransporter = require('./mailTransporter.js');
+const mailTransporter = require('../utils/mailTransporter.js');
 const fs = require('fs');
 const axios = require('axios');
 const APIHOST = process.env.NODE_ENV == "production" ? process.env.APIHOST : "localhost"
