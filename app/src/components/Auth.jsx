@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import ApiService from '../../../service/api/ApiService';
 // Third party
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -13,13 +13,19 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-
+import Snackbar from '@material-ui/core/Snackbar';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import ErrorIcon from '@material-ui/icons/Error';
+import CloseIcon from '@material-ui/icons/Close';
 
+
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 
 const AuthComponent = () => {
@@ -28,11 +34,11 @@ const AuthComponent = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [loginError, setLoginError] = useState(false);
     const [infoIn, setInfoIn] = useState(false);
-    const [open, setOpen] = useState(true);
-    
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const [loading, setLoading] = useState(false);
+    const open = true;
+
+    const [error, setError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
 
     const validateLogin = (login) => {
         if(login === "") return false;
@@ -45,25 +51,71 @@ const AuthComponent = () => {
     async function auth(matricula, senha) {
 
         if(validateLogin(matricula)) {
-            const status = await ApiService.login(matricula, senha);
-            if(status === 200){
+            let res;
+            try {
+                res = await ApiService.login(matricula, senha);
+            } catch(err) {
+                setErrorMsg(err.message);
+                setError(true);
+                setLoading(false);
+                return;
+            }
+
+            if(res.status === 200){
+                const sessionClass = res.data.class;
+                const sessionNews = res.data.news;
+                const sessionProgress = res.data.progress;
+                const sessionStudent = res.data.student;
+                const jwt = res.data.jwt;
+                cookies.set("jwt", jwt, {path: "/"});
+                sessionStorage.setItem('APC_sessionClass', JSON.stringify(sessionClass));
+                sessionStorage.setItem('APC_sessionNews', JSON.stringify(sessionNews));
+                sessionStorage.setItem('APC_sessionProgress', JSON.stringify(sessionProgress));
+                sessionStorage.setItem('APC_sessionStudent', JSON.stringify(sessionStudent));
+                // Redirects to HomePage
                 window.location= '/alunos'
             } else {
-                document.getElementById('login-error-alert').classList.remove('hide');
+                setErrorMsg("Usuário ou senha inválidos.");
+                setError(true);
                 document.getElementById("pwd").value = '';
             }
         } else {
             setLoginError(true);
         }
+        setLoading(false);
     }
 
     useEffect( () => {
         if(matricula !== "" && password !== ""){
             setInfoIn(true);
+        } else {
+            setInfoIn(false);
         }
     }, [password, matricula]);
 
     return (
+        <div>
+        <Snackbar
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            open={error}
+            onClose={() => setError(false)}
+            ContentProps={{
+            'aria-describedby': 'message-id',
+            }}
+            autoHideDuration={30000}
+            message={
+                <span id="message-id">
+                <ErrorIcon />
+                {errorMsg} 
+                </span>
+            }
+            action={[
+                <IconButton key="close" aria-label="close" color="inherit" onClick={() => setError(false)}>
+                    <CloseIcon />
+                </IconButton>
+            ]}
+        />
+
         <Dialog open={open} aria-labelledby="auth-modal">
             <DialogTitle id="form-dialog-title">Seção restrita</DialogTitle>
             <DialogContent>
@@ -103,11 +155,12 @@ const AuthComponent = () => {
             </FormControl>
             </DialogContent>
             <DialogActions>
-            <Button onClick={() => auth(matricula, password)} color="primary" disabled={!infoIn}>
-                Entrar
+            <Button onClick={() => {setLoading(true); auth(matricula, password)}} color="primary" disabled={!infoIn}>
+                { loading ? <CircularProgress/> : "Entrar" }
             </Button>
             </DialogActions>
         </Dialog>
+        </div>
     )
 };
 

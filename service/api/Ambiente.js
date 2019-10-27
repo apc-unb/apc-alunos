@@ -7,4 +7,4 @@ const Api =  axios.create({
     baseURL: 'http://' + APIHOST + ':' + APIPORT
 });
 
-export default Api;
+module.exports = Api;

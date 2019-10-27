@@ -4,9 +4,10 @@ const path = require('path');
 const moment = require('moment');
 const log = require('loglevel');
 
-const { projectService, removeAllFilesFromDir } = require('./service/projectService');
+const { projectService } = require('./service/projectService');
 const projectProcessor = new projectService();
 const form = require('./utils/formParser');
+const fileRemover = require('./utils/fileRemover.js');
 
 log.setDefaultLevel(log.levels.DEBUG);
 
@@ -57,11 +58,11 @@ tomorrow5am.add(5, 'hours');
 // To remove the files from the dir and then create an interval of 1 day
 setTimeout( () => {
   log.warn('Removendo arquivos de tmp/');
-  removeAllFilesFromDir();
+  fileRemover.removeAllFilesFromDir();
   // Interval of 24hours
   setInterval(() => {
     log.warn('Removendo arquivos de tmp/');
-    removeAllFilesFromDir();
+    fileRemover.removeAllFilesFromDir();
   }, 86400000);
 }, tomorrow5am.diff(now));
 
