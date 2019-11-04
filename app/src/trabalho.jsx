@@ -10,25 +10,33 @@ const APIHOST = process.env.NODE_ENV == "production" ? process.env.APIHOST : "lo
 const APIPORT = process.env.NODE_ENV == "production" ? process.env.APIPORT : "8080"
 
 const projectUrl = 'http://' + APIHOST + ':' + APIPORT + '/project/type';
-const submissionUrl = 'http://' + APIHOST + ':' + APIPORT + '/project';
+
 const moment = require('moment');
 
 import Submission from './components/Submission.js';
 import FilePicker from './components/FilePicker';
+
+import ApiService from '../../service/api/ApiService';
 
 const ProjectView = (props) => {
     const [projectTypes, setProjectTypes] = useState([]);
     const [submissions, setSubmissions] = useState([]);
     const sessionStudent = JSON.parse(sessionStorage.getItem('APC_sessionStudent'));
 
-    useState( () => {
-        axios.all([
-            axios.get(projectUrl),
-            axios.get(submissionUrl + '/' + sessionStudent.ID)
-        ]).then(axios.spread((res1, res2) => {
-            setProjectTypes(res1.data);
-            setSubmissions(res2.data);
-        }));
+    useState( async () => {
+        const [err, res] = await ApiService.listProjects(sessionStudent.ID);
+        const [errType, resType] = await ApiService.listProjectTypes();
+        if(err !== null) {
+            console.log(err);
+        } else {
+            setSubmissions(res.data);
+        }
+        if(errType !== null) {
+            console.log(errType);
+        } else {
+            setProjectTypes(resType.data)
+        }
+
     }, []);
 
     const projects = projectTypes.map( (value, index) => {

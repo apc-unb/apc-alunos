@@ -1,7 +1,9 @@
 // React
 import React, { useState, useEffect } from 'react';
 // Back-end
-import ApiService from '../../../service/api/ApiService';
+import Ambiente from '../../../service/api/Ambiente';
+const baseUrl = 'http://' + Ambiente.APIHOST + ':' + Ambiente.APIPORT;
+import axios from 'axios';
 // Third party
 import Button from '@material-ui/core/Button';
 
@@ -49,36 +51,35 @@ const AuthComponent = () => {
     }
 
     async function auth(matricula, senha) {
-
         if(validateLogin(matricula)) {
-            let res;
-            try {
-                res = await ApiService.login(matricula, senha);
-            } catch(err) {
+            axios.post(baseUrl + '/student/login', {
+                    "matricula": matricula,
+                    "password": senha
+            }).then(res => {
+                if(res.status === 200){
+                    const sessionClass = res.data.class;
+                    const sessionNews = res.data.news;
+                    const sessionProgress = res.data.progress;
+                    const sessionStudent = res.data.student;
+                    const jwt = res.data.jwt;
+                    cookies.set("jwt", jwt, {path: "/"});
+                    sessionStorage.setItem('APC_sessionClass', JSON.stringify(sessionClass));
+                    sessionStorage.setItem('APC_sessionNews', JSON.stringify(sessionNews));
+                    sessionStorage.setItem('APC_sessionProgress', JSON.stringify(sessionProgress));
+                    sessionStorage.setItem('APC_sessionStudent', JSON.stringify(sessionStudent));
+                    // Redirects to HomePage
+                    window.location= '/alunos'
+                } else {
+                    setErrorMsg("Usuário ou senha inválidos.");
+                    setError(true);
+                    document.getElementById("pwd").value = '';
+                }
+            }).catch((err) => {
                 setErrorMsg(err.message);
                 setError(true);
                 setLoading(false);
                 return;
-            }
-
-            if(res.status === 200){
-                const sessionClass = res.data.class;
-                const sessionNews = res.data.news;
-                const sessionProgress = res.data.progress;
-                const sessionStudent = res.data.student;
-                const jwt = res.data.jwt;
-                cookies.set("jwt", jwt, {path: "/"});
-                sessionStorage.setItem('APC_sessionClass', JSON.stringify(sessionClass));
-                sessionStorage.setItem('APC_sessionNews', JSON.stringify(sessionNews));
-                sessionStorage.setItem('APC_sessionProgress', JSON.stringify(sessionProgress));
-                sessionStorage.setItem('APC_sessionStudent', JSON.stringify(sessionStudent));
-                // Redirects to HomePage
-                window.location= '/alunos'
-            } else {
-                setErrorMsg("Usuário ou senha inválidos.");
-                setError(true);
-                document.getElementById("pwd").value = '';
-            }
+            });
         } else {
             setLoginError(true);
         }

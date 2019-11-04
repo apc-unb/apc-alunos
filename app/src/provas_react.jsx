@@ -6,8 +6,7 @@ import ReactDOM from 'react-dom';
 import Header from './components/Header.js';
 import Auth from '../../service/api/Auth';
 
-const APIHOST = process.env.NODE_ENV == "production" ? process.env.APIHOST : "localhost"
-const APIPORT = process.env.NODE_ENV == "production" ? process.env.APIPORT : "8080"
+import ApiService from '../../service/api/ApiService';
 
 function Task(props) {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -54,13 +53,13 @@ class Exam extends React.Component {
         }
     }
 
-    componentDidMount() {
-        const url = 'http://' + APIHOST + ':' + APIPORT + '/task/' + this.state.id;
-        axios.get(url).then( (response) => {
-            this.setState({"tasks": response.data, "loaded": true});
-        }).catch( (error) => {
+    async componentDidMount() {
+        const [err, res] = ApiService.listExamTasks(this.state.id);
+        if(err !== null){
             console.log(error);
-        });
+        } else {
+            this.setState({"tasks": res.data, "loaded": true});
+        }
     }
 
     render() {
@@ -90,16 +89,14 @@ class ExamMenu extends React.Component {
             "ready": false
         }
     }
-    componentDidMount() {
+    async componentDidMount() {
         const sessionClass = JSON.parse(sessionStorage.getItem('APC_sessionClass'));
-        const url = 'http://' + APIHOST + ':' + APIPORT + '/exam/' + sessionClass.ID;
-        axios.get(url)
-        .then( (response) => {
-            this.setState({"data" : response.data, "ready": true});
-        })
-        .catch( (error) => {
-            console.log(error);
-        })
+        const [err, res] = await ApiService.listExams(sessionClass.ID);
+        if(err !== null){
+            console.log(err);
+        } else {
+            this.setState({"data" : res.data, "ready": true});
+        }
     }
 
     render() {
