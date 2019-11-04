@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 
 import Header from './components/Header.js';
-
+import Auth from '../../service/api/Auth';
 import 'react-toastify/dist/ReactToastify.css';
 
 import axios from 'axios';
@@ -10,26 +10,33 @@ const APIHOST = process.env.NODE_ENV == "production" ? process.env.APIHOST : "lo
 const APIPORT = process.env.NODE_ENV == "production" ? process.env.APIPORT : "8080"
 
 const projectUrl = 'http://' + APIHOST + ':' + APIPORT + '/project/type';
-const submissionUrl = 'http://' + APIHOST + ':' + APIPORT + '/project';
+
 const moment = require('moment');
 
 import Submission from './components/Submission.js';
 import FilePicker from './components/FilePicker';
 
+import ApiService from '../../service/api/ApiService';
+
 const ProjectView = (props) => {
     const [projectTypes, setProjectTypes] = useState([]);
     const [submissions, setSubmissions] = useState([]);
-    const connInfo = JSON.parse(sessionStorage.connInfo);
+    const sessionStudent = JSON.parse(sessionStorage.getItem('APC_sessionStudent'));
 
-    useState( () => {
-        let connInfo = JSON.parse(sessionStorage.connInfo);
-        axios.all([
-            axios.get(projectUrl),
-            axios.get(submissionUrl + '/' + connInfo.student.ID)
-        ]).then(axios.spread((res1, res2) => {
-            setProjectTypes(res1.data);
-            setSubmissions(res2.data);
-        }));
+    useState( async () => {
+        const [err, res] = await ApiService.listProjects(sessionStudent.ID);
+        const [errType, resType] = await ApiService.listProjectTypes();
+        if(err !== null) {
+            console.log(err);
+        } else {
+            setSubmissions(res.data);
+        }
+        if(errType !== null) {
+            console.log(errType);
+        } else {
+            setProjectTypes(resType.data)
+        }
+
     }, []);
 
     const projects = projectTypes.map( (value, index) => {
@@ -50,10 +57,10 @@ const ProjectView = (props) => {
         });
 
         const infoParaEnvio = {
-            "StudentID": connInfo.student.ID,
+            "StudentID": sessionStudent.ID,
             "ProjectTypeID": value.ID,
-            "ClassID": connInfo.student.ClassID,
-            "studentName": connInfo.student.firstname + " " + connInfo.student.lastname
+            "ClassID": sessionStudent.ClassID,
+            "studentName": sessionStudent.firstname + " " + sessionStudent.lastname
         }
 
         return (
@@ -90,13 +97,4 @@ const ProjectView = (props) => {
 
 // Header bar
 ReactDOM.render(<Header/>, document.getElementById('header-bar'));
-// Verifies if page can be leaded
-if(!sessionStorage.connInfo){
-    console.log("Error: you are not logged in.");
-    let nogo = document.createElement('div');
-    nogo.classList.add("alert", "alert-danger");
-    nogo.innerHTML = '<p><strong>Atenção!</strong>&nbsp;Você deve fazer o <a href="alunos.html" class="alert-link">login</a> para prosseguir.</p>';
-    document.getElementById('page-root').appendChild(nogo);
-} else {
-    ReactDOM.render(<ProjectView/>, document.getElementById('page-root'));
-}
+Auth(<ProjectView />);

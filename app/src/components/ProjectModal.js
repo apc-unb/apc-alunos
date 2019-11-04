@@ -59,6 +59,7 @@ export default function ProjectReceivedDialog() {
   const handleClickOpen = () => {
     setOpen(true);
   };
+  
   const handleClose = () => {
     setOpen(false);
   };
@@ -73,12 +74,13 @@ export default function ProjectReceivedDialog() {
           <p>Seu trabalho foi enviado foi recebido e será enviado para o monitor que irá corrigi-lo em breve.</p>
           <p>Fique atento ao processo de correção:</p>
             <ul>
-                <li>Recebimento do trabalho</li>
-                <li>Trabalho enviado para o monitor</li>
-                <li>Trabalho aguardando correção pelo monitor</li>
-                <li>Trabalho corrigido</li>
+                <li>Created</li>
+                <li>Pending</li>
+                <li>Received</li>
+                <li>Confirmed</li>
             </ul>
-          <p variant="body1">Caso seu trabalho não mude para o status "Enviado para o monitor" em 24h fale com seu professor!</p>
+          <p variant="body1">Caso seu trabalho não mude para o status "Pending" em 24h fale com seu professor!</p>
+          <p>Se o status estiver como "Failed" significa que algo deu errado e você deve reenviar o trabalho.</p>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}  variant="contained" color="primary" className={styles.button}>

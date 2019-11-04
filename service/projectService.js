@@ -1,18 +1,25 @@
-const logFormat = require('loglevel-format');
-
-
-const mailTransporter = require('./mailTransporter.js');
-const fs = require('fs');
-const axios = require('axios');
-const APIHOST = process.env.NODE_ENV == "production" ? process.env.APIHOST : "localhost"
-const APIPORT = process.env.NODE_ENV == "production" ? process.env.APIPORT : "8080"
-
-const sendProjectUrl = 'http://' + APIHOST + ':' + APIPORT + '/project'
-
+const api = require('./api/Ambiente');
 const log = require('loglevel');
+const logFormat = require('loglevel-format');
+const mailTransporter = require('../utils/mailTransporter.js');
+const fileRemover = require('../utils/fileRemover.js');
+
+
+async function updateProjectStatus(projectID, status) {
+  const res = await api.put('/project/status', {
+      "_id": projectID,
+      "status": status
+  });
+  return res.data;
+}
+
+async function submitProject(projectInfo) {
+  const res = await api.post('/project', projectInfo);
+  return res.data;
+}
 
 var logDefaults = {
-  template: '[%t] <%l>: %m',
+  template: '[%t] (%l): %m',
   messageFormatter: function(data){
     return data;  
   },
@@ -31,15 +38,9 @@ class projectService {
   
   constructor() {  }
 
-  processProjectSubmission(err, fields, files) {
-
-      if(err !== null){
-        log.error("Não foi possível enviar o trabalho:", err.message);
-        return [false, err.message];
-      }
+  async processProjectSubmission(fields, files) {
   
       const studentName = fields.studentName;
-  
       // Send Project to API
       // To register submission and get TA email
       const projectInfo = {
@@ -47,19 +48,21 @@ class projectService {
         "ProjectTypeID": fields.ProjectTypeID,
         "ClassID": fields.ClassID,
         "filename": files.file.name,
-        "status": "Entrega ao monitor não confirmada"
       }
-
-      axios.post(sendProjectUrl, projectInfo).then( res => {
-
+      
+      const res = await submitProject(projectInfo);
+        
+      if(res.status === 200){
         const messageToSend = mailTransporter.emailDefaultMessage({
           "taEmail": res.data.content.monitorEmail,
           "taName": res.data.content.monitorName,
+          "projectID": res.data.content.projectID,
           "studentName": studentName,
           "file": files.file
         });
-      
+        
         var file = files.file;
+        const projectID = res.data.content.projectID;
         
         mailTransporter.smtpTransport.sendMail(messageToSend, (error, response) => {
             // Log
@@ -67,54 +70,25 @@ class projectService {
             // Remove file from server
             if(error === null){
               // Remove o arquivo e fecha o transportador
-              removeFileFromServer(file.path);
+              fileRemover.removeFileFromServer(file.path);
               smtpTransport.close();
-              // TODO: Avisa a api que o email foi entregue
+              // Faz o update na API
+              ApiServices.updateProjectStatus(projectID, "Pending");
             } else {
-              // TODO: Avisa a API que nao conseguiu entregar o email
+              // Avisa a API que nao conseguiu entregar o email
+              ApiServices.updateProjectStatus(projectID, "Failed");
             }
         });
-      }).catch(err => {
+      } else {
           // Log
           log.error(err.message);
-      });
+          // TODO: Pensar um jeito de avisar o aluno que não foi possível enviar o trabalho
+      }
 
       return [true, `Received Upload: ${files.file.name}`]
   }
 }
 
-const removeFileFromServer = (path) => {
-  fs.access(path, err => {
-    if(!err){
-      try{
-        fs.unlinkSync(path);
-      } catch(err) {
-        log.error("Não foi possível remover o trabalho "+ path +" do servidor: " + err.message);
-      }
-      log.info("Trabalho " + path + " removido do servidor.");
-    } else {
-      log.error("Não foi possível acessar o trabalho " + path + " no servidor:" + err.message);
-    }
-  })
-};
-
-const DEFAULT_DIR = 'tmp';
-const removeAllFilesFromDir = () => {
-  fs.readdir(DEFAULT_DIR, (err, files) => {
-    if (err) {
-      log.error(err.message);
-    };
-  
-    for (const file of files) {
-      fs.unlinkSync(path.join(DEFAULT_DIR, file), err => {
-        if (err) 
-        log.error(err.message);
-      });
-    }
-  });
-}
-
 module.exports = {
-  projectService,
-  removeAllFilesFromDir
+  projectService
 };

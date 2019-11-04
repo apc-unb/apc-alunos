@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import Header from './components/Header.js';
+import Auth from '../../service/api/Auth';
 
-const APIHOST = process.env.NODE_ENV == "production" ? process.env.APIHOST : "localhost"
-const APIPORT = process.env.NODE_ENV == "production" ? process.env.APIPORT : "8080"
+import ApiService from '../../service/api/ApiService';
 
 function Task(props) {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -53,13 +53,13 @@ class Exam extends React.Component {
         }
     }
 
-    componentDidMount() {
-        const url = 'http://' + APIHOST + ':' + APIPORT + '/task/' + this.state.id;
-        axios.get(url).then( (response) => {
-            this.setState({"tasks": response.data, "loaded": true});
-        }).catch( (error) => {
+    async componentDidMount() {
+        const [err, res] = ApiService.listExamTasks(this.state.id);
+        if(err !== null){
             console.log(error);
-        });
+        } else {
+            this.setState({"tasks": res.data, "loaded": true});
+        }
     }
 
     render() {
@@ -89,16 +89,14 @@ class ExamMenu extends React.Component {
             "ready": false
         }
     }
-    componentDidMount() {
-        let connInfo = JSON.parse(sessionStorage.connInfo);
-        const url = 'http://' + APIHOST + ':' + APIPORT + '/exam/' + connInfo.class.ID;
-        axios.get(url)
-        .then( (response) => {
-            this.setState({"data" : response.data, "ready": true});
-        })
-        .catch( (error) => {
-            console.log(error);
-        })
+    async componentDidMount() {
+        const sessionClass = JSON.parse(sessionStorage.getItem('APC_sessionClass'));
+        const [err, res] = await ApiService.listExams(sessionClass.ID);
+        if(err !== null){
+            console.log(err);
+        } else {
+            this.setState({"data" : res.data, "ready": true});
+        }
     }
 
     render() {
@@ -128,14 +126,4 @@ class ExamMenu extends React.Component {
 
 // Header bar
 ReactDOM.render(<Header/>, document.getElementById('header-bar'));
-// Verifies if page can be leaded
-if(!sessionStorage.connInfo){
-    console.log("Error: you are not logged in.");
-    let nogo = document.createElement('div');
-    nogo.classList.add("alert", "alert-danger");
-    nogo.innerHTML = '<p><strong>Atenção!</strong>&nbsp;Você deve fazer o <a href="alunos.html" class="alert-link">login</a> para ver as provas da sua turma.</p>';
-    document.getElementById('page-root').appendChild(nogo);
-} else {
-    // TODO: Pegar info da turma do aluno e carregar componentes
-    ReactDOM.render(<ExamMenu/>, document.getElementById('page-root'));
-}
+Auth(<ExamMenu />)

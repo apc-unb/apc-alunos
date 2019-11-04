@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 
 import UpdateForm from './UpdateForm.jsx';
 
-const axios = require('axios');
-const APIHOST = process.env.NODE_ENV == "production" ? process.env.APIHOST : "184.172.214.210"
-const APIPORT = process.env.NODE_ENV == "production" ? process.env.APIPORT : "32637"
+import ApiService from '../../../service/api/ApiService';
 
 // Profile class renders the Profile card.
 // Receives information from the API through props.
@@ -36,87 +34,52 @@ class Profile extends React.Component {
         modal.classList.add('fade');
     }
 
-    updateEmail(email_id, pwd_id, root) {
+    async updateEmail(email_id, pwd_id, root) {
         this.dismissModal(document.getElementById(root));
 
         let new_email = document.getElementById(email_id).value;
         let pwd = document.getElementById(pwd_id).value;
-        var profile = this;
-        const url = 'http://' + APIHOST + ':' + APIPORT + '/students';
-        axios.put( url, {
-            'id': this.props.ID,
-            'email': new_email,
-            'password': pwd
-        }).then( function (response) {
-            profile.setState({email: response.data.email});
-            // TODO: Transformar isso em React.
-            // Não descobri como faz para adicionar o elemento no body sem remover todo o resto
-            let info_box = document.createElement('div');
-            info_box.innerText = "Email atualizado com sucesso!";
-            info_box.classList.add("info-box-success","info-box");
-            info_box.id = 'email-update-success';
-            document.getElementsByTagName('body')[0].appendChild(info_box);
-            setTimeout( () => { 
-                let box = document.getElementById('email-update-success');
-                box.parentNode.removeChild(box);
-            }, 2000);
-        }).catch ( function (error) {
-            console.log(error);
-            // TODO: Transformar isso em React.
-            // Não descobri como faz para adicionar o elemento no body sem remover todo o resto
-            let info_box = document.createElement('div');
-            info_box.innerText = "Ocorreu um erro. Tente novamente.";
-            info_box.classList.add("info-box-fail","info-box");
-            info_box.id = 'email-update-fail';
-            document.getElementsByTagName('body')[0].appendChild(info_box);
-            setTimeout( () => { 
-                let box = document.getElementById('email-update-fail');
-                box.parentNode.removeChild(box);
-            }, 2000);
-        });
+        // Makes request
+        const [err, res] = ApiService.updateEmail(this.props.ID, new_email, pwd);
+        if(err !== null) {
+            // TODO: Add snackbar with error
+            console.log(err);
+        } else {
+            if(res.status === 201){
+                profile.setState({email: res.data.email});
+                console.log("Update success");
+                // TODO: Add snackbar with success
+            } else {
+                // TODO: Add snackbar with error
+                console.log("Something went wrong. Response status:", res.status);
+            }
 
+        }
     }
 
-    updatePassword(newpwd_id, pwd_id, root) {
+    async updatePassword(newpwd_id, pwd_id, root) {
         this.dismissModal(document.getElementById(root));
         
         let new_pwd = document.getElementById(newpwd_id).value;
         let pwd = document.getElementById(pwd_id).value;
-        const url = 'http://' + APIHOST + ':' + APIPORT + '/students';
-        axios.put(url, {
-            'id': this.props.ID,
-            'newpassword': new_pwd,
-            'password': pwd
-        }).then( function (response) {
-            // TODO: Transformar isso em React.
-            // Não descobri como faz para adicionar o elemento no body sem remover todo o resto
-            let info_box = document.createElement('div');
-            info_box.innerText = "Senha atualizada com sucesso!";
-            info_box.classList.add("info-box-success","info-box");
-            info_box.id = 'email-update-success';
-            document.getElementsByTagName('body')[0].appendChild(info_box);
-            setTimeout( () => { 
-                let box = document.getElementById('email-update-success');
-                box.parentNode.removeChild(box);
-            }, 2000);
-        }).catch ( function (error) {
-            console.log(error);
-            // TODO: Transformar isso em React.
-            // Não descobri como faz para adicionar o elemento no body sem remover todo o resto
-            let info_box = document.createElement('div');
-            info_box.innerText = "Ocorreu um erro. Tente novamente.";
-            info_box.classList.add("info-box-fail","info-box");
-            info_box.id = 'email-update-fail';
-            document.getElementsByTagName('body')[0].appendChild(info_box);
-            setTimeout( () => { 
-                let box = document.getElementById('email-update-fail');
-                box.parentNode.removeChild(box);
-            }, 2000);
-        });
+        // Makes request
+        const [err, res] = await ApiService.updatePassword(this.props.ID, pwd, new_pwd);
+        if(err !== null) {
+            // TODO: Add snackbar with error
+            console.log(err);
+        } else {
+            if(res.status === 201){
+                console.log("Update success");
+                // TODO: Add snackbar with success
+            } else {
+                // TODO: Add snackbar with error
+                console.log("Something went wrong. Response status:", res.status);
+            }
 
+        }
     }
 
-    updateHandle(handle_el) {
+    async updateHandle(handle_el) {
         let handle = document.getElementById(handle_el).value;
         var profile = this;
         let data;
@@ -139,17 +102,17 @@ class Profile extends React.Component {
             }     
             this.setState({handle_uri: handle});
         }
-        const url = 'http://' + APIHOST + ':' + APIPORT + '/students';
-        axios.put(url, data ).then( (response) => {
-                console.log("Request ok");
-            }).catch( (error) => {
-                console.log("Erro:", error);
-                if(handle_el == "handle-cf"){
-                    profile.setState({handle_cf : ''});
-                } else {
-                    profile.setState({handle_uri: ''});
-                }
-            });
+        const[err, res] = await ApiService.updateHandle(data.id, data.password, data.handles);
+        if(err !== null){
+            console.log(err);
+            if(handle_el == "handle-cf"){
+                profile.setState({handle_cf : ''});
+            } else {
+                profile.setState({handle_uri: ''});
+            }
+        } else {
+            console.log("Request successful");
+        }
     }
 
     render() {

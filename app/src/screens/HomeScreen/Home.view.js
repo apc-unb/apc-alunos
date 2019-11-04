@@ -3,10 +3,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import Grades from './components/Grades.jsx';
-import Activities from './components/Activities.jsx';
-import News from './components/News.jsx';
-import Profile from './components/Profile.jsx'
+import Grades from './components/Grades.js';
+import Activities from './components/Activities.js';
+import News from './components/News.js';
+import Profile from '../../components/Profile.jsx'
 
 function ClassInfo(props) {
     return (
@@ -34,13 +34,18 @@ function ClassInfo(props) {
 }
 
 // Probably needs more state intelligence than its parts
-const MainScreen = ({ data }) => {
-    console.log('Creating home page with info:', JSON.stringify(data.data));
+const MainScreen = (data) => {
+    console.log('Creating home page with info:', JSON.stringify(data));
+    const sessionClass = JSON.parse(sessionStorage.getItem('APC_sessionClass'));
+    const sessionNews = JSON.parse(sessionStorage.getItem('APC_sessionNews'));
+    const sessionProgress = JSON.parse(sessionStorage.getItem('APC_sessionProgress'));
+    const sessionStudent = JSON.parse(sessionStorage.getItem('APC_sessionStudent'));
+
     return (
         <div class="row">
             <div class="col-sm-8 container-fluid">
                 <div class="media" id="news-root">
-                    <News {...data.news}/>
+                    <News {...sessionNews}/>
                 </div>
 
                 <div class="media" id="activities-root">
@@ -49,13 +54,13 @@ const MainScreen = ({ data }) => {
             </div>
             <div class="col-sm-4 container-fluid">
                 <div class="media" id="student-root">
-                    <Profile {...data.student} classInfo={data.class} _pwd={sessionStorage.__pwd}/>
+                    <Profile {...sessionStudent} classInfo={sessionClass}/>
                 </div>
                 <div class="media" id="class-root">
-                    <ClassInfo {...data.class}/>
+                    <ClassInfo {...sessionClass}/>
                 </div>
                 <div class="media" id="grades-root">
-                    <Grades {...data.student.grades}/>
+                    <Grades {...sessionStudent.grades}/>
                 </div>
             </div>
         </div> 

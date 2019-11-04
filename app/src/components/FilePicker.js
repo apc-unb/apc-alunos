@@ -76,7 +76,6 @@ export default function FilePicker(props) {
 
     return (
         <form method="post" action="#" id="#">
-            <ProjectReceivedModal/>
             <div>
                 <ToastContainer />
             </div>
