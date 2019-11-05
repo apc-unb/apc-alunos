@@ -4,9 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // Remover mode: 'development' para fazer o build de procução 
 module.exports = {
   entry: {
-    students_main: './app/src/index.js',
-    tests_main: './app/src/provas_react.jsx',
-    trabalho_main: './app/src/trabalho.jsx'
+    main: './app/src/index.js',
   },
   output: {
     filename: '[name].bundle.js',
@@ -19,10 +17,14 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        loader: 'style-loader'
+      },
+      {
+        test: /\.css$/,
+        loader: 'css-loader',
+        query: {
+          modules: true,
+        }
       },
       {
         test: /\.(png|svg|jpg|gif)$/,

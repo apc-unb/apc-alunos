@@ -96,5 +96,4 @@ const ProjectView = (props) => {
 }
 
 // Header bar
-ReactDOM.render(<Header/>, document.getElementById('header-bar'));
-Auth(<ProjectView />);
+export default ProjectView;
