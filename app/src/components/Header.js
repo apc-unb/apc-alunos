@@ -14,7 +14,7 @@ const Header = ({ changeScreen }) => {
     }
 
     return (
-    <nav class="navbar navbar-default navbar-blue" id="header-bar">
+    <nav className="navbar navbar-default navbar-blue" id="header-bar">
         <div className="container-fluid">
             <div className="navbar-header">
                 <a className="navbar-brand" href="/index.html" style={{"padding": "5px", "marginRight": "10px"}}>
