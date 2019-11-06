@@ -11,7 +11,7 @@ const fileRemover = require('./utils/fileRemover.js');
 
 log.setDefaultLevel(log.levels.DEBUG);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 // Log requests for debug
 app.use( (req, res, next) => {

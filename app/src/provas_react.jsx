@@ -124,6 +124,4 @@ class ExamMenu extends React.Component {
     }
 }
 
-// Header bar
-ReactDOM.render(<Header/>, document.getElementById('header-bar'));
-Auth(<ExamMenu />)
+export default ExamMenu;

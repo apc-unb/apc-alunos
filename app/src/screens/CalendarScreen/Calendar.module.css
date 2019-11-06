@@ -1,0 +1,10 @@
+.frame {
+    align-self: center;
+    flex: 1;
+}
+
+.flexContainer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}

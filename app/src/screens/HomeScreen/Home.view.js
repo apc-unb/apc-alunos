@@ -34,32 +34,31 @@ function ClassInfo(props) {
 }
 
 // Probably needs more state intelligence than its parts
-const MainScreen = (data) => {
-    console.log('Creating home page with info:', JSON.stringify(data));
+const MainScreen = () => {
     const sessionClass = JSON.parse(sessionStorage.getItem('APC_sessionClass'));
     const sessionNews = JSON.parse(sessionStorage.getItem('APC_sessionNews'));
     const sessionProgress = JSON.parse(sessionStorage.getItem('APC_sessionProgress'));
     const sessionStudent = JSON.parse(sessionStorage.getItem('APC_sessionStudent'));
 
     return (
-        <div class="row">
-            <div class="col-sm-8 container-fluid">
-                <div class="media" id="news-root">
+        <div className="row">
+            <div className="col-sm-8 container-fluid">
+                <div className="media" id="news-root">
                     <News {...sessionNews}/>
                 </div>
 
-                <div class="media" id="activities-root">
+                <div className="media" id="activities-root">
                     <Activities />
                 </div>
             </div>
-            <div class="col-sm-4 container-fluid">
-                <div class="media" id="student-root">
+            <div className="col-sm-4 container-fluid">
+                <div className="media" id="student-root">
                     <Profile {...sessionStudent} classInfo={sessionClass}/>
                 </div>
-                <div class="media" id="class-root">
+                <div className="media" id="class-root">
                     <ClassInfo {...sessionClass}/>
                 </div>
-                <div class="media" id="grades-root">
+                <div className="media" id="grades-root">
                     <Grades {...sessionStudent.grades}/>
                 </div>
             </div>
