@@ -103,8 +103,6 @@ const ApiServices = {
         }
         return [err, res];
     }
-    // Project Back-end (this server)
-
 
 };
 

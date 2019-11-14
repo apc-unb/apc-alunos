@@ -7,7 +7,7 @@ import AuthComponent from '../../app/src/components/Auth.jsx';
 
 import HomeScreen from './screens/HomeScreen/Home.view.js';
 import ExamScreen from './provas_react.jsx';
-import ProjectScreen from './trabalho.jsx';
+import ProjectScreen from './screens/ProjectScreen/Project.view.js';
 import CalendarScreen from './screens/CalendarScreen/Calendar.view.js';
 import Header from './components/Header.js';
 

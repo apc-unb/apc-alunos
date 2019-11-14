@@ -4,10 +4,10 @@ const path = require('path');
 const moment = require('moment');
 const log = require('loglevel');
 
-const { projectService } = require('./service/projectService');
-const projectProcessor = new projectService();
+const projectService = require('./service/projectService');
 const form = require('./utils/formParser');
 const fileRemover = require('./utils/fileRemover.js');
+var Prometheus = require('./utils/prometheus');  
 
 log.setDefaultLevel(log.levels.DEBUG);
 
@@ -19,16 +19,25 @@ app.use( (req, res, next) => {
   next();
 });
 
+// Metrics
+app.use(Prometheus.requestCounters);  
+// Metrics endpoint
+Prometheus.injectMetricsRoute(app);
+
 // @POST
 // Envio de trabalho
-app.post('/envioDeTrabalho', async (req, res) => {
-  form.parse(req, (err, fields, files) => {
+app.post('/envioDeTrabalho', (req, res) => {
+  const theForm = form.newForm();
+  theForm.parse(req, (err, fields, files) => {
     if(err) {
       log.error("Não foi possível enviar o trabalho:", err.message);
       res.sendStatus(500).end(err.message);
+      return;
     } else {
-      projectProcessor.processProjectSubmission(fields, files);
+      log.debug("Processing upload...", files.file.name);
+      projectService.processProjectSubmission(fields, files);
       res.end("Upload completed.");
+      return;
     }
   });
 });

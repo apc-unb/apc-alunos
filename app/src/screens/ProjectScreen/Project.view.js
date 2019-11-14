@@ -1,22 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
 
-import Header from './components/Header.js';
-import Auth from '../../service/api/Auth';
 import 'react-toastify/dist/ReactToastify.css';
-
-import axios from 'axios';
-const APIHOST = process.env.NODE_ENV == "production" ? process.env.APIHOST : "localhost"
-const APIPORT = process.env.NODE_ENV == "production" ? process.env.APIPORT : "8080"
-
-const projectUrl = 'http://' + APIHOST + ':' + APIPORT + '/project/type';
-
 const moment = require('moment');
 
 import Submission from './components/Submission.js';
 import FilePicker from './components/FilePicker';
-
-import ApiService from '../../service/api/ApiService';
+import ApiService from '../../../../service/api/ApiService';
 
 const ProjectView = (props) => {
     const [projectTypes, setProjectTypes] = useState([]);
@@ -60,7 +49,10 @@ const ProjectView = (props) => {
             "StudentID": sessionStudent.ID,
             "ProjectTypeID": value.ID,
             "ClassID": sessionStudent.ClassID,
-            "studentName": sessionStudent.firstname + " " + sessionStudent.lastname
+            "studentName": sessionStudent.firstname + " " + sessionStudent.lastname,
+            "monitorName": relatedSubmissions.length > 0 ? relatedSubmissions[0].monitorname : null,
+            "monitorEmail": relatedSubmissions.length > 0 ? relatedSubmissions[0].monitoremail : null,
+            "projectID": relatedSubmissions.length > 0 ? relatedSubmissions[0].ID : null
         }
 
         return (
@@ -81,11 +73,11 @@ const ProjectView = (props) => {
                 </ul>
                 {
                     moment().isBetween(value.start, value.end) ?
-                    <FilePicker {...infoParaEnvio}/> :
+                    <FilePicker {...infoParaEnvio} askResend={submissionObjs.length > 0}/> :
                     null
                 }
             </li>
-        )
+        );
     });
 
     return (

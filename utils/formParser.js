@@ -20,21 +20,26 @@ log.setDefaultLevel(log.levels.INFO);
 logFormat.apply(log, logDefaults);
 
 
-form = new formidable.IncomingForm();
-form.uploadDir = "./tmp/";
-form.keepExtensions = true;
-form.on('fileBegin', function (name, file){
-    file.path = form.uploadDir + file.name;
-});
-form.on('error', (err) => {
-    log.error("Error Uploading file:", err.message);
-    request.resume();
-});
-form.on('aborted', (err) =>  {
-    log.warn("User abroted upload");
-});
-form.on('end', () => {
-    log.info('Upload completed');
-});
+const newForm = () => {
 
-module.exports = form;
+    form = new formidable.IncomingForm();
+    form.uploadDir = "./tmp/";
+    form.keepExtensions = true;
+    form.on('fileBegin', function (name, file){
+        file.path = form.uploadDir + file.name;
+    });
+    form.on('error', (err) => {
+        log.error("Error Uploading file:", err.message);
+        request.resume();
+    });
+    form.on('aborted', (err) =>  {
+        log.warn("User abroted upload");
+    });
+    form.on('end', () => {
+        log.info('Upload completed');
+    });
+
+    return form;
+}
+
+module.exports.newForm = newForm;

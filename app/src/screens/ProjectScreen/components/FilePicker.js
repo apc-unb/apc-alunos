@@ -1,15 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import ReactDOM from 'react-dom';
 
 import {Progress} from 'reactstrap';
-import { ToastContainer, toast } from 'react-toastify';
 import ProjectReceivedModal from './ProjectModal';
 
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+const jwt = cookies.get('jwt');
 import axios from 'axios';
 
 export default function FilePicker(props) {
     const [selectedFile, setSelectedFile] = useState(null);
     const [loaded, setLoaded] = useState(0);
+    const input = useRef(null);
 
     const onChangeHandler = (event) => {
         if(checkMimeType(event.target.files[0]) && checkFileSize(event.target.files[0])){
@@ -31,7 +34,7 @@ export default function FilePicker(props) {
         };
         
         if (err !== '') {
-            toast.error(err);
+            alert(err);
             return false; 
         }
         return true;
@@ -44,17 +47,18 @@ export default function FilePicker(props) {
             err = file.name + 'is too large, please pick a smaller file';
         }
         if (err !== '') {
-            toast.error(err);
+            alert(err);
             return false;
         }
         return true;
     }
 
     const onClickHandler = (event) => {
+        event.preventDefault();
         // Cria o formulario com todas as infos do aluno
         // E o trabalho
         if(selectedFile === null){
-            toast.error("Selecione um arquivo para enviar.");
+            alert("Selecione um arquivo para enviar.");
             return;
         }
         const data = new FormData();
@@ -63,28 +67,34 @@ export default function FilePicker(props) {
         data.append('file', selectedFile);
         data.append('ProjectTypeID', props.ProjectTypeID);
         data.append('ClassID', props.ClassID);
+        data.append('monitorName', props.monitorName);
+        data.append('monitorEmail', props.monitorEmail);
+        data.append('resend', props.askResend)
+        data.append('auth', jwt);
+        data.append('projectID', props.projectID);
+
+        if(!props.askResend || confirm("Quer mesmo fazer um novo envio do trabalho?\n\nO anterior não será mais considerado"))
         // Envia o formulario
         axios.post('/envioDeTrabalho', data, {
             onUploadProgress: ProgressEvent => setLoaded((ProgressEvent.loaded / ProgressEvent.total)*100),
         }).then( res => {
-            ReactDOM.render(<ProjectReceivedModal/>, document.getElementById("submissionModalRoot"));
+            alert("Trabalho enviado com sucesso");
+            setSelectedFile(null);
+            input.current.value = null;
         }).catch( err => {
-            toast.error('Ocorreu um erro: ' + err.message);
+            alert('Ocorreu um erro: ' + err.message);
             setLoaded(0);
         });
     }
 
     return (
         <form method="post" action="#" id="#">
-            <div>
-                <ToastContainer />
-            </div>
             <div className="form-group files">
             <label>Envie seu trabalho</label>
             <input
+                ref={input}
                 type="file"
                 className="form-control"
-                multiple=""
                 onChange={(event) => onChangeHandler(event)}
             />
 

@@ -3,40 +3,47 @@ var Counter = require('prom-client').Counter;
 var Histogram = require('prom-client').Histogram;  
 var Summary = require('prom-client').Summary;  
 var ResponseTime = require('response-time');  
-var Logger = require('./logger');
+const log = require('loglevel');
+const logFormat = require('loglevel-format');
 
+const logDefaults = {
+    template: '[%t] (%l): %m',
+    messageFormatter: function(data){
+        return data;  
+    },
+    timestampFormatter: function (date) {
+        return date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
+    },
+    levelFormatter: function (level) {
+        return level.toUpperCase();
+    },
+    appendExtraArguments: false
+};
+
+log.setDefaultLevel(log.levels.INFO);
+logFormat.apply(log, logDefaults);
 
 /**
  * A Prometheus counter that counts the invocations with different paths
  * e.g. /foo and /bar will be counted as 2 different paths
  */
-module.exports.pathsTaken = pathsTaken = new Counter({  
-    name: 'pathsTaken',
-    help: 'Paths taken in the app',
-    labelNames: ['path']
+module.exports.pathsTaken = platformAccess = new Counter({  
+    name: 'platformAccess',
+    help: 'Access in the students platform',
+    labelNames: ['origin']
 });
 
 module.exports.classesAccessed = classesAccessed = new Counter({
     name: 'classesAccessed',
     help: 'Classes accessed in the app (from static classes)',
-    labelNames: ['aulas']
-});
-/**
- * A Prometheus summary to record the HTTP method, path, response code and response time
- */
-module.exports.responses = responses = new Summary({  
-    name: 'responses',
-    help: 'Response time in millis',
-    labelNames: ['method', 'path', 'status']
+    labelNames: ['aula']
 });
 
-/**
- * This funtion will start the collection of metrics and should be called from within in the main js file
- */
-module.exports.startCollection = function () {  
-    Logger.log(Logger.LOG_INFO, `Starting the collection of metrics, the metrics are available on /metrics`);
-    require('prom-client').collectDefaultMetrics();
-};
+module.exports.faqsAccessed = faqsAccessed = new Counter({
+    name: 'faqsAccessed',
+    help: 'FAQs accessed in the app (from static FAQs)',
+    labelNames: ['FAQ']
+});
 
 /**
  * This function increments the counters that are executed on the request side of an invocation
@@ -44,23 +51,16 @@ module.exports.startCollection = function () {
  */
 module.exports.requestCounters = function (req, res, next) {
     if (req.path != '/metrics') {
-        pathsTaken.inc({ path: req.path });
-        if(req.path.startsWith("/aulas/aulas") && req.path.endsWith(".html")){
-            classesAccessed.inc({ aulas: req.path });
+        if(req.path === '/alunos/'){
+            platformAccess.inc({ origin: req.ip });
+        } else if(req.path.startsWith("/aulas/aulas") && req.path.endsWith(".html")){
+            classesAccessed.inc({ aula: req.path.substr(req.path.lastIndexOf('/') + 1) });
+        } else if(req.path.startsWith("/FAQs/FAQs") && req.path.endsWith(".html")){
+            faqsAccessed.inc({ FAQ: req.path.substr(req.path.lastIndexOf('/') + 1) });
         }
     }
     next();
 }
-
-/**
- * This function increments the counters that are executed on the response side of an invocation
- * Currently it updates the responses summary
- */
-module.exports.responseCounters = ResponseTime(function (req, res, time) {  
-    if(req.url != '/metrics') {
-        responses.labels(req.method, req.url, res.statusCode).observe(time);
-    }
-})
 
 /**
  * In order to have Prometheus get the data from this app a specific URL is registered
