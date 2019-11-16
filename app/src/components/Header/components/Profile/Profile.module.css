@@ -1,0 +1,40 @@
+.Profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin: 24px;
+}
+
+.handleDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.matricula {
+    font-size: 14px;
+}
+
+.nome {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.pictureOpen {
+    width: 128px;
+    height: 128px;
+    border-radius: 50;
+    margin: 8px;
+    transition: 0.5s;
+}
+
+.pictureClose {
+    width: 64px;
+    height: 64px;
+    border-radius: 50;
+    margin: 8px;
+    transition: 0.5s;
+}

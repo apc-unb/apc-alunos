@@ -29,7 +29,7 @@ const emailDefaultBody = (taName, studentName, projectID) => {
                 <p>Lembre-se de confirmar o recebimento do trabalho clicando no botão abaixo.</p>
 
                 <form action="http://localhost:8080/project/status" method="PUT">
-                    <input type="hidden" name="_id" value=${projectID}>
+                    <input type="hidden" name="id" value=${projectID}>
                     <input type="hidden" name="status" value="Received">
                     <input type="submit" value="Confirmar Recebimento">
                 </form>

@@ -175,7 +175,6 @@ class Profile extends React.Component {
                         {   this.state.photourl != '' ?
                             <img src={this.state.photourl} alt="Avatar" className="media-object"/> :
                             <span className="glyphicon glyphicon-user media-object"></span>
-
                         } 
                     </div>
                     <div className="media-body">

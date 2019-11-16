@@ -8,47 +8,51 @@ import AuthComponent from '../../app/src/components/Auth.jsx';
 import HomeScreen from './screens/HomeScreen/Home.view.js';
 import ExamScreen from './provas_react.jsx';
 import ProjectScreen from './screens/ProjectScreen/Project.view.js';
-import CalendarScreen from './screens/CalendarScreen/Calendar.view.js';
-import Header from './components/Header.js';
 
+import Header from './components/Header/Header.js';
+import style from './index.css';
+
+const cookies = new Cookies();
+const jwt = cookies.get('jwt');
 
 const App = ({ startingPoint }) => {
-    const [currScreen, setCurrScreen] = useState(startingPoint);
+    const [currScreen, setCurrScreen] = useState(0);
+    const [authenticated, setAuthenticated] = useState((sessionStorage.APC_sessionStudent && jwt != null));
 
     const nextScreen = () => {
         switch (currScreen) {
             case 0:
-                return <AuthComponent />
-            case 1:
                 return <HomeScreen />
-            case 2:
-                return <CalendarScreen />
-            case 3:
+            case 1:
                 return <ExamScreen />
-            case 4:
+            case 2:
                 return <ProjectScreen />
             default:
                 return <AuthComponent />
         }
     }
 
-    return (
-        <div>
-            <Header changeScreen={setCurrScreen}/>
-            {nextScreen()}
-        </div>
-    );
+    if(authenticated){
+        return (
+            <div className={style.App}>
+                <Header
+                    changeScreen={setCurrScreen}
+                    currScreen={currScreen}
+                    handleLogout={() => setAuthenticated(false)}
+                />
+                {nextScreen()}
+            </div>
+        );
+    } else {
+        return (
+            <AuthComponent />
+        )
+    }
 
 }
 
-
-// Verifica se esta com uma sessão acontecendo
-const cookies = new Cookies();
-const jwt = cookies.get('jwt');
-// "Main"
-const startOrContinue = (sessionStorage.APC_sessionStudent && jwt != null) ? 1 : 0;
 ReactDOM.render(
-    < App startingPoint={startOrContinue} />,
+    < App />,
     document.getElementById('page-root')
 );
 

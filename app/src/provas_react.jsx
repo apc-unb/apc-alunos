@@ -1,10 +1,6 @@
 'use strict';
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-
-import Header from './components/Header.js';
-import Auth from '../../service/api/Auth';
 
 import ApiService from '../../service/api/ApiService';
 

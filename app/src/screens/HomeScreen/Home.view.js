@@ -41,7 +41,7 @@ const MainScreen = () => {
     const sessionStudent = JSON.parse(sessionStorage.getItem('APC_sessionStudent'));
 
     return (
-        <div className="row">
+        <div className="row" style={{margin: 20}}>
             <div className="col-sm-8 container-fluid">
                 <div className="media" id="news-root">
                     <News {...sessionNews}/>

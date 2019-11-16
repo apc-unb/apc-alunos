@@ -1,0 +1,9 @@
+.App {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: rebeccapurple;
+    align-items: stretch;
+    width: inherit;
+    height: inherit;
+}
