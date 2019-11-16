@@ -1,17 +1,15 @@
 // React
 import React, { useState, useEffect } from 'react';
 // Back-end
-import Ambiente from '../../../service/api/Ambiente';
+import Ambiente from '../../../../service/api/Ambiente';
 const baseUrl = 'http://' + Ambiente.APIHOST + ':' + Ambiente.APIPORT;
 import axios from 'axios';
 // Third party
 import Button from '@material-ui/core/Button';
+import styles from './Auth.module.css';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -24,11 +22,53 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import ErrorIcon from '@material-ui/icons/Error';
 import CloseIcon from '@material-ui/icons/Close';
+import WarnIcon from '@material-ui/icons/WarningOutlined';
+import Paper from '@material-ui/core/Paper';
 
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+    icon: {
+        fontSize: 32,
+        color: '#2d3264',
+        margin: '8px'
+    },
+
+    paper: {
+        textAlign: 'left',
+        margin: '12px',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#e9e9fc'
+    },
+
+    input: {
+        width: '256px',
+        fontSize: '16px',
+        color: '#2d3264'
+    },
+
+    inputLabel: {
+        fontSize: '16px',
+        color: '#2d3264'
+    },
+
+    helpText: {
+        fontSize: '12px',
+        color: '#2d3264'
+    },
+
+    button: {
+        fontSize: '14px',
+        backgroundColor: '#e9e9fc',
+        color: '#2d3264'
+    }
+});
 
 const AuthComponent = () => {
     const [matricula, setMatricula] = useState('');
@@ -38,7 +78,7 @@ const AuthComponent = () => {
     const [infoIn, setInfoIn] = useState(false);
     const [loading, setLoading] = useState(false);
     const open = true;
-
+    const classes = useStyles();
     const [error, setError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -73,6 +113,7 @@ const AuthComponent = () => {
                     setErrorMsg("Usuário ou senha inválidos.");
                     setError(true);
                     document.getElementById("pwd").value = '';
+                    setLoading(false);
                 }
             }).catch((err) => {
                 setErrorMsg(err.message);
@@ -82,8 +123,8 @@ const AuthComponent = () => {
             });
         } else {
             setLoginError(true);
+            setLoading(false);
         }
-        setLoading(false);
     }
 
     useEffect( () => {
@@ -118,46 +159,63 @@ const AuthComponent = () => {
         />
 
         <Dialog open={open} aria-labelledby="auth-modal">
-            <DialogTitle id="form-dialog-title">Seção restrita</DialogTitle>
-            <DialogContent>
-            <DialogContentText>
-                Esta página é somente para alunos.
-                Se não souber sua senha entre em contato com seu professor.
-            </DialogContentText>
-            <FormControl error={loginError}>
-                <InputLabel htmlFor="component-helper">Login</InputLabel>
-                <Input
-                id="component-helper"
-                required={true}
-                value={matricula}
-                onChange={(event) => setMatricula(event.target.value)}
-                aria-describedby="component-helper-text"
-                />
-                <FormHelperText id="component-helper-text">Matrícula sem barra</FormHelperText>
-            </FormControl>
-            <FormControl>
-                <InputLabel htmlFor="adornment-password">Senha</InputLabel>
-                <Input
-                id="adornment-password"
-                type={showPassword ? 'text' : 'password'}
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                endAdornment={
-                    <InputAdornment position="end">
-                    <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={() => setShowPassword(!showPassword)}
-                    >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                    </InputAdornment>
-                }
-                />
-            </FormControl>
-            </DialogContent>
+            <div className={styles.authHeader}>
+                <span id="form-dialog-title" className={styles.authTitle}>
+                    Login - Seção restrita
+                </span>
+            </div>
+            <div>
+            <Paper classes={{root: classes.paper}}>
+                <WarnIcon classes={{root: classes.icon}} />
+                <div>
+                    <span className={styles.infoText}>
+                        Esta página é somente para alunos.
+                    </span>
+                    <span className={styles.infoText}>
+                        Se não souber sua senha entre em contato com seu professor.
+                    </span>
+                </div>
+            </Paper>
+                <div className={styles.formDiv}>
+                    <FormControl error={loginError}>
+                        <InputLabel classes={{root: classes.inputLabel}} htmlFor="component-helper">Login</InputLabel>
+                        <Input
+                        id="component-helper"
+                        required={true}
+                        value={matricula}
+                        onChange={(event) => setMatricula(event.target.value)}
+                        aria-describedby="component-helper-text"
+                        multiline={false}
+                        classes={{root: classes.input}}
+                        />
+                        <FormHelperText id="component-helper-text" classes={{root: classes.helpText}}>Matrícula sem barra</FormHelperText>
+                    </FormControl>
+                    <FormControl error={loginError}>
+                        <InputLabel classes={{root: classes.inputLabel}} htmlFor="adornment-password">Senha</InputLabel>
+                        <Input
+                        id="adornment-password"
+                        classes={{root: classes.input}}
+                        multiline={false}
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                        endAdornment={
+                            <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
+                            </InputAdornment>
+                        }
+                        />
+                    </FormControl>
+                </div>
+            </div>
             <DialogActions>
-            <Button onClick={() => {setLoading(true); auth(matricula, password)}} color="primary" disabled={!infoIn}>
-                { loading ? <CircularProgress/> : "Entrar" }
+            <Button onClick={() => {setLoading(true); auth(matricula, password)}} disabled={!infoIn} classes={{root: classes.button}}>
+                { loading ? <CircularProgress size={14} color="#2d3264"/> : "Entrar" }
             </Button>
             </DialogActions>
         </Dialog>

@@ -3,15 +3,17 @@ import ReactDOM from 'react-dom';
 import Cookies from 'universal-cookie';
 
 
-import AuthComponent from '../../app/src/components/Auth.jsx';
+import AuthComponent from './components/AuthDialog/Auth.js';
 
 import HomeScreen from './screens/HomeScreen/Home.view.js';
 import ExamScreen from './provas_react.jsx';
 import ProjectScreen from './screens/ProjectScreen/Project.view.js';
+import ProfileScreen from './screens/CalendarScreen/Calendar.view.js';
 
 import Header from './components/Header/Header.js';
-import style from './index.css';
+import News from './components/News/News.js';
 
+import style from './index.css';
 const cookies = new Cookies();
 const jwt = cookies.get('jwt');
 
@@ -24,8 +26,10 @@ const App = ({ startingPoint }) => {
             case 0:
                 return <HomeScreen />
             case 1:
-                return <ExamScreen />
+                return <ProfileScreen />
             case 2:
+                return <ExamScreen />
+            case 3:
                 return <ProjectScreen />
             default:
                 return <AuthComponent />
@@ -41,6 +45,7 @@ const App = ({ startingPoint }) => {
                     handleLogout={() => setAuthenticated(false)}
                 />
                 {nextScreen()}
+                <News />
             </div>
         );
     } else {

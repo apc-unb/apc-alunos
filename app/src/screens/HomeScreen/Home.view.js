@@ -51,17 +51,6 @@ const MainScreen = () => {
                     <Activities />
                 </div>
             </div>
-            <div className="col-sm-4 container-fluid">
-                <div className="media" id="student-root">
-                    <Profile {...sessionStudent} classInfo={sessionClass}/>
-                </div>
-                <div className="media" id="class-root">
-                    <ClassInfo {...sessionClass}/>
-                </div>
-                <div className="media" id="grades-root">
-                    <Grades {...sessionStudent.grades}/>
-                </div>
-            </div>
         </div> 
     );
 }
