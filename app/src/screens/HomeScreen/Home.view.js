@@ -51,6 +51,7 @@ const MainScreen = () => {
         jan:[], fev:[], mar:[], abr:[], mai:[], jun:[], 
         jul:[], ago:[], set:[], out:[], nov:[], dez:[]
     });
+    const [eventDates, setEventDates] = useState({});
 
     useEffect(() => {
         ApiCalendar.onLoad(() => {
@@ -83,10 +84,17 @@ const MainScreen = () => {
         const eventStart = new Date(event.start.dateTime);
         const eventMonth = eventStart.getMonth();
         const monthStr = monthNumberToStr(eventMonth);
-    
+        // Update list of events by month
         let newObj = {...events};
         newObj[monthStr].push(event);
         setEvents(newObj);
+        // Update list of events
+        let type = "aviso";
+        if(event.summary.toLowerCase().startsWith("prova")) type = "prova";
+        else if(event.summary.toLowerCase().startsWith("trabalho")) type = "trabalho"
+        const dateToFormat = moment(event.start.dateTime);
+        eventDates[dateToFormat.format('DD-MM-YYYY')] = type;
+        setEventDates({...eventDates});
     }
 
     const bottomBar = [styles.BottomBar];
@@ -110,7 +118,9 @@ const MainScreen = () => {
                     <Icon color="inherit">calendar_today</Icon>
                 </div>
                 <div className={calendarDiv.join(' ')}>
-                    <Calendar value={new Date()}/>
+                    <Calendar
+                        eventList={eventDates}
+                    />
                 </div>
                 <div className={eventsDiv.join(' ')}>
                     {

@@ -23,3 +23,21 @@
     font-size: 14px;
     text-align: center;
 }
+
+.prova {
+    background: #fb654c;
+    background-clip: content-box;
+    padding: 8px;
+}
+
+.trabalho {
+    background: gold;
+    padding: 8px;
+    background-clip: content-box;
+}
+
+.outro {
+    background: #8affb0;
+    background-clip: content-box;
+    padding: 8px;
+}
