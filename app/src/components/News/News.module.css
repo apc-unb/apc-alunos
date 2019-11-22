@@ -2,13 +2,15 @@
     height: 100%;
     width: 320px;
     min-width: 320px;
+    max-width: 320px;
     background-color: #e9e9fc;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    position: absolute;
-    right: 0;
     padding: 4px;
+    position: fixed;
+    right: 0;
+
 }
 
 .header {

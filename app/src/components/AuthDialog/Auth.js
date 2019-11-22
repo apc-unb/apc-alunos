@@ -215,7 +215,7 @@ const AuthComponent = () => {
             </div>
             <DialogActions>
             <Button onClick={() => {setLoading(true); auth(matricula, password)}} disabled={!infoIn} classes={{root: classes.button}}>
-                { loading ? <CircularProgress size={14} color="#2d3264"/> : "Entrar" }
+                { loading ? <CircularProgress size={14} color="inherit"/> : "Entrar" }
             </Button>
             </DialogActions>
         </Dialog>

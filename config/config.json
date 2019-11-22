@@ -1,5 +1,6 @@
 {
     "clientID": "666489734544-bmla44lg92g4l49q6ngfckgco7im0dva.apps.googleusercontent.com",
     "secretKey": "P7zkRLFywGdFE8hCMINDXRbx",
-    "refreshToken": "1/w-DBGDuu5SiHEV9xpvF6sYU14GLcTJ-e4zSj0agSIXA"
+    "refreshToken": "1/w-DBGDuu5SiHEV9xpvF6sYU14GLcTJ-e4zSj0agSIXA",
+    "calendarApiKey": "AIzaSyAhQdnas-VMibqHsOM5osJnoagEwZtYXQE"
 }

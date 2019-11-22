@@ -6,16 +6,19 @@
     transition: 0.5s;
     border-radius: 0px 32px 0px 0px;
     background-image: linear-gradient(rgb(50,60,160), rgb(45, 50, 100));
+    overflow-y: none;
 }
 
 .headerOpen {
     width: 256px;
     min-width: 256px;
+    max-width: 256px;
 }
 
 .headerClosed {
     width: 92px;
     min-width: 92px;
+    max-width: 92px;
 }
 
 .headerTopDiv {

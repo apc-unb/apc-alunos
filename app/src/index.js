@@ -8,7 +8,7 @@ import AuthComponent from './components/AuthDialog/Auth.js';
 import HomeScreen from './screens/HomeScreen/Home.view.js';
 import ExamScreen from './provas_react.jsx';
 import ProjectScreen from './screens/ProjectScreen/Project.view.js';
-import ProfileScreen from './screens/CalendarScreen/Calendar.view.js';
+import ProfileScreen from './components/Profile.jsx';
 
 import Header from './components/Header/Header.js';
 import News from './components/News/News.js';
@@ -39,13 +39,19 @@ const App = ({ startingPoint }) => {
     if(authenticated){
         return (
             <div className={style.App}>
-                <Header
-                    changeScreen={setCurrScreen}
-                    currScreen={currScreen}
-                    handleLogout={() => setAuthenticated(false)}
-                />
-                {nextScreen()}
-                <News />
+                <div className={style.headerRoot}>
+                    <Header
+                        changeScreen={setCurrScreen}
+                        currScreen={currScreen}
+                        handleLogout={() => setAuthenticated(false)}
+                    />
+                </div>
+                <div className={style.newsRoot}>
+                    <News />
+                </div>
+                <div className={style.contentRoot}>
+                    {nextScreen()}
+                </div>
             </div>
         );
     } else {

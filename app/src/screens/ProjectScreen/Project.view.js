@@ -6,6 +6,7 @@ const moment = require('moment');
 import Submission from './components/Submission.js';
 import FilePicker from './components/FilePicker';
 import ApiService from '../../../../service/api/ApiService';
+import styles from './Project.module.css';
 
 const ProjectView = (props) => {
     const [projectTypes, setProjectTypes] = useState([]);
@@ -81,11 +82,15 @@ const ProjectView = (props) => {
     });
 
     return (
-        <ul>
+        <div className={styles.ProjectView}>
+            <div className={styles.headerDiv}>
+            <span className={styles.headerTitle}>Trabalhos</span>
+            </div>
+            <ul>
             {projects}
-        </ul>
+            </ul>
+        </div>
     )
 }
 
-// Header bar
 export default ProjectView;

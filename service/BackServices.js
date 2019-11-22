@@ -42,9 +42,8 @@ async function resendProject(projectId, fileName) {
     let res;
     let err = null;
     try {
-        res = await Api.put('/project/status', {
+        res = await Api.put('/project', {
             id: projectId,
-            status: "Updated",
             filename: fileName
         });
     } catch(error) {

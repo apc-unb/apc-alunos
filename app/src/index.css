@@ -2,8 +2,24 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    background-color: white;
     align-items: stretch;
+    background-color: white;
     width: inherit;
     height: inherit;
+}
+
+.contentRoot {
+    overflow-y: none;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.headerRoot {
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.newsRoot {
+    height: 100%;
+    overflow-y: scroll;
 }

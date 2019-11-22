@@ -1,0 +1,25 @@
+
+
+.button {
+    outline: none;
+    border: none;
+    background: navy;
+}
+
+.tileClass {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: black;
+    opacity: 0.8;
+    font-size: 14px;
+    padding: 6px;
+}
+
+.calendarClass {
+    background: transparent;
+    color: black;
+    opacity: 0.8;
+    font-size: 14px;
+    text-align: center;
+}

@@ -17,14 +17,18 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        loader: 'style-loader'
-      },
-      {
-        test: /\.css$/,
-        loader: 'css-loader',
-        query: {
-          modules: true,
-        }
+        use: [
+          {
+            loader: 'style-loader',
+            options: { injectType: 'singletonStyleTag' },
+          },{
+            loader: 'css-loader',
+            query: {
+              modules: true,
+              import: true
+            }
+          }
+        ]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,

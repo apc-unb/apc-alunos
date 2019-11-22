@@ -4,6 +4,10 @@ package-lock.json
 
 # VScode stuff
 .vscode/
+config/config.json
 config/
 # distribution
 dist/
+
+#googleCalendar
+apiGoogleconfig.json

@@ -1,0 +1,60 @@
+.EventList {
+    overflow-y: scroll;
+    height: inherit;
+}
+
+.monthHeader {
+    color: black;
+    opacity: 0.4;
+    font-size: 14px;
+    margin: 8px;
+    margin-left: 16px;
+    margin-bottom: 14px;
+}
+
+.dayContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.dayContentHeader {
+    color: black;
+    opacity: 0.5;
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+.dayContentText {
+    color: black;
+    opacity: 0.8;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.eventItem {
+    margin: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.padDay {
+    font-size: 20px;
+    color: #323ca0;
+    font-weight: 500;
+    padding: 8px;
+}
+
+.prova {
+    border-right: 3px solid #fb654c;
+}
+
+.trabalho {
+    border-right: 3px solid gold;
+}
+
+.outro {
+    border-right: 3px solid #8affb0;
+}
