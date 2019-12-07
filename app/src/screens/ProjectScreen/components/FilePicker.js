@@ -1,18 +1,40 @@
 import React, {useState, useRef} from 'react';
-import ReactDOM from 'react-dom';
-
-import {Progress} from 'reactstrap';
-import ProjectReceivedModal from './ProjectModal';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Button from '@material-ui/core/Button';
+import SendIcon from '@material-ui/icons/Send';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 const jwt = cookies.get('jwt');
 import axios from 'axios';
 
-export default function FilePicker(props) {
+const useStyles = makeStyles({
+    descriptionText: {
+        fontSize: '14px'
+    },
+    descriptionTitle: {
+        fontSize: '18px',
+        fontWeight: 700
+    },
+    button: {
+        backgroundColor: "#323ca0",
+        color: 'white',
+        borderRadius: '0px 0px 4px 4px'
+    }
+});
+
+const FilePicker = ({infoToSend, projectName, open, onClose}) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [loaded, setLoaded] = useState(0);
     const input = useRef(null);
+    const classes = useStyles();
 
     const onChangeHandler = (event) => {
         if(checkMimeType(event.target.files[0]) && checkFileSize(event.target.files[0])){
@@ -62,18 +84,18 @@ export default function FilePicker(props) {
             return;
         }
         const data = new FormData();
-        data.append('StudentID', props.StudentID);
-        data.append('studentName', props.studentName);
+        data.append('StudentID', infoToSend.StudentID);
+        data.append('studentName', infoToSend.studentName);
         data.append('file', selectedFile);
-        data.append('ProjectTypeID', props.ProjectTypeID);
-        data.append('ClassID', props.ClassID);
-        data.append('monitorName', props.monitorName);
-        data.append('monitorEmail', props.monitorEmail);
-        data.append('resend', props.askResend)
+        data.append('ProjectTypeID', infoToSend.ProjectTypeID);
+        data.append('ClassID', infoToSend.ClassID);
+        data.append('monitorName', infoToSend.monitorName);
+        data.append('monitorEmail', infoToSend.monitorEmail);
+        data.append('resend', infoToSend.askResend)
         data.append('auth', jwt);
-        data.append('projectID', props.projectID);
+        data.append('projectID', infoToSend.projectID);
 
-        if(!props.askResend || confirm("Quer mesmo fazer um novo envio do trabalho?\n\nO anterior não será mais considerado"))
+        if(!infoToSend.askResend || confirm("Quer mesmo fazer um novo envio do trabalho?\n\nO anterior não será mais considerado"))
         // Envia o formulario
         axios.post('/envioDeTrabalho', data, {
             onUploadProgress: ProgressEvent => setLoaded((ProgressEvent.loaded / ProgressEvent.total)*100),
@@ -88,46 +110,48 @@ export default function FilePicker(props) {
     }
 
     return (
-        <form method="post" action="#" id="#">
-            <div className="form-group files">
-            <label>Envie seu trabalho</label>
-            <input
-                ref={input}
-                type="file"
-                className="form-control"
-                onChange={(event) => onChangeHandler(event)}
-            />
-
-            {
-                loaded < 100 
-                ?
-                <Progress
-                    max="100"
-                    color="success"
-                    value={loaded}
-                    animated
-                    bar
-                >
-                {Math.round(loaded,2)}%
-                </Progress>
-                :
-                <Progress
-                    max="100"
-                    value="100"
-                    color="success"
-                    bar
-                >
-                    Upload Completed :D
-                </Progress>
-            }
-
-            <button
-                type="button"
-                className="btn btn-success btn-block"
-                onClick={(event) => onClickHandler(event)}
-                disabled={selectedFile === null}
-            >Enviar</button>
-            </div>
-        </form>
+        <Dialog
+            onClose={onClose}
+            aria-labelledby="project-description"
+            open={open}
+            maxWidth="xl"
+        >
+            <DialogTitle classes={{root: classes.descriptionTitle}} disableTypography={true}>
+                Enviar&nbsp;{projectName}
+            </DialogTitle>
+            <DialogContent>
+                <form method="post" action="#" id={'envio_' + projectName}>
+                    <div className="form-group files">
+                    <input
+                        ref={input}
+                        type="file"
+                        className="form-control"
+                        onChange={(event) => onChangeHandler(event)}
+                    />
+                    <LinearProgress variant="determinate" value={loaded} />
+                    <Button
+                        variant="contained"
+                        classes={{root: classes.button}}
+                        onClick={(event) => onClickHandler(event)}
+                        disabled={selectedFile === null}
+                        fullWidth={true}
+                        endIcon={<SendIcon />}
+                    >
+                        Enviar
+                    </Button>
+                    </div>
+                </form>
+            </DialogContent>
+        </Dialog>
     );
 };
+
+
+FilePicker.propTypes = {
+    infoToSend: PropTypes.object.isRequired,
+    open: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    projectName: PropTypes.string
+};
+
+export default FilePicker;

@@ -21,14 +21,14 @@ const MenuItem = ({ icon, text, action, open, selected}) => {
     if(!open) buttonClasses.push(styles.closed);
     if(open) {
         return (
-            <button onClick={action} className={buttonClasses.join(' ')}>
+            <button onClick={action} className={buttonClasses.join(' ')} tabIndex="98">
                 <Icon classes={{root: classes.open}}>{icon}</Icon>
                 <span>&nbsp;&nbsp;{text}</span>
             </button>
         )
     } else {
         return (
-            <button onClick={action} className={buttonClasses.join(' ')}>
+            <button onClick={action} className={buttonClasses.join(' ')} tabIndex="98">
                 <Icon classes={{root: classes.close}}>{icon}</Icon>
             </button>
         )

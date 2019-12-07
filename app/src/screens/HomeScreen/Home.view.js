@@ -106,10 +106,7 @@ const MainScreen = () => {
         eventsDiv.push(styles.BottomChildrenClosed);
     }
     return (
-        <div className={styles.HomeView}>
-            <div className={styles.headerDiv}>
-                <span className={styles.headerTitle}>Home</span>
-            </div>
+        <section className={styles.HomeView}>
             <div className={styles.contentDiv}>
                 Content Content Content
             </div>
@@ -145,7 +142,7 @@ const MainScreen = () => {
                 ""
             }
             
-        </div> 
+        </section> 
     );
 }
 

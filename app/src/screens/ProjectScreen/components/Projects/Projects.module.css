@@ -1,0 +1,74 @@
+.projectTitle {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0px;
+    text-anchor: middle;
+}
+
+.projectPeriodo {
+    font-size: 14px;
+    font-weight: 600;
+    color: black;
+    opacity: 0.8;
+    margin-bottom: 12px;
+}
+
+.closed {
+    background: #fb654c;
+    padding: 2px 8px;
+    width: fit-content;
+    border-radius: 50px;
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+.notOpenYet {
+    background: gold;
+    padding: 2px 8px;
+    width: fit-content;
+    border-radius: 50px;
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+.open {
+    background: #8affb0;
+    padding: 2px 8px;
+    width: fit-content;
+    border-radius: 50px;
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+
+.tableSubmission {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tableHead {
+    font-size: 16px;
+    font-weight: 800;
+    background-color: #e9e9fc;
+    padding: 4px;
+}
+
+.tableBody {
+    font-size: 16px;
+    font-weight: 600;
+    overflow: hidden;
+}
+
+.semSubmissoes {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.actionButton {
+    background-color: #323ca0;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 8px;
+}

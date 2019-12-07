@@ -18,7 +18,7 @@
     position: fixed;
     bottom: 0px;
     margin: -20px;
-    background-color: #f9fafc;
+    background-color: white;
     border-top: 2px solid #323ca0;
     margin-right: 320px;
 }
@@ -64,7 +64,7 @@
     margin-left: 20px;
     position: sticky;
     line-height: 20px;
-    background-color: #f9fafc;
+    background-color: white;
     padding: 0px 8px;
     top: 0px;
     z-index: 101;
@@ -97,19 +97,4 @@
     flex-direction: column;
     align-items: center;
     margin: 20px;
-}
-
-.headerTitle {
-    font-size: 32px;
-    color: #323ca0;
-}
-
-.headerDiv {
-    position: sticky;
-    top: 20px;
-    border-bottom: 1px solid #323ca0;
-    background-color: white;
-    line-height: 48px;
-    z-index: 100;
-    width: 100%;
 }

@@ -34,18 +34,18 @@ const Header = ({ changeScreen, currScreen, handleLogout }) => {
     else    headerClass.push(styles.headerClosed);
 
     return (
-    <nav className={headerClass.join(' ')} id="header-bar">
+    <header className={headerClass.join(' ')} id="header-bar">
         <div className={styles.headerTopDiv}>
             <div className={styles.headerBranding}>
-                <a className="" href="/index.html" className={styles.logo}>
+                <a className="" href="/index.html" className={styles.logo} tabIndex="100">
                     <img src="/assets/images/UnB-logo.png" alt="UnB" height={imgSize} width={imgSize} />
                 </a>
                 <div className={styles.iconBtnPos} >
-                <IconButton onClick={() => changeMenu()}>
+                <IconButton onClick={() => changeMenu()} tabIndex="99">
                     {
                         open ?
-                        <Icon className={styles.Icon} fontSize="large">keyboard_arrow_left</Icon> :
-                        <Icon className={styles.Icon} fontSize="large">keyboard_arrow_right</Icon>
+                        <Icon className={styles.Icon} fontSize="large" aria-label="diminuir menu">keyboard_arrow_left</Icon> :
+                        <Icon className={styles.Icon} fontSize="large" aria-label="expandir menu">keyboard_arrow_right</Icon>
                     }
                 </IconButton>
                 </div>
@@ -57,7 +57,7 @@ const Header = ({ changeScreen, currScreen, handleLogout }) => {
                 open={open}
             />
         </div>
-        <div className={[styles.headerBottomDiv, styles.menuItemContainer].join(' ')}>
+        <nav className={[styles.headerBottomDiv, styles.menuItemContainer].join(' ')}>
             <div className={styles.menuBtnSeparator}>
                 <MenuItem
                     icon="home"
@@ -84,7 +84,7 @@ const Header = ({ changeScreen, currScreen, handleLogout }) => {
                 />
                 <MenuItem
                     icon="assignment"
-                    text="Trabalho"
+                    text="Trabalhos"
                     action={() => changeScreen(3)}
                     selected={currScreen === 3}
                     open={open}
@@ -98,8 +98,8 @@ const Header = ({ changeScreen, currScreen, handleLogout }) => {
                 selected={false}
                 open={open}
             />
-        </div>
-    </nav>
+        </nav>
+    </header>
     );
 }
 

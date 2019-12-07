@@ -36,6 +36,14 @@ const App = ({ startingPoint }) => {
         }
     }
 
+    const contentTitle = () => {
+        const titles = ["Home", "Perfil", "Provas", "Trabalhos"];
+        if(currScreen <= 3){
+            return titles[currScreen];
+        }
+        return ""
+    }
+
     if(authenticated){
         return (
             <div className={style.App}>
@@ -46,11 +54,14 @@ const App = ({ startingPoint }) => {
                         handleLogout={() => setAuthenticated(false)}
                     />
                 </div>
+                <main className={style.contentRoot}>
+                    <header className={style.contentHeader}>
+                        <h1 className={style.contentTitle}>{contentTitle()}</h1>
+                    </header>
+                    {nextScreen()}
+                </main>
                 <div className={style.newsRoot}>
                     <News />
-                </div>
-                <div className={style.contentRoot}>
-                    {nextScreen()}
                 </div>
             </div>
         );

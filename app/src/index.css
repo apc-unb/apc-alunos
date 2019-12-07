@@ -3,23 +3,43 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: stretch;
-    background-color: white;
+    background-color: #f9fafc;
     width: inherit;
     height: inherit;
+    overflow-y: none;
+    overflow-x: none;
 }
 
 .contentRoot {
-    overflow-y: none;
+    overflow-y: auto;
     flex-grow: 1;
-    height: 100%;
+    height: 100%
 }
 
 .headerRoot {
     height: 100%;
     overflow-y: hidden;
+    flex-basis: auto;
 }
 
 .newsRoot {
     height: 100%;
     overflow-y: scroll;
+    flex-basis: auto;
+}
+
+.contentTitle {
+    font-size: 32px;
+    color: #323ca0;
+}
+
+.contentHeader {
+    position: sticky;
+    top: 20px;
+    border-bottom: 1px solid #323ca0;
+    background-color: #f9fafc;
+    line-height: 48px;
+    z-index: 100;
+    width: calc(100% - 16px);
+    margin: 8px;
 }
