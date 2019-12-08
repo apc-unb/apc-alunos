@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 import styles from './Header.module.css';
 
 import MenuItem from './components/MenuItem/MenuItem.js';
-import Profile from './components/Profile/Profile.js';
+import Profile from '../Profile/Profile';
 
 const cookies = new Cookies();
 

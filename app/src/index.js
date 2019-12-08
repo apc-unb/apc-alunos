@@ -8,7 +8,7 @@ import AuthComponent from './components/AuthDialog/Auth.js';
 import HomeScreen from './screens/HomeScreen/Home.view.js';
 import ExamScreen from './provas_react.jsx';
 import ProjectScreen from './screens/ProjectScreen/Project.view.js';
-import ProfileScreen from './components/Profile.jsx';
+import ProfileScreen from './screens/ProfileScreen/Profile.view.js';
 
 import Header from './components/Header/Header.js';
 import News from './components/News/News.js';

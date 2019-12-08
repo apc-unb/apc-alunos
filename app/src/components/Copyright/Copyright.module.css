@@ -1,0 +1,17 @@
+.copyright {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.poweredBy {
+    color: silver;
+    font-size: 12px;
+}
+
+.dragont {
+    color: silver;
+    font-size: 16px;
+    font-weight: 800;
+}

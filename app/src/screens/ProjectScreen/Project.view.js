@@ -37,6 +37,7 @@ const ProjectView = (props) => {
         }
 
         return <Projects 
+                key={index}
                 value={value}
                 relatedSubmissions={relatedSubmissions}
                 index={index}

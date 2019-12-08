@@ -7,8 +7,6 @@ import axios from 'axios';
 // Third party
 import Button from '@material-ui/core/Button';
 import styles from './Auth.module.css';
-
-import Dialog from '@material-ui/core/Dialog';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -23,7 +21,7 @@ import ErrorIcon from '@material-ui/icons/Error';
 import CloseIcon from '@material-ui/icons/Close';
 import WarnIcon from '@material-ui/icons/WarningOutlined';
 import Paper from '@material-ui/core/Paper';
-
+import Copyright from '../Copyright/Copyright';
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
@@ -152,7 +150,10 @@ const AuthComponent = () => {
     }, [password, matricula]);
 
     return (
-        <div>
+        <div className={styles.outerDiv}>
+            <a className="" href="/index.html" className={styles.logo} tabIndex="100">
+                <img src="/assets/images/UnB-logo.png" alt="UnB" height="64px" width="64px" />
+            </a>
         <Snackbar
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             open={error}
@@ -175,7 +176,7 @@ const AuthComponent = () => {
             />
         </Snackbar>
 
-        <Dialog open={open} aria-labelledby="auth-modal">
+        <Paper aria-labelledby="auth-modal">
             <div className={styles.authHeader}>
                 <span id="form-dialog-title" className={styles.authTitle}>
                     Login
@@ -237,7 +238,11 @@ const AuthComponent = () => {
                     </Button>
                 </div>
             </div>
-        </Dialog>
+        </Paper>
+        
+        <div className={styles.footer}>
+            <Copyright />
+        </div>
         </div>
     )
 };

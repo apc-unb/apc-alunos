@@ -29,7 +29,7 @@ const Project = ({ value, relatedSubmissions, index, sessionStudent }) => {
     const [filePickerOpen, setFilePickerOpen] = useState(false);
     const submissionObjs = relatedSubmissions.map( (sub) => {
         return (
-                < Submission {...sub} />
+                < Submission {...sub} key={sub.createdat}/>
         )
     });
 

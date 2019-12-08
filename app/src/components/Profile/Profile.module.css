@@ -7,6 +7,10 @@
     margin: 24px;
 }
 
+.invertColors {
+    color: black;
+}
+
 .handleDiv {
     display: flex;
     flex-direction: row;
@@ -26,7 +30,7 @@
 .pictureOpen {
     width: 128px;
     height: 128px;
-    border-radius: 50;
+    border-radius: 50%;
     margin: 8px;
     transition: 0.5s;
 }
@@ -34,7 +38,13 @@
 .pictureClose {
     width: 64px;
     height: 64px;
-    border-radius: 50;
+    border-radius: 50%;
     margin: 8px;
     transition: 0.5s;
+}
+
+.large {
+    width: 256;
+    height: 256;
+    border-radius: 50%;
 }
