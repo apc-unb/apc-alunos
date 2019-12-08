@@ -1,14 +1,14 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, Fragment} from 'react';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+
+import AlertDialog from '../../../components/AlertDialog';
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
@@ -30,9 +30,10 @@ const useStyles = makeStyles({
     }
 });
 
-const FilePicker = ({infoToSend, projectName, open, onClose}) => {
+const FilePicker = ({infoToSend, projectName, askResend, open, onClose}) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [loaded, setLoaded] = useState(0);
+    const [openResendDialog, setOpenResendDialog] = useState(false);
     const input = useRef(null);
     const classes = useStyles();
 
@@ -75,8 +76,9 @@ const FilePicker = ({infoToSend, projectName, open, onClose}) => {
         return true;
     }
 
-    const onClickHandler = (event) => {
-        event.preventDefault();
+    const onClickHandler = (event, resendConfirm = false) => {
+        if(event !== null)
+            event.preventDefault();
         // Cria o formulario com todas as infos do aluno
         // E o trabalho
         if(selectedFile === null){
@@ -91,58 +93,71 @@ const FilePicker = ({infoToSend, projectName, open, onClose}) => {
         data.append('ClassID', infoToSend.ClassID);
         data.append('monitorName', infoToSend.monitorName);
         data.append('monitorEmail', infoToSend.monitorEmail);
-        data.append('resend', infoToSend.askResend)
+        data.append('resend', askResend)
         data.append('auth', jwt);
         data.append('projectID', infoToSend.projectID);
 
-        if(!infoToSend.askResend || confirm("Quer mesmo fazer um novo envio do trabalho?\n\nO anterior não será mais considerado"))
-        // Envia o formulario
-        axios.post('/envioDeTrabalho', data, {
-            onUploadProgress: ProgressEvent => setLoaded((ProgressEvent.loaded / ProgressEvent.total)*100),
-        }).then( res => {
-            alert("Trabalho enviado com sucesso");
-            setSelectedFile(null);
-            input.current.value = null;
-        }).catch( err => {
-            alert('Ocorreu um erro: ' + err.message);
-            setLoaded(0);
-        });
+        if(!askResend || resendConfirm){
+            // Envia o formulario
+            axios.post('/envioDeTrabalho', data, {
+                onUploadProgress: ProgressEvent => setLoaded((ProgressEvent.loaded / ProgressEvent.total)*100),
+            }).then( res => {
+                alert("Trabalho enviado com sucesso");
+                setSelectedFile(null);
+                input.current.value = null;
+            }).catch( err => {
+                alert('Ocorreu um erro: ' + err.message);
+                setLoaded(0);
+            });
+        } else if(askResend){
+            setOpenResendDialog(true);
+        }
     }
 
     return (
-        <Dialog
-            onClose={onClose}
-            aria-labelledby="project-description"
-            open={open}
-            maxWidth="xl"
-        >
-            <DialogTitle classes={{root: classes.descriptionTitle}} disableTypography={true}>
-                Enviar&nbsp;{projectName}
-            </DialogTitle>
-            <DialogContent>
-                <form method="post" action="#" id={'envio_' + projectName}>
-                    <div className="form-group files">
-                    <input
-                        ref={input}
-                        type="file"
-                        className="form-control"
-                        onChange={(event) => onChangeHandler(event)}
-                    />
-                    <LinearProgress variant="determinate" value={loaded} />
-                    <Button
-                        variant="contained"
-                        classes={{root: classes.button}}
-                        onClick={(event) => onClickHandler(event)}
-                        disabled={selectedFile === null}
-                        fullWidth={true}
-                        endIcon={<SendIcon />}
-                    >
-                        Enviar
-                    </Button>
-                    </div>
-                </form>
-            </DialogContent>
-        </Dialog>
+        <Fragment>
+            <AlertDialog
+                open={openResendDialog}
+                handleClose={() => setOpenResendDialog(false)}
+                handleRefuse={() => setOpenResendDialog(false)}
+                handleAccept={() => {setOpenResendDialog(false); onClickHandler(null, true)}}
+                title="Reenviar trabalho?"
+                message="Atenção, você está reenviando o trabalho. Caso continue, a submissão anterior será desconsiderada."
+            />
+            <Dialog
+                onClose={onClose}
+                aria-labelledby="project-description"
+                open={open}
+                maxWidth="xl"
+            >
+                <DialogTitle classes={{root: classes.descriptionTitle}} disableTypography={true}>
+                    Enviar&nbsp;{projectName}
+                </DialogTitle>
+                <DialogContent>
+                    <form method="post" action="#" id={'envio_' + projectName}>
+                        <div className="form-group files">
+                        <input
+                            ref={input}
+                            type="file"
+                            className="form-control"
+                            onChange={(event) => onChangeHandler(event)}
+                        />
+                        <LinearProgress variant="determinate" value={loaded} />
+                        <Button
+                            variant="contained"
+                            classes={{root: classes.button}}
+                            onClick={(event) => onClickHandler(event)}
+                            disabled={selectedFile === null}
+                            fullWidth={true}
+                            endIcon={<SendIcon />}
+                        >
+                            Enviar
+                        </Button>
+                        </div>
+                    </form>
+                </DialogContent>
+            </Dialog>
+        </Fragment>
     );
 };
 
@@ -151,7 +166,8 @@ FilePicker.propTypes = {
     infoToSend: PropTypes.object.isRequired,
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    projectName: PropTypes.string
+    projectName: PropTypes.string,
+    askResend: PropTypes.bool.isRequired
 };
 
 export default FilePicker;

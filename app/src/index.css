@@ -35,11 +35,16 @@
 
 .contentHeader {
     position: sticky;
-    top: 20px;
+    top: 0;
+    padding-top: 20px;
     border-bottom: 1px solid #323ca0;
     background-color: #f9fafc;
-    line-height: 48px;
+    line-height: 64px;
     z-index: 100;
     width: calc(100% - 16px);
-    margin: 8px;
+    margin: 0px 8px 8px 8px;
+}
+
+h1 {
+    margin: 0px;
 }

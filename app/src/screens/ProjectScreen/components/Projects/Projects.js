@@ -85,6 +85,7 @@ const Project = ({ value, relatedSubmissions, index, sessionStudent }) => {
                 onClose={() => setFilePickerOpen()}
                 projectName={value.name}
                 infoToSend={infoParaEnvio}
+                askResend={(relatedSubmissions.length > 0)}
             />
             <CardContent>
             <h2 className={styles.projectTitle}>

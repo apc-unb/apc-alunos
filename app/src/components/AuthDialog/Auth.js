@@ -30,44 +30,57 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 import { makeStyles } from '@material-ui/core/styles';
+import { SnackbarContent } from '@material-ui/core';
 
 const useStyles = makeStyles({
     icon: {
         fontSize: 32,
-        color: '#2d3264',
+        color: '#323ca0',
         margin: '8px'
     },
-
     paper: {
         textAlign: 'left',
-        margin: '12px',
+        margin: '0px 12px',
+        padding: '8px',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: '#e9e9fc'
     },
-
     input: {
         width: '256px',
         fontSize: '16px',
-        color: '#2d3264'
+        color: '#2d3264',
     },
-
     inputLabel: {
         fontSize: '16px',
         color: '#2d3264'
     },
-
     helpText: {
         fontSize: '12px',
-        color: '#2d3264'
+        color: '#2d3264',
+        marginBottom: '8px'
     },
-
     button: {
+        marginTop: '12px',
+        width: '256px',
         fontSize: '14px',
-        backgroundColor: '#e9e9fc',
-        color: '#2d3264'
-    }
+        backgroundColor: '#323ca0',
+        color: 'white'
+    },
+    buttonDisabled: {
+        backgroundColor: '#f5f5f5'
+    },
+    snackbar: {
+        backgroundColor: '#d32f2f',
+        color: 'white',
+        textAnchor: 'middle'
+    },
+    message: {
+        display: 'flex',
+        alignItems: 'center',
+        fontSize: '14px'
+      }
 });
 
 const AuthComponent = () => {
@@ -116,7 +129,11 @@ const AuthComponent = () => {
                     setLoading(false);
                 }
             }).catch((err) => {
-                setErrorMsg(err.message);
+                if(err.status === 0){
+                    setErrorMsg("Falha na conexão");
+                } else {
+                    setErrorMsg(err.message);
+                }
                 setError(true);
                 setLoading(false);
                 return;
@@ -141,27 +158,28 @@ const AuthComponent = () => {
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             open={error}
             onClose={() => setError(false)}
-            ContentProps={{
-            'aria-describedby': 'message-id',
-            }}
             autoHideDuration={30000}
+        >
+            <SnackbarContent
+            className={classes.snackbar}
             message={
-                <span id="message-id">
-                <ErrorIcon />
-                {errorMsg} 
+                <span id="client-snackbar" className={classes.message}>
+                  <ErrorIcon/>&nbsp;
+                  {errorMsg}
                 </span>
-            }
-            action={[
+              }
+              action={[
                 <IconButton key="close" aria-label="close" color="inherit" onClick={() => setError(false)}>
-                    <CloseIcon />
-                </IconButton>
-            ]}
-        />
+                  <CloseIcon />
+                </IconButton>,
+              ]}
+            />
+        </Snackbar>
 
         <Dialog open={open} aria-labelledby="auth-modal">
             <div className={styles.authHeader}>
                 <span id="form-dialog-title" className={styles.authTitle}>
-                    Login - Seção restrita
+                    Login
                 </span>
             </div>
             <div>
@@ -169,7 +187,7 @@ const AuthComponent = () => {
                 <WarnIcon classes={{root: classes.icon}} />
                 <div>
                     <span className={styles.infoText}>
-                        Esta página é somente para alunos.
+                        Esta página é somente para alunos matriculados na disciplina de APC.
                     </span>
                     <span className={styles.infoText}>
                         Se não souber sua senha entre em contato com seu professor.
@@ -211,13 +229,15 @@ const AuthComponent = () => {
                         }
                         />
                     </FormControl>
+                    <Button 
+                    onClick={() => {setLoading(true); auth(matricula, password)}}
+                    variant="contained"
+                    disabled={!infoIn}
+                    classes={{root: classes.button, disabled: classes.buttonDisabled}}>
+                        { loading ? <CircularProgress size={14} color="inherit"/> : "Entrar" }
+                    </Button>
                 </div>
             </div>
-            <DialogActions>
-            <Button onClick={() => {setLoading(true); auth(matricula, password)}} disabled={!infoIn} classes={{root: classes.button}}>
-                { loading ? <CircularProgress size={14} color="inherit"/> : "Entrar" }
-            </Button>
-            </DialogActions>
         </Dialog>
         </div>
     )
