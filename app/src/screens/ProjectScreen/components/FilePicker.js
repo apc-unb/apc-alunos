@@ -9,6 +9,11 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 
 import AlertDialog from '../../../components/AlertDialog';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+import ErrorIcon from '@material-ui/icons/Error';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
@@ -27,6 +32,16 @@ const useStyles = makeStyles({
         backgroundColor: "#323ca0",
         color: 'white',
         borderRadius: '0px 0px 4px 4px'
+    },
+    snackbar: {
+        backgroundColor: '#d32f2f',
+        color: 'white',
+        textAnchor: 'middle'
+    },
+    message: {
+        display: 'flex',
+        alignItems: 'center',
+        fontSize: '14px'
     }
 });
 
@@ -34,6 +49,8 @@ const FilePicker = ({infoToSend, projectName, askResend, open, onClose}) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [loaded, setLoaded] = useState(0);
     const [openResendDialog, setOpenResendDialog] = useState(false);
+    const [error, setError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
     const input = useRef(null);
     const classes = useStyles();
 
@@ -57,7 +74,8 @@ const FilePicker = ({infoToSend, projectName, askResend, open, onClose}) => {
         };
         
         if (err !== '') {
-            alert(err);
+            setErrorMsg(err);
+            setError(true);
             return false; 
         }
         return true;
@@ -67,10 +85,11 @@ const FilePicker = ({infoToSend, projectName, askResend, open, onClose}) => {
         let maxSize = 3145728; // 3MiB 
         let err = '';
         if (file.size > maxSize) {
-            err = file.name + 'is too large, please pick a smaller file';
+            err = file.name + ' is too large, please pick a smaller file';
         }
         if (err !== '') {
-            alert(err);
+            setErrorMsg(err);
+            setError(true);
             return false;
         }
         return true;
@@ -82,7 +101,8 @@ const FilePicker = ({infoToSend, projectName, askResend, open, onClose}) => {
         // Cria o formulario com todas as infos do aluno
         // E o trabalho
         if(selectedFile === null){
-            alert("Selecione um arquivo para enviar.");
+            setErrorMsg("Selecione um arquivo para enviar.");
+            setError(true);
             return;
         }
         const data = new FormData();
@@ -124,6 +144,27 @@ const FilePicker = ({infoToSend, projectName, askResend, open, onClose}) => {
                 title="Reenviar trabalho?"
                 message="Atenção, você está reenviando o trabalho. Caso continue, a submissão anterior será desconsiderada."
             />
+            <Snackbar
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            open={error}
+            onClose={() => setError(false)}
+            autoHideDuration={30000}
+            >
+                <SnackbarContent
+                className={classes.snackbar}
+                message={
+                    <span id="client-snackbar" className={classes.message}>
+                    <ErrorIcon/>&nbsp;
+                    {errorMsg}
+                    </span>
+                }
+                action={[
+                    <IconButton key="close" aria-label="close" color="inherit" onClick={() => setError(false)}>
+                    <CloseIcon />
+                    </IconButton>,
+                ]}
+                />
+            </Snackbar>
             <Dialog
                 onClose={onClose}
                 aria-labelledby="project-description"
