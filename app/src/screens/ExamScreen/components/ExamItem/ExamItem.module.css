@@ -1,0 +1,54 @@
+.examTitle {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0px;
+    text-anchor: middle;
+}
+
+.questionHeader {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.questionTitle {
+    font-size: 14px;
+    font-weight: 800;
+    color: black;
+    margin-bottom: 12px;
+}
+
+.questionTags {
+    font-size: 12px;
+    font-weight: 600;
+    color: black;
+    opacity: 0.6;
+    margin-bottom: 12px;
+}
+
+.questionScore {
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.questionDescription {
+    max-width: 360px;
+}
+
+@media only screen and (min-width: 1440px){
+
+    .questionDescription {
+        max-width: 750px;
+
+    }
+}
+
+@media only screen and (max-width: 1439px)
+and (min-width: 1024px) {
+
+    .questionDescription {
+        max-width: 480px;
+
+    }
+}

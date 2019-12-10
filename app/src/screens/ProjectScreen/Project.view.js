@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react';
 
-import 'react-toastify/dist/ReactToastify.css';
-
 import Projects from './components/Projects/Projects';
 import ApiService from '../../../../service/api/ApiService';
 import styles from './Project.module.css';

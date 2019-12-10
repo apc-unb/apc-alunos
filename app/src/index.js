@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 import AuthComponent from './components/AuthDialog/Auth.js';
 
 import HomeScreen from './screens/HomeScreen/Home.view.js';
-import ExamScreen from './provas_react.jsx';
+import ExamScreen from './screens/ExamScreen/Exam.view.js';
 import ProjectScreen from './screens/ProjectScreen/Project.view.js';
 import ProfileScreen from './screens/ProfileScreen/Profile.view.js';
 
