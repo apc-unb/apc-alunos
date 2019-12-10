@@ -44,7 +44,8 @@
 }
 
 .large {
-    width: 256;
-    height: 256;
+    width: 248px;
+    height: 248px;
     border-radius: 50%;
+    margin: 12px;
 }

@@ -1,0 +1,23 @@
+
+.infoDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-self: stretch;
+    margin-top: 32px;
+}
+
+.infoDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 12px;
+}
+
+.infoText {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 6px 0px;
+}

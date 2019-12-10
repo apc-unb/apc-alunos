@@ -3,10 +3,6 @@
 import React, { Component, useRef, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import Grades from './components/Grades.js';
-import Activities from './components/Activities.js';
-import News from './components/News.js';
-import Profile from '../../components/Profile.jsx'
 import Calendar from '../../components/Calendar/Calendar';
 import EventList from './components/EventList/EventList.js';
 import styles from './Home.module.css';

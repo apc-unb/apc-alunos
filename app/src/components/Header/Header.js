@@ -54,6 +54,7 @@ const Header = ({ changeScreen, currScreen, handleLogout }) => {
                 firstName={student.firstname}
                 lastName={student.lastname}
                 matricula={student.matricula}
+                picture={student.photourl}
                 open={open}
             />
         </div>
