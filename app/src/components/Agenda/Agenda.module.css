@@ -1,0 +1,92 @@
+.Agenda {
+    width: inherit;
+    position: absolute;
+    bottom: 0px;
+    height: 360px;
+}
+
+.BottomBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: white;
+    border-top: 2px solid #323ca0;
+    margin-right: 320px;
+    height: inherit;
+}
+
+.BottomClosed {
+    height: 2px;
+    border: none;
+    display: flex;
+    justify-content: center;
+}
+
+.openBottomBtn {
+    position: fixed;
+    bottom: 10px;
+    left: 48%;
+    background-color: #323ca0;
+    color: white;
+    width: 32px;
+    height: 32px;
+    padding: 2px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.BottomChildrenClosed {
+    display: none;
+}
+
+.closeBottom {
+    background-color: #323ca0;
+    color: white;
+    width: 32px;
+    height: 32px;
+    padding: 2px;
+    height: fit-content;
+    text-align: center;
+    position: relative;
+    border-radius: 50%;
+    top: -14px;
+    left: 14px;
+    cursor: pointer;
+}
+
+.agendaTitle {
+    font-weight: 600;
+    color: #323ca0;
+    font-size: 16px;
+    margin-left: 20px;
+    position: sticky;
+    line-height: 20px;
+    background-color: white;
+    padding: 0px 8px;
+    top: 0px;
+    z-index: 101;
+    padding: 40px 0px 20px 0px;
+}
+
+.CalendarDiv {
+    width: 47.5%;    
+    margin: 20px;
+}
+
+.listOfEvents {
+    margin-left: 24px;
+    height: inherit;
+}
+
+.listOfEventsDiv {
+    width: 50%;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: stretch;
+    border-left: solid 1px lightgray;
+    padding: 0px 20px;
+    overflow-y: scroll;
+}

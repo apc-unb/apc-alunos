@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Cookies from 'universal-cookie';
 
@@ -12,6 +12,7 @@ import ProfileScreen from './screens/ProfileScreen/Profile.view.js';
 
 import Header from './components/Header/Header.js';
 import News from './components/News/News.js';
+import Agenda from './components/Agenda/Agenda.js';
 
 import style from './index.css';
 const cookies = new Cookies();
@@ -59,6 +60,7 @@ const App = ({ startingPoint }) => {
                         <h1 className={style.contentTitle}>{contentTitle()}</h1>
                     </header>
                     {nextScreen()}
+                    <Agenda />
                 </main>
                 <div className={style.newsRoot}>
                     <News />
