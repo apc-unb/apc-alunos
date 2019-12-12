@@ -1,0 +1,33 @@
+.title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 12px;
+    text-anchor: middle;
+}
+
+.doingBad {
+    background: #fb654c;
+    padding: 2px 8px;
+    width: fit-content;
+    border-radius: 50px;
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+.doingFine {
+    background: gold;
+    padding: 2px 8px;
+    width: fit-content;
+    border-radius: 50px;
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+.doingGreat {
+    background: #8affb0;
+    padding: 2px 8px;
+    width: fit-content;
+    border-radius: 50px;
+    font-size: 20px;
+    opacity: 0.8;
+}

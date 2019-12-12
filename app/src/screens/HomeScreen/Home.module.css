@@ -1,18 +1,8 @@
 .HomeView {
     display: flex;
-    align-self: stretch;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
-    margin: 20px;
-    width: inherit;
-    margin-right: 340px;
-}
-
-.contentDiv {
-    display: flex;
-    width: inherit;
-    flex-direction: column;
     align-items: center;
     margin: 20px;
+    width: inherit;
 }
