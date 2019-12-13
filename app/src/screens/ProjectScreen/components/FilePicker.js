@@ -12,6 +12,7 @@ import AlertDialog from '../../../components/AlertDialog';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import ErrorIcon from '@material-ui/icons/Error';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 
@@ -33,15 +34,20 @@ const useStyles = makeStyles({
         color: 'white',
         borderRadius: '0px 0px 4px 4px'
     },
-    snackbar: {
-        backgroundColor: '#d32f2f',
-        color: 'white',
-        textAnchor: 'middle'
-    },
     message: {
         display: 'flex',
         alignItems: 'center',
         fontSize: '14px'
+    },
+    snackbar: {
+        color: 'white',
+        textAnchor: 'middle'
+    },
+    success: {
+        backgroundColor: '#43a047',
+    },
+    fail: {
+        backgroundColor: '#d32f2f',
     }
 });
 
@@ -49,8 +55,12 @@ const FilePicker = ({infoToSend, projectName, askResend, open, onClose}) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [loaded, setLoaded] = useState(0);
     const [openResendDialog, setOpenResendDialog] = useState(false);
+
     const [error, setError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
+    const [success, setSuccess] = useState(false);
+    const [successMsg, setSuccessMsg] = useState("");
+
     const input = useRef(null);
     const classes = useStyles();
 
@@ -122,17 +132,24 @@ const FilePicker = ({infoToSend, projectName, askResend, open, onClose}) => {
             axios.post('/envioDeTrabalho', data, {
                 onUploadProgress: ProgressEvent => setLoaded((ProgressEvent.loaded / ProgressEvent.total)*100),
             }).then( res => {
-                alert("Trabalho enviado com sucesso");
+                setSuccess(true);
+                setSuccessMsg("Trabalho enviado com sucesso");
                 setSelectedFile(null);
                 input.current.value = null;
             }).catch( err => {
-                alert('Ocorreu um erro: ' + err.message);
+                setError(true);
+                setErrorMsg('Ocorreu um erro: ' + err.message);
                 setLoaded(0);
             });
         } else if(askResend){
             setOpenResendDialog(true);
         }
     }
+
+    const snack = error || success;
+    const snackbarClass = success ? [classes.snackbar, classes.success] : [classes.snackbar, classes.fail];
+    const snackbarIcon = success ? <CheckCircleIcon /> : <ErrorIcon />;
+    const snackbarMsg = success ? successMsg : errorMsg;
 
     return (
         <Fragment>
@@ -146,21 +163,21 @@ const FilePicker = ({infoToSend, projectName, askResend, open, onClose}) => {
             />
             <Snackbar
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-            open={error}
-            onClose={() => setError(false)}
+            open={snack}
+            onClose={() => {setError(false); setSuccess(false)}}
             autoHideDuration={30000}
             >
                 <SnackbarContent
-                className={classes.snackbar}
+                className={snackbarClass.join(' ')}
                 message={
                     <span id="client-snackbar" className={classes.message}>
-                    <ErrorIcon/>&nbsp;
-                    {errorMsg}
+                    {snackbarIcon}&nbsp;
+                    {snackbarMsg}
                     </span>
                 }
                 action={[
                     <IconButton key="close" aria-label="close" color="inherit" onClick={() => setError(false)}>
-                    <CloseIcon />
+                        <CloseIcon />
                     </IconButton>,
                 ]}
                 />

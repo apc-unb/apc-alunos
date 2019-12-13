@@ -5,6 +5,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import PropTypes from 'prop-types';
+
+import Markdown from 'react-markdown';
+
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -32,7 +35,7 @@ const ProjectDescription = ({projectName, projectDescription, open, onClose}) =>
             </DialogTitle>
             <DialogContent>
                 <DialogContentText classes={{root: classes.descriptionText}}>
-                    {projectDescription}
+                    <Markdown source={projectDescription.replace(/\\n/gi, '\n')} />
                 </DialogContentText>
             </DialogContent>
         </Dialog>

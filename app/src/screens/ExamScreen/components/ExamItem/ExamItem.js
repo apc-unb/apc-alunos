@@ -4,6 +4,7 @@ import ApiService from '../../../../../../service/api/ApiService';
 import styles from './ExamItem.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 
+import Markdown from 'react-markdown';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -42,9 +43,7 @@ const Question = ({questionInfo}) => {
                 </header>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-                <p className={styles.questionDescription}>
-                {questionInfo.statement}
-                </p>
+                <Markdown className={styles.questionDescription} source={questionInfo.statement.replace(/\\n/gi, '\n')} />
             </ExpansionPanelDetails>
         </ExpansionPanel>
     );

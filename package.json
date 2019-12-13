@@ -35,14 +35,15 @@
     "react": "16.9.0",
     "react-calendar": "^2.19.2",
     "react-dom": "^16.9.0",
+    "react-markdown": "^4.2.2",
     "react-toastify": "^5.4.0",
     "reactstrap": "^8.0.1",
     "response-time": "^2.3.2",
+    "serialize-javascript": ">=2.1.1",
     "universal-cookie": "^4.0.2",
-    "webpack": "4.39.1",
+    "webpack": "^4.41.2",
     "webpack-cli": "^3.3.7",
-    "webpack-merge": "^4.2.2",
-    "serialize-javascript": ">=2.1.1"
+    "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

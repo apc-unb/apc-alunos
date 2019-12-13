@@ -51,7 +51,7 @@ async function processProjectSubmission(fields, files) {
       "file": files.file
     });
   } else {
-    log.debug("Create new");
+
     [err, res] = await Api.newProjectSubmission(projectInfo);
     response = res;
     error = err;
@@ -78,10 +78,10 @@ async function processProjectSubmission(fields, files) {
           fileRemover.removeFileFromServer(file.path);
           smtpTransport.close();
           // Faz o update na API
-          ApiServices.updateProjectStatus(projectID, "Pending");
+          Api.updateProjectStatus(projectID, "Pending");
         } else {
           // Avisa a API que nao conseguiu entregar o email
-          ApiServices.updateProjectStatus(projectID, "Failed");
+          Api.updateProjectStatus(projectID, "Failed");
         }
     });
   } else {
