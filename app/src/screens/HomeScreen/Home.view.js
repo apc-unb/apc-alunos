@@ -29,7 +29,6 @@ const MainScreen = () => {
             if(err !== null){
               console.log(err);
             } else {
-              console.log("Data:", res.data);
               setInfo(res.data);
             }
         }

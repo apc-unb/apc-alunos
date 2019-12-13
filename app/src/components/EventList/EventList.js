@@ -61,12 +61,12 @@ const EventList = ({events}) => {
 
     const eventList = Object.keys(events).map((key, idx) => {
             // TODO: Figure how to show only some months in list
-            const thisMonth = moment().month();
-            const eventMonth = moment();
-            return (<div key={idx}>
-                <span className={styles.monthHeader}>{monthToFullName(key)}</span>
-                {events[key]}
-            </div>)
+            if(events[key].length === 0) return;
+            
+                return (<div key={idx}>
+                    <span className={styles.monthHeader}>{monthToFullName(key)}</span>
+                    {events[key]}
+                </div>)
     });
 
     return (
