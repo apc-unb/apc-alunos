@@ -1,4 +1,4 @@
-@media only screen and (min-width: 1170px) {
+/* @media only screen and (min-width: 1170px) {
     .News {
         height: 100%;
         width: 320px;
@@ -11,9 +11,9 @@
         padding: 4px;
     
     }
-}
+} */
 
-@media only screen and (min-width: 1024px)
+/* @media only screen and (min-width: 1024px)
 and (max-width: 1169px) {
     .News {
         height: 100%;
@@ -27,8 +27,17 @@ and (max-width: 1169px) {
         padding: 4px;
     
     }
-}
+} */
+.News {
+    height: 100%;
+    width: 320px;
+    background-color: #e9e9fc;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 4px;
 
+}
 
 .header {
     font-size: 24px;

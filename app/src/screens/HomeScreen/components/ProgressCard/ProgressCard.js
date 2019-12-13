@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -16,10 +17,11 @@ import CloseIcon from '@material-ui/icons/Close';
 const useStyles = makeStyles({
   root: {
     width: '100%',
+    maxWidth: '100%',
     overflowX: 'auto',
   },
   table: {
-    minWidth: 650,
+    maxWidth: 'inherit'
   },
   tableHeader: {
     fontSize: '14px',
@@ -44,16 +46,6 @@ const useStyles = makeStyles({
   }
 });
 
-  function createData(atividade, data, link, status) {
-    return { atividade, data, link, status };
-  }
-
-  const rows = [
-    createData('List 1', '12/12/2019', 'http://google.com', (1/2)),
-    createData('List 2', '13/12/2019', 'http://google.com', (2/3)),
-    createData('List 3', '14/12/2019', 'http://google.com', (0/3)),
-  ];
-
   const statusSymbol = (status) => {
     const classes = useStyles();
     if(status < 0.4) 
@@ -64,7 +56,7 @@ const useStyles = makeStyles({
     return <CheckFullIcon className={classes.mint}/>;
   }
 
-export default function ProgressCard({ progress }) {
+export default function ProgressCard({ progress, data }) {
   const classes = useStyles();
 
   const progressColor = () => {
@@ -81,30 +73,37 @@ export default function ProgressCard({ progress }) {
 
   return (
     <Paper className={classes.root}>
-      <h2 className={styles.title}>Progresso ·&nbsp;
-      <span className={progressColor()}>{((progress.done/progress.total) * 100).toFixed(2)}%</span></h2>
+      <h2 className={styles.title}>Atividades ·&nbsp;
+        <span className={progressColor()}>{((progress.done/progress.total) * 100).toFixed(2)}%</span>
+      </h2>
+      <div className={styles.tableWrapper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell className={classes.tableHeader}>Atividade</TableCell>
-            <TableCell className={classes.tableHeader}>Data</TableCell>
             <TableCell className={classes.tableHeader}>Link</TableCell>
+            <TableCell className={classes.tableHeader} align="center">Progresso</TableCell>
             <TableCell className={classes.tableHeader} align="center">Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row" className={classes.tableText}>
-                {row.atividade}
-              </TableCell>
-              <TableCell className={classes.tableText}>{row.data}</TableCell>
-              <TableCell className={classes.tableText}>{row.link}</TableCell>
-              <TableCell className={classes.tableText} align="center">{statusSymbol(row.status)}</TableCell>
-            </TableRow>
-          ))}
+          {
+            data.length > 0 ?
+            data.map(row => (
+              <TableRow key={row.name}>
+                <TableCell component="th" scope="row" className={classes.tableText}>
+                  {row.name}
+                </TableCell>
+                <TableCell className={classes.tableText}><a href={row.url}>{row.url.replace('https://', '')}</a></TableCell>
+                <TableCell className={classes.tableText} align="center">{row.done}/{row.total}</TableCell>
+                <TableCell className={classes.tableText} align="center">{statusSymbol(row.done / row.total)}</TableCell>
+              </TableRow>
+            )) :
+            null
+          }
         </TableBody>
       </Table>
+      </div>
     </Paper>
   );
 };

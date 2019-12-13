@@ -3,6 +3,14 @@
     font-weight: 700;
     margin: 12px;
     text-anchor: middle;
+    align-self: flex-start;
+}
+
+.tableWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
 }
 
 .doingBad {
@@ -31,3 +39,10 @@
     font-size: 20px;
     opacity: 0.8;
 }
+
+/* @media only screen and (min-width: 1024px)
+and (max-width: 1269px) {
+    .tableWrapper {
+        width: 440px;
+    }
+} */

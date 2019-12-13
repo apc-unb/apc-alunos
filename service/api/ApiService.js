@@ -59,6 +59,16 @@ const ApiServices = {
         return [err, res];
     },
     // Home Screen
+    contestInfo: async (id) => {
+        let res;
+        let err = null;
+        try {
+            res = await Api.get('/student/contest/' + id);
+        } catch (error){
+            err = error;
+        }
+        return [err, res];
+    },
     // Exam Screen
     listExams: async (classID) => {
         let res;
