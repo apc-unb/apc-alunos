@@ -1,10 +1,5 @@
 FROM node
 
-ENV APIHOST="localhost"
-ENV APIPORT="80"
-ENV PORT="4000"
-ENV NODE_ENV="production"
-
 WORKDIR /app
 RUN mkdir tmp
 # Copy all files to container

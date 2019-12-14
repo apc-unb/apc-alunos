@@ -9,7 +9,7 @@ const form = require('./utils/formParser');
 const fileRemover = require('./utils/fileRemover.js');
 var Prometheus = require('./utils/prometheus');  
 
-log.setDefaultLevel(log.levels.DEBUG);
+log.setDefaultLevel(process.env.LOGLEVEL || "DEBUG");
 
 const port = process.env.PORT || 4000;
 

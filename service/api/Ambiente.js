@@ -1,9 +1,11 @@
-const axios = require('axios');
+const env = require('../../config/env.json');
 
-const APIHOST = process.env.NODE_ENV == "production" ? process.env.APIHOST : "localhost"
-const APIPORT = process.env.NODE_ENV == "production" ? process.env.APIPORT : "8080"
+const APIHOST = env.NODE_ENV == "production" ? env.APIHOST : "localhost"
+const APIPORT = env.NODE_ENV == "production" ? env.APIPORT : "8080"
+const LOGLEVEL = env.LOGLEVEL
 
 module.exports = {
     APIHOST: APIHOST,
-    APIPORT: APIPORT
+    APIPORT: APIPORT,
+    LOGLEVEL: LOGLEVEL
 };

@@ -36,6 +36,8 @@ services:
   apc-alunos:
     image : apcunb/apc-alunos
     build: .
+    environment: 
+      - LOGLEVEL=INFO
     ports:
       - 4000:4000
     depends_on:
@@ -85,10 +87,10 @@ services:
       - apc-prometheus
       - apc-grafana
 
-  local:
-    image: busybox
-    depends_on:
-      - apc-mongo
-      - apc-api
+  # local:
+  #   image: busybox
+  #   depends_on:
+  #     - apc-mongo
+  #     - apc-api
 
 
